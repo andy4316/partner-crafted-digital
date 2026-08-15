@@ -7,11 +7,11 @@ import { TAGLINE } from "@/lib/site";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "AB Digital Consultancy — Websites, hosting and SEO for Indian businesses" },
+      { title: "Website Design for Small Business in India | AB Digital Consultancy" },
       {
         name: "description",
         content:
-          "We design, build, host and look after websites for small and medium businesses in India. One partner instead of five vendors. No lock-in.",
+          "Bengaluru web design studio building affordable business websites in India — design, hosting, SEO and maintenance from one partner who stays after launch.",
       },
       { property: "og:title", content: "AB Digital Consultancy — A website is only the beginning" },
       {
@@ -20,6 +20,11 @@ export const Route = createFileRoute("/")({
           "Design, hosting, SEO, maintenance and print — handled by one team that stays after launch.",
       },
       { property: "og:url", content: "/" },
+      { name: "twitter:title", content: "AB Digital Consultancy — A website is only the beginning" },
+      {
+        name: "twitter:description",
+        content: "Websites, hosting, SEO and maintenance for small businesses in India.",
+      },
     ],
     links: [{ rel: "canonical", href: "/" }],
   }),

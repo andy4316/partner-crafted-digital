@@ -9,11 +9,11 @@ import { PHONE_DISPLAY, WHATSAPP_URL } from "@/lib/site";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — AB Digital Consultancy" },
+      { title: "Contact a Web Designer in Bengaluru | AB Digital Consultancy" },
       {
         name: "description",
         content:
-          "Tell us about your business and what you need. Message us on WhatsApp at +91 90521 42231 or send a short note.",
+          "Tell us about your business and the website you need. WhatsApp +91 90521 42231 or send a short note — you'll hear back from the person doing the work.",
       },
       { property: "og:title", content: "Contact — AB Digital Consultancy" },
       {
@@ -21,6 +21,11 @@ export const Route = createFileRoute("/contact")({
         content: "A short note or a WhatsApp message is enough to start.",
       },
       { property: "og:url", content: "/contact" },
+      { name: "twitter:title", content: "Contact — AB Digital Consultancy" },
+      {
+        name: "twitter:description",
+        content: "WhatsApp +91 90521 42231, or send a short note.",
+      },
     ],
     links: [{ rel: "canonical", href: "/contact" }],
   }),

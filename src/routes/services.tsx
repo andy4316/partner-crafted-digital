@@ -16,11 +16,11 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
-      { title: "Services & Pricing — AB Digital Consultancy" },
+      { title: "Affordable Business Website Packages & Pricing India | AB Digital" },
       {
         name: "description",
         content:
-          "Web design, hosting, CMS updates, SEO, maintenance and print materials. Three clear plans from ₹12,000, with yearly care included.",
+          "Web design, hosting, SEO, maintenance and print for Indian businesses. Three clear packages from ₹12,000, with yearly care included and no hidden extras.",
       },
       { property: "og:title", content: "Services & Pricing — AB Digital Consultancy" },
       {
@@ -28,6 +28,11 @@ export const Route = createFileRoute("/services")({
         content: "Everything we do, and exactly what it costs. Three plans, no hidden extras.",
       },
       { property: "og:url", content: "/services" },
+      { name: "twitter:title", content: "Services & Pricing — AB Digital Consultancy" },
+      {
+        name: "twitter:description",
+        content: "Website packages from ₹12,000, with hosting, SEO and care included.",
+      },
     ],
     links: [{ rel: "canonical", href: "/services" }],
   }),

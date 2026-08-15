@@ -9,11 +9,11 @@ import { caseStudiesQuery } from "@/lib/content";
 export const Route = createFileRoute("/work")({
   head: () => ({
     meta: [
-      { title: "Work — AB Digital Consultancy" },
+      { title: "Business Website Case Studies, India | AB Digital Consultancy" },
       {
         name: "description",
         content:
-          "Case studies from AB Digital Consultancy: the problem a business came with, what we built, and what changed afterwards.",
+          "Real projects from a Bengaluru web developer: the problem each business came with, what we built for them, and what changed after launch.",
       },
       { property: "og:title", content: "Work — AB Digital Consultancy" },
       {
@@ -21,6 +21,11 @@ export const Route = createFileRoute("/work")({
         content: "Considered, bespoke work for Indian businesses. Problem, build, outcome.",
       },
       { property: "og:url", content: "/work" },
+      { name: "twitter:title", content: "Work — AB Digital Consultancy" },
+      {
+        name: "twitter:description",
+        content: "Problem, build, outcome — websites we thought hard about.",
+      },
     ],
     links: [{ rel: "canonical", href: "/work" }],
   }),
