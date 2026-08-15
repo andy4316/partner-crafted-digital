@@ -41,7 +41,7 @@ function About() {
           <Reveal>
             <img
               src={founder}
-              alt="The founder of AB Digital Consultancy"
+              alt="Founder of AB Digital Consultancy, a web design and SEO studio in Bengaluru, at his desk"
               width={1024}
               height={1280}
               className="w-full object-cover"
@@ -74,7 +74,14 @@ function About() {
       <Section className="border-t border-border">
         <div className="grid gap-12 md:grid-cols-[auto_1fr] md:items-center">
           <Reveal>
-            <img src={logoMark} alt="" width={96} height={96} loading="lazy" className="h-24 w-24" />
+            <img
+              src={logoMark}
+              alt="AB Digital Consultancy logo mark: two navy pillars forming a hidden upward arrow"
+              width={96}
+              height={96}
+              loading="lazy"
+              className="h-24 w-24"
+            />
           </Reveal>
           <Reveal delay={120}>
             <h2 className="text-2xl md:text-3xl">Two pillars, and an arrow you only see later.</h2>
