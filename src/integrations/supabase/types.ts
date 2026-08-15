@@ -14,7 +14,156 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      case_studies: {
+        Row: {
+          built: string
+          client_name: string
+          created_at: string
+          id: string
+          is_placeholder: boolean
+          outcome: string
+          problem: string
+          sector: string
+          sort_order: number
+        }
+        Insert: {
+          built: string
+          client_name: string
+          created_at?: string
+          id?: string
+          is_placeholder?: boolean
+          outcome: string
+          problem: string
+          sector: string
+          sort_order?: number
+        }
+        Update: {
+          built?: string
+          client_name?: string
+          created_at?: string
+          id?: string
+          is_placeholder?: boolean
+          outcome?: string
+          problem?: string
+          sector?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      contact_enquiries: {
+        Row: {
+          business: string | null
+          created_at: string
+          id: string
+          message: string
+          name: string
+          phone: string
+        }
+        Insert: {
+          business?: string | null
+          created_at?: string
+          id?: string
+          message: string
+          name: string
+          phone: string
+        }
+        Update: {
+          business?: string | null
+          created_at?: string
+          id?: string
+          message?: string
+          name?: string
+          phone?: string
+        }
+        Relationships: []
+      }
+      faqs: {
+        Row: {
+          answer: string
+          created_at: string
+          id: string
+          question: string
+          sort_order: number
+        }
+        Insert: {
+          answer: string
+          created_at?: string
+          id?: string
+          question: string
+          sort_order?: number
+        }
+        Update: {
+          answer?: string
+          created_at?: string
+          id?: string
+          question?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      pricing_tiers: {
+        Row: {
+          blurb: string
+          created_at: string
+          features: string[]
+          id: string
+          name: string
+          recommended: boolean
+          setup_price: string
+          sort_order: number
+          yearly_price: string
+        }
+        Insert: {
+          blurb: string
+          created_at?: string
+          features?: string[]
+          id?: string
+          name: string
+          recommended?: boolean
+          setup_price: string
+          sort_order?: number
+          yearly_price: string
+        }
+        Update: {
+          blurb?: string
+          created_at?: string
+          features?: string[]
+          id?: string
+          name?: string
+          recommended?: boolean
+          setup_price?: string
+          sort_order?: number
+          yearly_price?: string
+        }
+        Relationships: []
+      }
+      services: {
+        Row: {
+          created_at: string
+          id: string
+          points: string[]
+          sort_order: number
+          summary: string
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          points?: string[]
+          sort_order?: number
+          summary: string
+          title: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          points?: string[]
+          sort_order?: number
+          summary?: string
+          title?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
