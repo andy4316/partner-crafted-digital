@@ -8,11 +8,11 @@ import { Eyebrow, Section, SiteLayout } from "@/components/site-layout";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — AB Digital Consultancy" },
+      { title: "About the Founder | Web Developer in Bengaluru, India" },
       {
         name: "description",
         content:
-          "Why AB Digital Consultancy exists: a founder-led web partner for Indian businesses, built around relationships rather than one-off projects.",
+          "Why AB Digital Consultancy exists: a founder-led web developer in Bengaluru who builds websites for Indian businesses and stays on to look after them.",
       },
       { property: "og:title", content: "About — AB Digital Consultancy" },
       {
@@ -20,6 +20,11 @@ export const Route = createFileRoute("/about")({
         content: "A founder-led web partner built around staying, not shipping and vanishing.",
       },
       { property: "og:url", content: "/about" },
+      { name: "twitter:title", content: "About — AB Digital Consultancy" },
+      {
+        name: "twitter:description",
+        content: "A founder-led web partner in Bengaluru, built around staying.",
+      },
     ],
     links: [{ rel: "canonical", href: "/about" }],
   }),
@@ -41,7 +46,7 @@ function About() {
           <Reveal>
             <img
               src={founder}
-              alt="The founder of AB Digital Consultancy"
+              alt="Founder of AB Digital Consultancy, a web design and SEO studio in Bengaluru, at his desk"
               width={1024}
               height={1280}
               className="w-full object-cover"
@@ -74,7 +79,14 @@ function About() {
       <Section className="border-t border-border">
         <div className="grid gap-12 md:grid-cols-[auto_1fr] md:items-center">
           <Reveal>
-            <img src={logoMark} alt="" width={96} height={96} loading="lazy" className="h-24 w-24" />
+            <img
+              src={logoMark}
+              alt="AB Digital Consultancy logo mark: two navy pillars forming a hidden upward arrow"
+              width={96}
+              height={96}
+              loading="lazy"
+              className="h-24 w-24"
+            />
           </Reveal>
           <Reveal delay={120}>
             <h2 className="text-2xl md:text-3xl">Two pillars, and an arrow you only see later.</h2>

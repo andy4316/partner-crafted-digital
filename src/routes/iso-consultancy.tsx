@@ -6,11 +6,11 @@ import { SiteLayout } from "@/components/site-layout";
 export const Route = createFileRoute("/iso-consultancy")({
   head: () => ({
     meta: [
-      { title: "ISO Consultancy — AB Digital Consultancy" },
+      { title: "ISO Certification Consultancy in Bengaluru | AB Digital" },
       {
         name: "description",
         content:
-          "A separate practice area: ISO certification guidance, documentation and audit preparation for Indian businesses.",
+          "ISO certification support for Indian businesses: gap assessment, documentation written around how you actually work, and audit readiness.",
       },
       { property: "og:title", content: "ISO Consultancy — AB Digital Consultancy" },
       {
@@ -18,6 +18,11 @@ export const Route = createFileRoute("/iso-consultancy")({
         content: "ISO certification guidance, documentation and audit readiness.",
       },
       { property: "og:url", content: "/iso-consultancy" },
+      { name: "twitter:title", content: "ISO Consultancy — AB Digital Consultancy" },
+      {
+        name: "twitter:description",
+        content: "Gap assessment, documentation and audit readiness.",
+      },
     ],
     links: [{ rel: "canonical", href: "/iso-consultancy" }],
   }),

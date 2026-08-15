@@ -22,7 +22,13 @@ function Header() {
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
-          <img src={logoMark} alt="" width={28} height={28} className="h-7 w-7" />
+          <img
+            src={logoMark}
+            alt="AB Digital Consultancy logo"
+            width={28}
+            height={28}
+            className="h-7 w-7"
+          />
           <span className="font-serif text-base tracking-tight">AB Digital</span>
         </Link>
 
