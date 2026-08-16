@@ -40,7 +40,7 @@ function Home() {
           src={logoMark}
           alt=""
           aria-hidden
-          className="hero-mark pointer-events-none absolute -right-[18%] top-1/2 w-[120vw] max-w-none -translate-y-1/2 select-none md:-right-[8%] md:w-[70vw]"
+          className="hero-mark pointer-events-none absolute -right-[18%] top-1/2 w-[120vw] max-w-none -translate-y-1/2 select-none md:-right-[6%] md:w-[85vw]"
         />
         <div className="relative mx-auto w-full max-w-6xl px-6 py-28">
 
