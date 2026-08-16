@@ -177,4 +177,11 @@
     transform: none;
     transition: none;
   }
+  .hero-mark {
+    animation: none;
+    opacity: 0.09;
+  }
+  .card-lift:hover {
+    transform: none;
+  }
 }
