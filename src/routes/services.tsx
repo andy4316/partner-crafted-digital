@@ -1,5 +1,14 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import {
+  FileText,
+  Layout,
+  Megaphone,
+  Printer,
+  Search,
+  Server,
+  Wrench,
+} from "lucide-react";
 import { Suspense } from "react";
 
 import { Reveal } from "@/components/reveal";
@@ -39,20 +48,55 @@ export const Route = createFileRoute("/services")({
   component: Services,
 });
 
+const SERVICE_ICONS = [
+  Layout,
+  Server,
+  FileText,
+  Search,
+  Wrench,
+  Megaphone,
+  Printer,
+] as const;
+
+const SERVICE_TINTS = [
+  "from-gold/12",
+  "from-teal/12",
+  "from-gold/8",
+  "from-teal/14",
+  "from-gold/10",
+  "from-teal/10",
+  "from-gold/14",
+] as const;
+
 function ServiceList() {
   const { data } = useSuspenseQuery(servicesQuery);
   return (
-    <div className="mt-20 divide-y divide-border border-t border-border">
-      {data.map((s, i) => (
-        <Reveal key={s.id} className="grid gap-6 py-12 md:grid-cols-[1fr_1.4fr]">
-          <div>
-            <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
-              {String(i + 1).padStart(2, "0")}
-            </p>
-            <h3 className="mt-3 text-2xl">{s.title}</h3>
-          </div>
-          <div>
-            <p className="text-muted-foreground">{s.summary}</p>
+    <div className="mt-20 grid gap-6 md:grid-cols-2">
+      {data.map((s, i) => {
+        const Icon = SERVICE_ICONS[i % SERVICE_ICONS.length] ?? Layout;
+        return (
+          <Reveal
+            key={s.id}
+            delay={(i % 2) * 90}
+            className={cn(
+              "card-lift group relative overflow-hidden border border-border bg-gradient-to-br to-transparent p-8",
+              SERVICE_TINTS[i % SERVICE_TINTS.length],
+            )}
+          >
+            <div className="flex items-start justify-between gap-6">
+              <div>
+                <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
+                  {String(i + 1).padStart(2, "0")}
+                </p>
+                <h3 className="mt-3 text-2xl">{s.title}</h3>
+              </div>
+              <Icon
+                className="h-8 w-8 shrink-0 stroke-[1.25] text-gold transition-transform duration-500 group-hover:-translate-y-1"
+                aria-hidden
+              />
+            </div>
+            <span className="draw-line mt-6" aria-hidden />
+            <p className="mt-6 text-muted-foreground">{s.summary}</p>
             <ul className="mt-6 space-y-2">
               {s.points.map((p) => (
                 <li key={p} className="flex gap-3 text-sm text-muted-foreground">
@@ -61,9 +105,9 @@ function ServiceList() {
                 </li>
               ))}
             </ul>
-          </div>
-        </Reveal>
-      ))}
+          </Reveal>
+        );
+      })}
     </div>
   );
 }
@@ -77,10 +121,10 @@ function Pricing() {
           key={tier.id}
           delay={i * 100}
           className={cn(
-            "flex flex-col border p-8",
+            "card-lift flex flex-col border p-8",
             tier.recommended
-              ? "border-gold bg-card shadow-[0_20px_60px_-40px_rgba(27,42,68,0.6)]"
-              : "border-border",
+              ? "border-gold bg-gradient-to-b from-secondary to-card shadow-[0_20px_60px_-40px_rgba(27,42,68,0.6)] md:-mt-4 md:pb-12"
+              : "border-border bg-card/40",
           )}
         >
           {tier.recommended && (
@@ -109,6 +153,7 @@ function Pricing() {
     </div>
   );
 }
+
 
 function Faqs() {
   const { data } = useSuspenseQuery(faqsQuery);

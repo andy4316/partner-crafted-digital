@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
+import logoMark from "@/assets/logo-mark.png";
 import { Reveal } from "@/components/reveal";
 import { Eyebrow, Section, SiteLayout } from "@/components/site-layout";
 import { TAGLINE } from "@/lib/site";
@@ -34,8 +35,15 @@ export const Route = createFileRoute("/")({
 function Home() {
   return (
     <SiteLayout>
-      <section className="section-dark flex min-h-[88vh] items-center">
-        <div className="mx-auto w-full max-w-6xl px-6 py-28">
+      <section className="section-dark relative flex min-h-[88vh] items-center overflow-hidden">
+        <img
+          src={logoMark}
+          alt=""
+          aria-hidden
+          className="hero-mark pointer-events-none absolute -right-[18%] top-1/2 w-[120vw] max-w-none -translate-y-1/2 select-none md:-right-[6%] md:w-[85vw]"
+        />
+        <div className="relative mx-auto w-full max-w-6xl px-6 py-28">
+
           <Reveal>
             <h1 className="max-w-4xl font-serif text-[2.6rem] leading-[1.1] sm:text-6xl md:text-7xl">
               {TAGLINE}
