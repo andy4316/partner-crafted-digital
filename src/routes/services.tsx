@@ -1,5 +1,14 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import {
+  FileText,
+  Layout,
+  Megaphone,
+  Printer,
+  Search,
+  Server,
+  Wrench,
+} from "lucide-react";
 import { Suspense } from "react";
 
 import { Reveal } from "@/components/reveal";
