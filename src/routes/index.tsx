@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
+import logoMark from "@/assets/logo-mark.png";
 import { Reveal } from "@/components/reveal";
 import { Eyebrow, Section, SiteLayout } from "@/components/site-layout";
 import { TAGLINE } from "@/lib/site";
