@@ -73,7 +73,7 @@ function ServiceList() {
   return (
     <div className="mt-20 grid gap-6 md:grid-cols-2">
       {data.map((s, i) => {
-        const Icon = SERVICE_ICONS[i % SERVICE_ICONS.length];
+        const Icon = SERVICE_ICONS[i % SERVICE_ICONS.length] ?? Layout;
         return (
           <Reveal
             key={s.id}
