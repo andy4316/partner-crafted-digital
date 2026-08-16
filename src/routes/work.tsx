@@ -34,10 +34,26 @@ export const Route = createFileRoute("/work")({
 
 function CaseStudies() {
   const { data } = useSuspenseQuery(caseStudiesQuery);
+  const realStudies = data.filter((study) => !study.is_placeholder);
+
+  if (realStudies.length === 0) {
+    return (
+      <Reveal className="mt-20">
+        <p className="max-w-2xl text-lg text-muted-foreground">
+          We&apos;re currently building our first client projects — check back soon, or see our
+          process on the{" "}
+          <Link to="/about" className="text-teal underline underline-offset-4 hover:text-gold">
+            About page
+          </Link>
+          .
+        </p>
+      </Reveal>
+    );
+  }
 
   return (
     <div className="mt-20 space-y-24">
-      {data.map((study, i) => (
+      {realStudies.map((study, i) => (
         <Reveal key={study.id} as="article" className="border-t border-border pt-12">
           <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
             {String(i + 1).padStart(2, "0")} — {study.sector}
@@ -57,11 +73,6 @@ function CaseStudies() {
               <dd className="mt-3 text-muted-foreground">{study.outcome}</dd>
             </div>
           </dl>
-          {study.is_placeholder && (
-            <p className="mt-8 text-sm text-muted-foreground">
-              This slot is reserved. The study goes up the week the client launches.
-            </p>
-          )}
         </Reveal>
       ))}
     </div>
