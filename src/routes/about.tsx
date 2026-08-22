@@ -1,9 +1,11 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 
 import founder from "@/assets/founder.jpg";
-import logoMark from "@/assets/logo-mark.png";
+import { ButtonLink } from "@/components/buttons";
+import { MarkDivider, PageHero } from "@/components/hero";
+import { Mark } from "@/components/mark";
 import { Reveal } from "@/components/reveal";
-import { Eyebrow, Section, SiteLayout } from "@/components/site-layout";
+import { DarkCta, Eyebrow, Section, SiteLayout } from "@/components/site-layout";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -19,14 +21,14 @@ export const Route = createFileRoute("/about")({
         property: "og:description",
         content: "A founder-led web partner built around staying, not shipping and vanishing.",
       },
-      { property: "og:url", content: "/about" },
+      { property: "og:url", content: "https://partner-crafted-digital.lovable.app/about" },
       { name: "twitter:title", content: "About — AB Digital Consultancy" },
       {
         name: "twitter:description",
         content: "A founder-led web partner in Bengaluru, built around staying.",
       },
     ],
-    links: [{ rel: "canonical", href: "/about" }],
+    links: [{ rel: "canonical", href: "https://partner-crafted-digital.lovable.app/about" }],
   }),
   component: About,
 });
@@ -34,86 +36,102 @@ export const Route = createFileRoute("/about")({
 function About() {
   return (
     <SiteLayout>
-      <Section>
-        <Reveal>
-          <Eyebrow>About</Eyebrow>
-          <h1 className="mt-8 max-w-3xl text-4xl md:text-6xl">
-            I started this because too many good businesses were being let down.
-          </h1>
-        </Reveal>
+      <PageHero
+        compact
+        badge="Founder-led, Bengaluru"
+        title={
+          <>
+            Too many good businesses were being <span className="text-accent">let down</span>.
+          </>
+        }
+        subtitle="So I started building websites the way I'd want mine looked after — properly, then permanently."
+        actions={<ButtonLink to="/contact">Say hello</ButtonLink>}
+      />
 
-        <div className="mt-20 grid gap-16 md:grid-cols-[1fr_1.15fr] md:items-start">
+      <Section>
+        <div className="grid gap-16 md:grid-cols-[1fr_1.15fr] md:items-start">
           <Reveal>
             <img
               src={founder}
               alt="Founder of AB Digital Consultancy, a web design and SEO studio in Bengaluru, at his desk"
               width={1024}
               height={1280}
-              className="w-full object-cover"
+              loading="lazy"
+              className="w-full rounded-md border border-border object-cover"
             />
           </Reveal>
-          <Reveal delay={120} className="space-y-6 text-muted-foreground">
+          <Reveal delay={120} className="space-y-6 text-ink-soft">
+            <Eyebrow>The story</Eyebrow>
             <p>
               I kept meeting owners who had paid for a website once, years ago. It looked dated. The
               phone number on it was wrong. Nobody knew the password. The person who built it had
               stopped replying.
             </p>
             <p>
-              That is not a technology problem. It is an abandonment problem. A website is not a
-              thing you buy once — it is a part of your business that needs someone looking after
-              it, the same way your shop needs sweeping.
+              That isn't a technology problem. It's an abandonment problem. A website isn't a thing
+              you buy once — it's a part of your business that needs someone looking after it, the
+              same way your shop needs sweeping.
             </p>
             <p>
               So the arrangement here is simple. We build it properly, then we stay. Prices change,
               you send a message. Google changes something, we deal with it. You never have to
               wonder who to call.
             </p>
-            <p className="text-foreground">
-              It was never about a single transaction. It is about building something that keeps
+            <p className="text-ink">
+              It was never about a single transaction. It's about building something that keeps
               standing on its own, with someone standing behind it.
             </p>
           </Reveal>
         </div>
       </Section>
 
-      <Section className="border-t border-border">
+      <Section alt>
         <div className="grid gap-12 md:grid-cols-[auto_1fr] md:items-center">
           <Reveal>
-            <img
-              src={logoMark}
-              alt="AB Digital Consultancy logo mark: two navy pillars forming a hidden upward arrow"
-              width={96}
-              height={96}
-              loading="lazy"
-              className="h-24 w-24"
+            <Mark
+              className="h-24 w-24 text-ink"
+              title="AB Digital Consultancy logo mark: two pillars forming a hidden upward arrow"
             />
           </Reveal>
           <Reveal delay={120}>
-            <h2 className="text-2xl md:text-3xl">Two pillars, and an arrow you only see later.</h2>
-            <p className="mt-5 max-w-2xl text-muted-foreground">
+            <Eyebrow>The mark</Eyebrow>
+            <h2 className="mt-4 text-2xl md:text-4xl">
+              Two pillars, and an arrow you only see later.
+            </h2>
+            <p className="mt-5 max-w-2xl text-ink-soft">
               The mark is two pillars — the work and the relationship. Between them, in the space
-              nobody designed on purpose, there is an arrow pointing up. That is the part we like:
-              growth is what happens in the gap between doing the work and sticking around.
+              nobody designed on purpose, there's an arrow pointing up. That's the part we like:
+              growth happens in the gap between doing the work and sticking around.
             </p>
           </Reveal>
         </div>
       </Section>
 
-      <section className="section-dark">
-        <div className="mx-auto max-w-6xl px-6 py-28 md:py-36">
-          <Reveal>
-            <h2 className="max-w-2xl font-serif text-3xl md:text-4xl">
-              If that sounds like the way you'd want to work, say hello.
-            </h2>
-            <Link
-              to="/contact"
-              className="mt-10 inline-block border-b-2 border-gold pb-1 text-sm uppercase tracking-[0.18em]"
-            >
-              Contact us
-            </Link>
+      <Section texture>
+        <Reveal>
+          <Eyebrow>How we work</Eyebrow>
+          <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">Slow to start, quick to answer.</h2>
+        </Reveal>
+        <div className="mt-16 grid items-center gap-10 md:grid-cols-[1fr_auto_1fr]">
+          <Reveal delay={100}>
+            <h3 className="text-2xl">We ask first</h3>
+            <p className="mt-4 text-ink-soft">
+              Before anything is designed, we talk about who your customers are and what they need
+              to see before they call you. Most of the value is decided in that conversation.
+            </p>
+          </Reveal>
+          <MarkDivider className="md:h-40 md:w-16 md:flex-col" />
+          <Reveal delay={200}>
+            <h3 className="text-2xl">Then we stay</h3>
+            <p className="mt-4 text-ink-soft">
+              Launch day is the middle of the job, not the end. Updates, hosting, backups and search
+              health continue quietly in the background while you run the business.
+            </p>
           </Reveal>
         </div>
-      </section>
+      </Section>
+
+      <DarkCta title="If that sounds like the way you'd want to work, say hello." actionLabel="Contact us" />
     </SiteLayout>
   );
 }
