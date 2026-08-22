@@ -2,8 +2,10 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Suspense } from "react";
 
+import { ButtonLink } from "@/components/buttons";
+import { PageHero } from "@/components/hero";
 import { Reveal } from "@/components/reveal";
-import { Eyebrow, Section, SiteLayout } from "@/components/site-layout";
+import { DarkCta, Eyebrow, Section, SiteLayout } from "@/components/site-layout";
 import { caseStudiesQuery } from "@/lib/content";
 
 export const Route = createFileRoute("/work")({
@@ -20,29 +22,29 @@ export const Route = createFileRoute("/work")({
         property: "og:description",
         content: "Considered, bespoke work for Indian businesses. Problem, build, outcome.",
       },
-      { property: "og:url", content: "/work" },
+      { property: "og:url", content: "https://partner-crafted-digital.lovable.app/work" },
       { name: "twitter:title", content: "Work — AB Digital Consultancy" },
       {
         name: "twitter:description",
         content: "Problem, build, outcome — websites we thought hard about.",
       },
     ],
-    links: [{ rel: "canonical", href: "/work" }],
+    links: [{ rel: "canonical", href: "https://partner-crafted-digital.lovable.app/work" }],
   }),
   component: Work,
 });
 
 function CaseStudies() {
   const { data } = useSuspenseQuery(caseStudiesQuery);
-  const realStudies = data.filter((study) => !study.is_placeholder);
+  const studies = data.filter((study) => !study.is_placeholder);
 
-  if (realStudies.length === 0) {
+  if (studies.length === 0) {
     return (
-      <Reveal className="mt-20">
-        <p className="max-w-2xl text-lg text-muted-foreground">
-          We&apos;re currently building our first client projects — check back soon, or see our
-          process on the{" "}
-          <Link to="/about" className="text-teal underline underline-offset-4 hover:text-gold">
+      <Reveal className="mt-14">
+        <p className="max-w-2xl text-lg text-ink-soft">
+          We&apos;re building our first client projects — check back soon, or read how we work on
+          the{" "}
+          <Link to="/about" className="text-accent underline underline-offset-4">
             About page
           </Link>
           .
@@ -52,26 +54,26 @@ function CaseStudies() {
   }
 
   return (
-    <div className="mt-20 space-y-24">
-      {realStudies.map((study, i) => (
-        <Reveal key={study.id} as="article" className="border-t border-border pt-12">
-          <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
-            {String(i + 1).padStart(2, "0")} — {study.sector}
+    <div className="mt-14 border-t border-border">
+      {studies.map((study, i) => (
+        <Reveal key={study.id} delay={i * 80} className="border-b border-border py-12">
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-soft">
+            {study.sector}
           </p>
-          <h2 className="mt-5 text-2xl md:text-4xl">{study.client_name}</h2>
-          <dl className="mt-10 grid gap-10 md:grid-cols-3">
-            <div>
-              <dt className="text-xs uppercase tracking-[0.18em] text-teal">The problem</dt>
-              <dd className="mt-3 text-muted-foreground">{study.problem}</dd>
-            </div>
-            <div>
-              <dt className="text-xs uppercase tracking-[0.18em] text-teal">What we built</dt>
-              <dd className="mt-3 text-muted-foreground">{study.built}</dd>
-            </div>
-            <div>
-              <dt className="text-xs uppercase tracking-[0.18em] text-teal">The outcome</dt>
-              <dd className="mt-3 text-muted-foreground">{study.outcome}</dd>
-            </div>
+          <h2 className="mt-3 text-2xl md:text-4xl">{study.client_name}</h2>
+          <dl className="mt-8 grid gap-8 md:grid-cols-3">
+            {[
+              ["Problem", study.problem],
+              ["Built", study.built],
+              ["Outcome", study.outcome],
+            ].map(([label, value]) => (
+              <div key={label}>
+                <dt className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
+                  {label}
+                </dt>
+                <dd className="mt-3 text-ink-soft">{value}</dd>
+              </div>
+            ))}
           </dl>
         </Reveal>
       ))}
@@ -82,40 +84,30 @@ function CaseStudies() {
 function Work() {
   return (
     <SiteLayout>
+      <PageHero
+        compact
+        badge="Selected projects"
+        title={
+          <>
+            Three sites we <span className="text-accent">thought hard about</span>, not thirty we
+            didn&apos;t.
+          </>
+        }
+        subtitle="Every project starts the same way: a conversation about what the business actually needs, before anything is designed."
+        actions={<ButtonLink to="/contact">Talk about your project</ButtonLink>}
+      />
+
       <Section>
         <Reveal>
-          <Eyebrow>Work</Eyebrow>
-          <h1 className="mt-8 max-w-3xl text-4xl md:text-6xl">
-            We'd rather show you three sites we thought hard about than thirty we didn't.
-          </h1>
-          <p className="mt-8 max-w-2xl text-muted-foreground">
-            Every project below started the same way: a conversation about what the business
-            actually needed, before anything was designed.
-          </p>
+          <Eyebrow>Case studies</Eyebrow>
+          <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">Problem, build, outcome.</h2>
         </Reveal>
-
-        <Suspense
-          fallback={<p className="mt-20 text-sm text-muted-foreground">Loading case studies…</p>}
-        >
+        <Suspense fallback={<p className="mt-14 text-sm text-ink-soft">Loading…</p>}>
           <CaseStudies />
         </Suspense>
       </Section>
 
-      <section className="section-dark">
-        <div className="mx-auto max-w-6xl px-6 py-28 md:py-36">
-          <Reveal>
-            <h2 className="max-w-2xl font-serif text-3xl md:text-4xl">
-              Your business could be the next one on this page.
-            </h2>
-            <Link
-              to="/contact"
-              className="mt-10 inline-block border-b-2 border-gold pb-1 text-sm uppercase tracking-[0.18em]"
-            >
-              Start a conversation
-            </Link>
-          </Reveal>
-        </div>
-      </section>
+      <DarkCta title="Your business could be the next one on this page." />
     </SiteLayout>
   );
 }
