@@ -1,8 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
-import logoMark from "@/assets/logo-mark.png";
+import { GridTexture } from "@/components/artifacts";
+import { ButtonLink } from "@/components/buttons";
+import { Mark } from "@/components/mark";
+import { Reveal } from "@/components/reveal";
 import { PHONE_DISPLAY, SITE_NAME, WHATSAPP_URL } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -17,28 +20,37 @@ const NAV = [
 
 function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur">
+    <header
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 transition-all duration-500",
+        scrolled || open
+          ? "border-b border-border bg-white/80 backdrop-blur-md"
+          : "border-b border-transparent bg-transparent",
+      )}
+    >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
-          <img
-            src={logoMark}
-            alt="AB Digital Consultancy logo"
-            width={28}
-            height={28}
-            className="h-7 w-7"
-          />
-          <span className="font-serif text-base tracking-tight">AB Digital</span>
+          <Mark className="h-6 w-6 text-ink" title="AB Digital Consultancy mark" />
+          <span className="font-serif text-base font-bold tracking-tight">AB Digital</span>
         </Link>
 
-        <nav aria-label="Main" className="hidden items-center gap-8 md:flex">
+        <nav aria-label="Main" className="hidden items-center gap-8 min-[860px]:flex">
           {NAV.slice(1).map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-              activeProps={{ className: "text-sm text-foreground" }}
+              className="nav-link font-mono text-[11px] uppercase tracking-[0.16em] text-ink-soft transition-colors hover:text-ink"
+              activeProps={{ className: "text-ink" }}
             >
               {item.label}
             </Link>
@@ -50,21 +62,21 @@ function Header() {
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="md:hidden"
+          className="min-[860px]:hidden"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
       {open && (
-        <nav aria-label="Mobile" className="border-t border-border/60 px-6 py-4 md:hidden">
+        <nav aria-label="Mobile" className="border-t border-border px-6 py-4 min-[860px]:hidden">
           <ul className="space-y-3">
             {NAV.map((item) => (
               <li key={item.to}>
                 <Link
                   to={item.to}
                   onClick={() => setOpen(false)}
-                  className="block text-base text-foreground"
+                  className="block font-mono text-sm uppercase tracking-[0.14em]"
                 >
                   {item.label}
                 </Link>
@@ -79,21 +91,24 @@ function Header() {
 
 function Footer() {
   return (
-    <footer className="section-dark">
+    <footer className="border-t border-border bg-alt">
       <div className="mx-auto max-w-6xl px-6 py-16">
         <div className="grid gap-10 md:grid-cols-3">
           <div>
-            <p className="font-serif text-xl">{SITE_NAME}</p>
-            <p className="mt-3 max-w-xs text-sm opacity-70">
+            <div className="flex items-center gap-3">
+              <Mark className="h-6 w-6 text-ink" />
+              <p className="font-serif text-lg font-bold">{SITE_NAME}</p>
+            </div>
+            <p className="mt-4 max-w-xs text-sm text-ink-soft">
               A complete web partner for small and medium businesses across India.
             </p>
           </div>
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] opacity-60">Pages</p>
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-soft">Pages</p>
             <ul className="mt-4 space-y-2 text-sm">
               {NAV.map((item) => (
                 <li key={item.to}>
-                  <Link to={item.to} className="opacity-80 transition-opacity hover:opacity-100">
+                  <Link to={item.to} className="text-ink-soft transition-colors hover:text-accent">
                     {item.label}
                   </Link>
                 </li>
@@ -101,17 +116,20 @@ function Footer() {
             </ul>
           </div>
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] opacity-60">Talk to us</p>
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-soft">
+              Talk to us
+            </p>
             <a
               href={WHATSAPP_URL}
-              className="mt-4 inline-block border-b border-gold pb-0.5 text-sm"
               rel="noopener"
+              className="mt-4 inline-block font-mono text-sm text-accent"
             >
               WhatsApp {PHONE_DISPLAY}
             </a>
+            <p className="mt-4 text-sm text-ink-soft">Bengaluru, Karnataka — working India-wide.</p>
           </div>
         </div>
-        <p className="mt-14 text-xs opacity-50">
+        <p className="mt-14 font-mono text-[11px] text-ink-soft">
           © {new Date().getFullYear()} {SITE_NAME}. Built, hosted and looked after in India.
         </p>
       </div>
@@ -132,24 +150,70 @@ export function SiteLayout({ children, className }: { children: ReactNode; class
 export function Section({
   children,
   className,
-  dark = false,
+  alt = false,
+  texture = false,
 }: {
   children: ReactNode;
   className?: string;
-  dark?: boolean;
+  alt?: boolean;
+  texture?: boolean;
 }) {
   return (
-    <section className={cn(dark && "section-dark", className)}>
-      <div className="mx-auto max-w-6xl px-6 py-24 md:py-36">{children}</div>
+    <section
+      className={cn(
+        "relative overflow-hidden border-t border-border",
+        alt ? "bg-alt" : "bg-background",
+        className,
+      )}
+    >
+      {texture && <GridTexture />}
+      <div className="relative mx-auto max-w-6xl px-6 py-24 md:py-32">{children}</div>
     </section>
   );
 }
 
 export function Eyebrow({ children }: { children: ReactNode }) {
   return (
-    <div>
-      <span className="rule-gold" aria-hidden="true" />
-      <p className="mt-4 text-xs uppercase tracking-[0.22em] opacity-60">{children}</p>
-    </div>
+    <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">{children}</p>
+  );
+}
+
+/** Full-bleed dark closing section with the mark cropped at the bottom edge. */
+export function DarkCta({
+  title,
+  body,
+  actionTo = "/contact",
+  actionLabel = "Start a conversation",
+}: {
+  title: string;
+  body?: string;
+  actionTo?: string;
+  actionLabel?: string;
+}) {
+  return (
+    <section className="relative overflow-hidden bg-ink text-white">
+      <GridTexture dark />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-1/3 w-[900px] max-w-[170vw] -translate-x-1/2"
+      >
+        <Mark className="w-full text-white opacity-[0.05]" />
+      </div>
+      <div className="relative mx-auto max-w-6xl px-6 py-28 md:py-36">
+        <Reveal>
+          <h2 className="max-w-3xl text-3xl md:text-5xl">{title}</h2>
+          {body && <p className="mt-6 max-w-xl text-white/70">{body}</p>}
+          <div className="mt-10">
+            <ButtonLink
+              to={actionTo}
+              variant="ghost"
+              className="border-white/30 bg-transparent text-white hover:border-white hover:text-white"
+            >
+              {actionLabel}
+            </ButtonLink>
+          </div>
+        </Reveal>
+      </div>
+    </section>
   );
 }
