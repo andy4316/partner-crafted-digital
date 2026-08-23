@@ -1,7 +1,9 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 
+import { ButtonLink } from "@/components/buttons";
+import { PageHero } from "@/components/hero";
 import { Reveal } from "@/components/reveal";
-import { SiteLayout } from "@/components/site-layout";
+import { DarkCta, Eyebrow, Section, SiteLayout } from "@/components/site-layout";
 
 export const Route = createFileRoute("/iso-consultancy")({
   head: () => ({
@@ -17,80 +19,86 @@ export const Route = createFileRoute("/iso-consultancy")({
         property: "og:description",
         content: "ISO certification guidance, documentation and audit readiness.",
       },
-      { property: "og:url", content: "/iso-consultancy" },
+      {
+        property: "og:url",
+        content: "https://partner-crafted-digital.lovable.app/iso-consultancy",
+      },
       { name: "twitter:title", content: "ISO Consultancy — AB Digital Consultancy" },
       {
         name: "twitter:description",
         content: "Gap assessment, documentation and audit readiness.",
       },
     ],
-    links: [{ rel: "canonical", href: "/iso-consultancy" }],
+    links: [
+      { rel: "canonical", href: "https://partner-crafted-digital.lovable.app/iso-consultancy" },
+    ],
   }),
   component: Iso,
 });
 
+const STEPS = [
+  {
+    n: "01",
+    t: "Gap assessment",
+    d: "We look at how you work today and where the standard expects something different.",
+  },
+  {
+    n: "02",
+    t: "Documentation",
+    d: "Manuals, procedures and records written to match how your business really runs.",
+  },
+  {
+    n: "03",
+    t: "Audit readiness",
+    d: "Internal audit, corrective actions, and being there when the auditor arrives.",
+  },
+];
+
 function Iso() {
   return (
-    <SiteLayout className="bg-teal text-primary-foreground">
-      <section className="border-b border-primary-foreground/15">
-        <div className="mx-auto max-w-6xl px-6 py-24 md:py-36">
-          <Reveal>
-            <p className="font-mono text-xs uppercase tracking-[0.3em] opacity-70">
-              Practice area / 02
-            </p>
-            <h1 className="mt-8 max-w-3xl font-serif text-4xl md:text-6xl">ISO Consultancy</h1>
-            <p className="mt-8 max-w-2xl opacity-80">
-              A separate, more formal side of the practice. Certification is paperwork, process and
-              evidence — not design. It deserves its own treatment, and its own conversation.
-            </p>
-          </Reveal>
-        </div>
-      </section>
+    <SiteLayout className="[--accent:#2E6E62]">
+      <PageHero
+        compact
+        badge="Practice area / 02"
+        title={
+          <>
+            ISO <span className="text-accent">consultancy</span>, kept practical.
+          </>
+        }
+        subtitle="A related but separate side of the practice. Certification is paperwork, process and evidence — not design — so it gets its own conversation."
+        actions={<ButtonLink to="/contact">Ask about certification</ButtonLink>}
+      />
 
-      <section>
-        <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-          <div className="grid gap-14 md:grid-cols-3">
-            {[
-              {
-                n: "01",
-                t: "Gap assessment",
-                d: "We look at how you work today and where the standard expects something different.",
-              },
-              {
-                n: "02",
-                t: "Documentation",
-                d: "Manuals, procedures and records written to match how your business really runs.",
-              },
-              {
-                n: "03",
-                t: "Audit readiness",
-                d: "Internal audit, corrective actions, and being there when the auditor arrives.",
-              },
-            ].map((item, i) => (
-              <Reveal key={item.n} delay={i * 100}>
-                <p className="font-mono text-xs tracking-[0.3em] opacity-60">{item.n}</p>
-                <h2 className="mt-4 font-serif text-2xl">{item.t}</h2>
-                <p className="mt-3 text-sm opacity-80">{item.d}</p>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={150}>
-            <div className="mt-24 border-t border-primary-foreground/20 pt-12">
-              <p className="max-w-2xl opacity-80">
-                This section is still being built out. If certification is on your list this year,
-                talk to us now and we'll tell you plainly whether we're the right fit.
-              </p>
-              <Link
-                to="/contact"
-                className="mt-8 inline-block border-b-2 border-primary-foreground/60 pb-1 text-sm uppercase tracking-[0.18em]"
-              >
-                Learn more
-              </Link>
-            </div>
-          </Reveal>
+      <Section>
+        <Reveal>
+          <Eyebrow>How it runs</Eyebrow>
+          <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">Three steps, no theatre.</h2>
+        </Reveal>
+        <div className="mt-14 border-t border-border">
+          {STEPS.map((step, i) => (
+            <Reveal
+              key={step.n}
+              delay={i * 90}
+              className="grid gap-4 border-b border-border py-10 md:grid-cols-[auto_1fr_1.4fr] md:items-baseline"
+            >
+              <p className="font-mono text-[11px] tracking-[0.28em] text-accent">{step.n}</p>
+              <h3 className="text-2xl">{step.t}</h3>
+              <p className="font-mono text-sm text-ink-soft">{step.d}</p>
+            </Reveal>
+          ))}
         </div>
-      </section>
+        <Reveal delay={150}>
+          <p className="mt-12 max-w-2xl text-ink-soft">
+            This practice area is still being built out. If certification is on your list this year,
+            talk to us now and we'll tell you plainly whether we're the right fit.
+          </p>
+        </Reveal>
+      </Section>
+
+      <DarkCta
+        title="Certification on the list this year? Let's see if we fit."
+        actionLabel="Learn more"
+      />
     </SiteLayout>
   );
 }

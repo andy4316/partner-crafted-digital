@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
 // TODO: replace with your project URL once a project name or custom domain is set.
-const BASE_URL = "";
+// Canonical public origin used for canonical tags and this sitemap.
+const BASE_URL = "https://partner-crafted-digital.lovable.app";
 
 interface SitemapEntry {
   path: string;
