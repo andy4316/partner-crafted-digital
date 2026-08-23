@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 
+import { ButtonAnchor } from "@/components/buttons";
+import { PageHero } from "@/components/hero";
 import { Reveal } from "@/components/reveal";
 import { Eyebrow, Section, SiteLayout } from "@/components/site-layout";
 import { supabase } from "@/integrations/supabase/client";
@@ -20,20 +22,22 @@ export const Route = createFileRoute("/contact")({
         property: "og:description",
         content: "A short note or a WhatsApp message is enough to start.",
       },
-      { property: "og:url", content: "/contact" },
+      { property: "og:url", content: "https://partner-crafted-digital.lovable.app/contact" },
       { name: "twitter:title", content: "Contact — AB Digital Consultancy" },
       {
         name: "twitter:description",
         content: "WhatsApp +91 90521 42231, or send a short note.",
       },
     ],
-    links: [{ rel: "canonical", href: "/contact" }],
+    links: [{ rel: "canonical", href: "https://partner-crafted-digital.lovable.app/contact" }],
   }),
   component: Contact,
 });
 
 const fieldClass =
-  "mt-2 w-full border-b border-input bg-transparent py-3 text-base outline-none transition-colors focus:border-gold";
+  "mt-2 w-full rounded-[6px] border border-border bg-white px-3 py-2.5 text-base outline-none transition-colors focus:border-accent";
+
+const labelClass = "font-mono text-[11px] uppercase tracking-[0.18em] text-ink-soft";
 
 function Contact() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -62,25 +66,34 @@ function Contact() {
 
   return (
     <SiteLayout>
-      <Section>
-        <Reveal>
-          <Eyebrow>Contact</Eyebrow>
-          <h1 className="mt-8 max-w-3xl text-4xl md:text-6xl">
-            Tell us what you're trying to do. We'll be straight with you.
-          </h1>
-        </Reveal>
+      <PageHero
+        compact
+        badge="Replies within a working day"
+        title={
+          <>
+            Tell us what you're trying to do. We'll be <span className="text-accent">straight</span>{" "}
+            with you.
+          </>
+        }
+        subtitle="A short note is enough. No sales call, no pressure — just an honest answer about what your business needs."
+        actions={
+          <ButtonAnchor href={WHATSAPP_URL}>WhatsApp {PHONE_DISPLAY}</ButtonAnchor>
+        }
+      />
 
-        <div className="mt-20 grid gap-16 md:grid-cols-[1.2fr_1fr]">
+      <Section>
+        <div className="grid gap-16 md:grid-cols-[1.2fr_1fr]">
           <Reveal>
-            <form onSubmit={handleSubmit} className="max-w-xl space-y-8">
+            <Eyebrow>Send a note</Eyebrow>
+            <form onSubmit={handleSubmit} className="mt-8 max-w-xl space-y-6">
               <div>
-                <label htmlFor="name" className="text-sm text-muted-foreground">
+                <label htmlFor="name" className={labelClass}>
                   Your name
                 </label>
                 <input id="name" name="name" required autoComplete="name" className={fieldClass} />
               </div>
               <div>
-                <label htmlFor="business" className="text-sm text-muted-foreground">
+                <label htmlFor="business" className={labelClass}>
                   Business name
                 </label>
                 <input
@@ -91,7 +104,7 @@ function Contact() {
                 />
               </div>
               <div>
-                <label htmlFor="phone" className="text-sm text-muted-foreground">
+                <label htmlFor="phone" className={labelClass}>
                   Phone or WhatsApp
                 </label>
                 <input
@@ -104,7 +117,7 @@ function Contact() {
                 />
               </div>
               <div>
-                <label htmlFor="message" className="text-sm text-muted-foreground">
+                <label htmlFor="message" className={labelClass}>
                   What do you need?
                 </label>
                 <textarea id="message" name="message" required rows={4} className={fieldClass} />
@@ -113,19 +126,19 @@ function Contact() {
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="border-b-2 border-gold pb-1 text-sm uppercase tracking-[0.18em] disabled:opacity-50"
+                className="inline-flex items-center gap-2 rounded-[6px] bg-ink px-6 py-3 font-mono text-xs uppercase tracking-[0.14em] text-white transition-all duration-300 hover:scale-[1.03] hover:bg-accent disabled:opacity-50"
               >
                 {status === "sending" ? "Sending…" : "Send it across"}
               </button>
 
               <p aria-live="polite" className="text-sm">
                 {status === "sent" && (
-                  <span className="text-teal">
+                  <span className="text-accent">
                     Got it. We'll reply within a working day — usually sooner.
                   </span>
                 )}
                 {status === "error" && (
-                  <span className="text-muted-foreground">
+                  <span className="text-ink-soft">
                     That didn't go through. Please message us on WhatsApp instead.
                   </span>
                 )}
@@ -134,20 +147,21 @@ function Contact() {
           </Reveal>
 
           <Reveal delay={120}>
-            <h2 className="text-xl">Rather just talk?</h2>
-            <p className="mt-4 text-muted-foreground">
-              Most conversations start on WhatsApp. Send a line about your business — no form, no
-              sales call.
+            <Eyebrow>Rather just talk?</Eyebrow>
+            <h2 className="mt-4 text-2xl">WhatsApp is usually faster.</h2>
+            <p className="mt-4 text-ink-soft">
+              Most conversations start there. Send a line about your business — no form, no sales
+              call.
             </p>
-            <a
-              href={WHATSAPP_URL}
-              rel="noopener"
-              className="mt-8 inline-block border-b-2 border-gold pb-1 text-sm uppercase tracking-[0.18em]"
-            >
-              WhatsApp {PHONE_DISPLAY}
-            </a>
-            <p className="mt-10 text-sm text-muted-foreground">
-              We work with businesses anywhere in India. Monday to Saturday, 10am to 7pm.
+            <div className="mt-8">
+              <ButtonAnchor href={WHATSAPP_URL} variant="ghost">
+                WhatsApp {PHONE_DISPLAY}
+              </ButtonAnchor>
+            </div>
+            <p className="mt-10 font-mono text-xs text-ink-soft">
+              Bengaluru, Karnataka. Working with businesses anywhere in India.
+              <br />
+              Monday to Saturday, 10am to 7pm.
             </p>
           </Reveal>
         </div>
