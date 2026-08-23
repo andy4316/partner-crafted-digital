@@ -30,7 +30,7 @@ function Watermark({ tone = "ink" }: { tone?: "ink" | "white" }) {
       className="pointer-events-none absolute left-1/2 top-1/2 w-[1200px] max-w-[190vw]"
     >
       <Mark
-        className={cn("w-full", tone === "ink" ? "text-ink opacity-[0.035]" : "text-white opacity-[0.05]")}
+        className={cn("w-full", tone === "ink" ? "text-ink opacity-[0.022]" : "text-white opacity-[0.05]")}
       />
     </div>
   );
@@ -66,7 +66,7 @@ export function PageHero({
     <section
       className={cn(
         "relative flex items-center overflow-hidden bg-background",
-        compact ? "min-h-[70vh] pt-28" : "min-h-[92vh] pt-24",
+        compact ? "min-h-[56vh] pt-28 pb-16" : "min-h-[92vh] pt-24",
       )}
     >
       <GridTexture />
