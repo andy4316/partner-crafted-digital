@@ -38,23 +38,46 @@ function Header() {
           : "border-b border-transparent bg-transparent",
       )}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5 sm:px-6 sm:py-5">
-        <Link to="/" className="flex min-w-0 items-center gap-2.5 sm:gap-3.5" onClick={() => setOpen(false)}>
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5 sm:px-6 sm:py-5 lg:px-10">
+        <Link to="/" className="group flex min-w-0 items-center gap-2.5 sm:gap-3.5" onClick={() => setOpen(false)}>
           <Mark className="h-6 w-auto shrink-0 text-ink sm:h-7" title="AB Digital Consultancy logo" />
           <span className="truncate font-serif text-base font-bold tracking-tight sm:text-lg">AB Digital</span>
         </Link>
 
-        <nav aria-label="Main" className="hidden items-center gap-9 min-[860px]:flex">
-          {NAV.slice(1).map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="nav-link font-mono text-xs uppercase tracking-[0.14em] text-ink-soft transition-colors hover:text-ink"
-              activeProps={{ className: "text-ink" }}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <nav aria-label="Main" className="hidden items-center gap-10 min-[860px]:flex">
+          <ul className="flex items-center gap-8">
+            {NAV.slice(1, -1).map((item) => (
+              <li key={item.to}>
+                <Link
+                  to={item.to}
+                  className="group relative flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-ink-soft transition-colors hover:text-ink"
+                  activeProps={{ className: "text-ink" }}
+                >
+                  {({ isActive }) => (
+                    <>
+                      <span
+                        aria-hidden
+                        className={cn(
+                          "h-1 w-1 bg-accent transition-opacity duration-300",
+                          isActive ? "opacity-100" : "opacity-0",
+                        )}
+                      />
+                      {item.label}
+                    </>
+                  )}
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          <span aria-hidden className="h-4 w-px bg-border" />
+
+          <Link
+            to="/contact"
+            className="border border-ink px-4 py-2 font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-ink transition-all hover:bg-ink hover:text-white"
+          >
+            Start Project
+          </Link>
         </nav>
 
         <button
@@ -83,8 +106,16 @@ function Header() {
               </li>
             ))}
           </ul>
+          <Link
+            to="/contact"
+            onClick={() => setOpen(false)}
+            className="mt-3 block border border-ink px-4 py-2.5 text-center font-mono text-[11px] uppercase tracking-[0.2em] text-ink"
+          >
+            Start Project
+          </Link>
         </nav>
       )}
+
     </header>
   );
 }
