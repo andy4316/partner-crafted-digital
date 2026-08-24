@@ -89,7 +89,7 @@ function About() {
         <div className="grid gap-12 md:grid-cols-[auto_1fr] md:items-center">
           <Reveal>
             <Mark
-              className="h-24 w-24 text-ink"
+              className="h-24 w-auto text-ink"
               title="AB Digital Consultancy logo mark: two pillars forming a hidden upward arrow"
             />
           </Reveal>
