@@ -38,10 +38,10 @@ function Header() {
           : "border-b border-transparent bg-transparent",
       )}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-        <Link to="/" className="flex items-center gap-3.5" onClick={() => setOpen(false)}>
-          <Mark className="h-7 w-auto text-ink" title="AB Digital Consultancy logo" />
-          <span className="font-serif text-lg font-bold tracking-tight">AB Digital</span>
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5 sm:px-6 sm:py-5">
+        <Link to="/" className="flex min-w-0 items-center gap-2.5 sm:gap-3.5" onClick={() => setOpen(false)}>
+          <Mark className="h-6 w-auto shrink-0 text-ink sm:h-7" title="AB Digital Consultancy logo" />
+          <span className="truncate font-serif text-base font-bold tracking-tight sm:text-lg">AB Digital</span>
         </Link>
 
         <nav aria-label="Main" className="hidden items-center gap-9 min-[860px]:flex">
@@ -62,21 +62,21 @@ function Header() {
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="min-[860px]:hidden"
+          className="grid h-9 w-9 shrink-0 place-items-center min-[860px]:hidden"
         >
           {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
       {open && (
-        <nav aria-label="Mobile" className="border-t border-border px-6 py-4 min-[860px]:hidden">
-          <ul className="space-y-3">
+        <nav aria-label="Mobile" className="border-t border-border px-4 py-3 min-[860px]:hidden sm:px-6">
+          <ul className="space-y-2">
             {NAV.map((item) => (
               <li key={item.to}>
                 <Link
                   to={item.to}
                   onClick={() => setOpen(false)}
-                  className="block font-mono text-sm uppercase tracking-[0.14em]"
+                  className="block py-1 font-mono text-sm uppercase tracking-[0.14em]"
                 >
                   {item.label}
                 </Link>
