@@ -125,7 +125,7 @@ export function MarkDivider({ className }: { className?: string }) {
   return (
     <div className={cn("flex items-center justify-center gap-6", className)} aria-hidden>
       <span className="h-px flex-1 bg-border" />
-      <Mark className="h-7 w-7 text-accent" />
+      <Mark className="h-6 w-auto text-accent" />
       <span className="h-px flex-1 bg-border" />
     </div>
   );

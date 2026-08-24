@@ -4,7 +4,6 @@ import { useEffect, useState, type ReactNode } from "react";
 
 import { GridTexture } from "@/components/artifacts";
 import { ButtonLink } from "@/components/buttons";
-import lockup from "@/assets/ab-digital-lockup.png.asset.json";
 import { Mark } from "@/components/mark";
 import { Reveal } from "@/components/reveal";
 import { PHONE_DISPLAY, SITE_NAME, WHATSAPP_URL } from "@/lib/site";
@@ -41,13 +40,8 @@ function Header() {
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
-          <img
-            src={lockup.url}
-            alt="AB Digital Consultancy — complete web partner for growing businesses"
-            width={180}
-            height={44}
-            className="h-8 w-auto"
-          />
+          <Mark className="h-5 w-auto text-ink" title="AB Digital Consultancy logo" />
+          <span className="font-serif text-base font-bold tracking-tight">AB Digital</span>
         </Link>
 
         <nav aria-label="Main" className="hidden items-center gap-8 min-[860px]:flex">

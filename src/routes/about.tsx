@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import founder from "@/assets/founder.jpg";
 import { ButtonLink } from "@/components/buttons";
 import { MarkDivider, PageHero } from "@/components/hero";
-import { Mark } from "@/components/mark";
+import lockup from "@/assets/ab-digital-lockup.png.asset.json";
 import { Reveal } from "@/components/reveal";
 import { DarkCta, Eyebrow, Section, SiteLayout } from "@/components/site-layout";
 
@@ -88,9 +88,12 @@ function About() {
       <Section alt>
         <div className="grid gap-12 md:grid-cols-[auto_1fr] md:items-center">
           <Reveal>
-            <Mark
-              className="h-24 w-24 text-ink"
-              title="AB Digital Consultancy logo mark: two pillars forming a hidden upward arrow"
+            <img
+              src={lockup.url}
+              alt="AB Digital Consultancy logo: two navy pillars forming a hidden upward arrow, beside the wordmark"
+              width={420}
+              height={204}
+              className="w-full max-w-[320px]"
             />
           </Reveal>
           <Reveal delay={120}>
