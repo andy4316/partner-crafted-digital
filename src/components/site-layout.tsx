@@ -38,18 +38,18 @@ function Header() {
           : "border-b border-transparent bg-transparent",
       )}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
-          <Mark className="h-5 w-auto text-ink" title="AB Digital Consultancy logo" />
-          <span className="font-serif text-base font-bold tracking-tight">AB Digital</span>
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+        <Link to="/" className="flex items-center gap-3.5" onClick={() => setOpen(false)}>
+          <Mark className="h-7 w-auto text-ink" title="AB Digital Consultancy logo" />
+          <span className="font-serif text-lg font-bold tracking-tight">AB Digital</span>
         </Link>
 
-        <nav aria-label="Main" className="hidden items-center gap-8 min-[860px]:flex">
+        <nav aria-label="Main" className="hidden items-center gap-9 min-[860px]:flex">
           {NAV.slice(1).map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="nav-link font-mono text-[11px] uppercase tracking-[0.16em] text-ink-soft transition-colors hover:text-ink"
+              className="nav-link font-mono text-xs uppercase tracking-[0.14em] text-ink-soft transition-colors hover:text-ink"
               activeProps={{ className: "text-ink" }}
             >
               {item.label}
@@ -64,7 +64,7 @@ function Header() {
           onClick={() => setOpen((v) => !v)}
           className="min-[860px]:hidden"
         >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
