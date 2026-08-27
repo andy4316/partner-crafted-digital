@@ -54,7 +54,7 @@ function Home() {
         }
       />
 
-      <Section alt className="py-28 md:py-40">
+      <Section alt texture className="py-28 md:py-40">
         <div className="grid gap-12 lg:grid-cols-[minmax(140px,180px)_1fr]">
           <Reveal>
             <Eyebrow>What we do</Eyebrow>
