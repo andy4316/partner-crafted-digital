@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { CodeArtifact, TerminalArtifact } from "@/components/artifacts";
+import { BrowserArtifact, CodeArtifact, CssArtifact, TerminalArtifact } from "@/components/artifacts";
 import { ButtonLink } from "@/components/buttons";
 import { MarkDivider, PageHero } from "@/components/hero";
 import { Reveal } from "@/components/reveal";
