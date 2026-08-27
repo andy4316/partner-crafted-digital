@@ -54,28 +54,64 @@ function Home() {
         }
       />
 
-      <Section texture>
-        <CodeArtifact className="right-[3%] top-[18%]" delay={400} duration={8.5} />
-        <Reveal>
-          <Eyebrow>What we do</Eyebrow>
-          <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">
-            Everything your business needs to exist online, from one place.
-          </h2>
-        </Reveal>
-        <Reveal delay={120}>
-          <p className="mt-8 max-w-2xl text-ink-soft">
-            Design and development. Hosting and domains. Content updates when your prices change.
-            Search visibility so people find you. Flyers and cards when you need something printed.
-            One number to call for all of it.
-          </p>
-        </Reveal>
-        <Reveal delay={200}>
-          <div className="mt-10">
-            <ButtonLink to="/services" variant="ghost">
-              See the full list
-            </ButtonLink>
+      <Section alt className="py-28 md:py-40">
+        <div className="grid gap-12 lg:grid-cols-[minmax(140px,180px)_1fr]">
+          <Reveal>
+            <Eyebrow>What we do</Eyebrow>
+          </Reveal>
+
+          <div>
+            <Reveal delay={100}>
+              <h2 className="max-w-5xl text-4xl leading-[1.02] tracking-tight sm:text-5xl md:text-6xl lg:text-[4.8rem]">
+                One partner. <span className="text-accent">Everything online.</span>
+              </h2>
+            </Reveal>
+
+            <Reveal delay={200}>
+              <p className="mt-8 max-w-2xl text-lg leading-relaxed text-ink-soft">
+                Design and development. Hosting and domains. Content updates when your prices
+                change. Search visibility so people find you. Flyers and cards when you need
+                something printed. One number to call for all of it.
+              </p>
+            </Reveal>
+
+            <Reveal delay={300}>
+              <div className="mt-10">
+                <ButtonLink to="/services" variant="ghost">
+                  See the full list
+                </ButtonLink>
+              </div>
+            </Reveal>
+
+            <div className="mt-20 grid gap-6 md:grid-cols-2">
+              <Reveal delay={400}>
+                <article className="group border border-border bg-white p-8 transition-colors hover:border-accent md:p-10">
+                  <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">
+                    Web & Digital
+                  </p>
+                  <h3 className="mt-6 text-2xl md:text-3xl">Websites that bring customers in.</h3>
+                  <p className="mt-4 text-ink-soft">
+                    Design, development, hosting, SEO and ongoing updates — built for small
+                    businesses in India.
+                  </p>
+                </article>
+              </Reveal>
+
+              <Reveal delay={500}>
+                <article className="group border border-border bg-white p-8 transition-colors hover:border-accent md:p-10">
+                  <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">
+                    Brand & Print
+                  </p>
+                  <h3 className="mt-6 text-2xl md:text-3xl">Marketing materials that match.</h3>
+                  <p className="mt-4 text-ink-soft">
+                    Business cards, flyers, brochures and branded collateral designed to look like
+                    they came from the same studio.
+                  </p>
+                </article>
+              </Reveal>
+            </div>
           </div>
-        </Reveal>
+        </div>
       </Section>
 
       <Section alt>
