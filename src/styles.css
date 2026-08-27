@@ -149,15 +149,45 @@
 @keyframes float-a {
   0%,
   100% {
-    transform: translateY(-14px);
+    transform: translateY(-10px);
   }
   50% {
-    transform: translateY(14px);
+    transform: translateY(10px);
   }
 }
 
 @utility float-slow {
-  animation: float-a 8s ease-in-out infinite;
+  animation: float-a 9s ease-in-out infinite;
+}
+
+/* Gentler drift for secondary sections — smaller range, longer period */
+@keyframes float-b {
+  0%,
+  100% {
+    transform: translateY(-7px) translateX(3px);
+  }
+  50% {
+    transform: translateY(7px) translateX(-3px);
+  }
+}
+
+@utility float-slower {
+  animation: float-b 13s ease-in-out infinite;
+}
+
+/* Minimal movement for background accents that should never pull focus */
+@keyframes float-c {
+  0%,
+  100% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+@utility float-gentle {
+  animation: float-c 17s ease-in-out infinite;
 }
 
 @keyframes dot-pulse {
