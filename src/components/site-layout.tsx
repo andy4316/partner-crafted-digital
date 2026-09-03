@@ -1,12 +1,12 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, X } from "lucide-react";
+import { ArrowUp, Menu, X } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 
 import { GridTexture } from "@/components/artifacts";
 import { ButtonLink } from "@/components/buttons";
 import { Mark } from "@/components/mark";
 import { Reveal } from "@/components/reveal";
-import { PHONE_DISPLAY, SITE_NAME, WHATSAPP_URL } from "@/lib/site";
+import { PHONE_DISPLAY, SITE_NAME, TAGLINE, WHATSAPP_URL } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 const NAV = [
