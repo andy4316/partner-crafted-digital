@@ -55,10 +55,8 @@ function Home() {
       />
 
       <Section alt texture className="py-28 md:py-40">
-        <BrowserArtifact className="left-[3%] top-[12%]" delay={0} duration={8} />
-        <CssArtifact className="right-[4%] top-[16%]" delay={1100} duration={9} />
-        <TerminalArtifact className="left-[5%] bottom-[14%]" delay={2200} duration={8.5} />
-        <CodeArtifact className="right-[3%] bottom-[18%]" delay={3300} duration={7.5} />
+        <BrowserArtifact className="right-[2%] top-[10%] opacity-40" delay={0} float="gentle" />
+        <TerminalArtifact className="left-[2%] bottom-[12%] opacity-40" delay={1800} float="gentle" />
         <div className="grid gap-12 lg:grid-cols-[minmax(140px,180px)_1fr]">
           <Reveal>
             <Eyebrow>What we do</Eyebrow>
