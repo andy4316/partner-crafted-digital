@@ -44,7 +44,7 @@ function Card({
   );
 }
 
-export function BrowserArtifact(props: { className?: string; delay?: number; duration?: number }) {
+export function BrowserArtifact(props: { className?: string; delay?: number; duration?: number; float?: "slow" | "slower" | "gentle" }) {
   return (
     <Card {...props}>
       <div className="flex items-center gap-1.5">
@@ -60,7 +60,7 @@ export function BrowserArtifact(props: { className?: string; delay?: number; dur
   );
 }
 
-export function CodeArtifact(props: { className?: string; delay?: number; duration?: number }) {
+export function CodeArtifact(props: { className?: string; delay?: number; duration?: number; float?: "slow" | "slower" | "gentle" }) {
   return (
     <Card {...props}>
       <pre className="whitespace-pre">
@@ -73,7 +73,7 @@ export function CodeArtifact(props: { className?: string; delay?: number; durati
   );
 }
 
-export function TerminalArtifact(props: { className?: string; delay?: number; duration?: number }) {
+export function TerminalArtifact(props: { className?: string; delay?: number; duration?: number; float?: "slow" | "slower" | "gentle" }) {
   return (
     <Card {...props}>
       <span className="text-accent">$</span> git push origin main
@@ -82,7 +82,7 @@ export function TerminalArtifact(props: { className?: string; delay?: number; du
   );
 }
 
-export function CssArtifact(props: { className?: string; delay?: number; duration?: number }) {
+export function CssArtifact(props: { className?: string; delay?: number; duration?: number; float?: "slow" | "slower" | "gentle" }) {
   return (
     <Card {...props}>
       <pre className="whitespace-pre">
