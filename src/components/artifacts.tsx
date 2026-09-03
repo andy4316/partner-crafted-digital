@@ -34,7 +34,7 @@ function Card({
       aria-hidden
       style={duration ? { animationDelay: `${delay}ms`, animationDuration: `${duration}s` } : { animationDelay: `${delay}ms` }}
       className={cn(
-        "pointer-events-none absolute hidden rounded-md border border-border bg-white/85 p-3 font-mono text-[11px] leading-relaxed text-ink-soft shadow-[0_18px_40px_-28px_rgba(13,17,23,0.45)] backdrop-blur-sm xl:block",
+        "pointer-events-none absolute block rounded-md border border-border bg-white/85 p-3 font-mono text-[11px] leading-relaxed text-ink-soft shadow-[0_18px_40px_-28px_rgba(13,17,23,0.45)] backdrop-blur-sm max-sm:p-2 max-sm:text-[10px] max-sm:opacity-30",
         floatClass,
         className,
       )}
