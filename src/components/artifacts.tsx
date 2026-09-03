@@ -18,19 +18,24 @@ function Card({
   children,
   className,
   delay = 0,
-  duration = 8,
+  duration,
+  float = "slow",
 }: {
   children: React.ReactNode;
   className?: string;
   delay?: number;
   duration?: number;
+  float?: "slow" | "slower" | "gentle";
 }) {
+  const floatClass =
+    float === "slower" ? "float-slower" : float === "gentle" ? "float-gentle" : "float-slow";
   return (
     <div
       aria-hidden
-      style={{ animationDelay: `${delay}ms`, animationDuration: `${duration}s` }}
+      style={duration ? { animationDelay: `${delay}ms`, animationDuration: `${duration}s` } : { animationDelay: `${delay}ms` }}
       className={cn(
-        "float-slow pointer-events-none absolute hidden rounded-md border border-border bg-white/85 p-3 font-mono text-[11px] leading-relaxed text-ink-soft shadow-[0_18px_40px_-28px_rgba(13,17,23,0.45)] backdrop-blur-sm xl:block",
+        "pointer-events-none absolute hidden rounded-md border border-border bg-white/85 p-3 font-mono text-[11px] leading-relaxed text-ink-soft shadow-[0_18px_40px_-28px_rgba(13,17,23,0.45)] backdrop-blur-sm xl:block",
+        floatClass,
         className,
       )}
     >
