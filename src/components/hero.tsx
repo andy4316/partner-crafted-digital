@@ -73,7 +73,7 @@ export function PageHero({
       <Watermark />
       <HeroArtifacts />
 
-      <div className="relative mx-auto w-full max-w-5xl px-6 py-20 text-center">
+      <div className="relative z-10 mx-auto w-full max-w-5xl px-6 py-20 text-center">
         <div className="cascade" style={{ animationDelay: "80ms" }}>
           <StatusBadge>{badge}</StatusBadge>
         </div>
