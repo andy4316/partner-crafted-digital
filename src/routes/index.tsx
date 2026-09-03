@@ -144,7 +144,7 @@ function Home() {
       </Section>
 
       <Section texture>
-        <TerminalArtifact className="left-[2%] bottom-[20%]" delay={1200} duration={7.5} />
+        <CssArtifact className="right-[3%] top-[14%] opacity-30" delay={0} float="slower" />
         <Reveal>
           <Eyebrow>A glimpse of the work</Eyebrow>
           <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">
