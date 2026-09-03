@@ -34,6 +34,7 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-iso: var(--iso-red);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -55,6 +56,7 @@
   --muted-foreground: #57606a;
   --accent: #0969da;
   --accent-foreground: #ffffff;
+  --iso-red: #c8102e;
   --border: #d0d7de;
   --input: #d0d7de;
   --ring: #0969da;

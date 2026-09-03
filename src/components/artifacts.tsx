@@ -18,19 +18,24 @@ function Card({
   children,
   className,
   delay = 0,
-  duration = 8,
+  duration,
+  float = "slow",
 }: {
   children: React.ReactNode;
   className?: string;
   delay?: number;
   duration?: number;
+  float?: "slow" | "slower" | "gentle";
 }) {
+  const floatClass =
+    float === "slower" ? "float-slower" : float === "gentle" ? "float-gentle" : "float-slow";
   return (
     <div
       aria-hidden
-      style={{ animationDelay: `${delay}ms`, animationDuration: `${duration}s` }}
+      style={duration ? { animationDelay: `${delay}ms`, animationDuration: `${duration}s` } : { animationDelay: `${delay}ms` }}
       className={cn(
-        "float-slow pointer-events-none absolute hidden rounded-md border border-border bg-white/85 p-3 font-mono text-[11px] leading-relaxed text-ink-soft shadow-[0_18px_40px_-28px_rgba(13,17,23,0.45)] backdrop-blur-sm xl:block",
+        "pointer-events-none absolute block rounded-md border border-border bg-white/85 p-3 font-mono text-[11px] leading-relaxed text-ink-soft shadow-[0_18px_40px_-28px_rgba(13,17,23,0.45)] backdrop-blur-sm max-sm:p-2 max-sm:text-[10px] max-sm:opacity-30",
+        floatClass,
         className,
       )}
     >
@@ -39,7 +44,7 @@ function Card({
   );
 }
 
-export function BrowserArtifact(props: { className?: string; delay?: number; duration?: number }) {
+export function BrowserArtifact(props: { className?: string; delay?: number; duration?: number; float?: "slow" | "slower" | "gentle" }) {
   return (
     <Card {...props}>
       <div className="flex items-center gap-1.5">
@@ -55,7 +60,7 @@ export function BrowserArtifact(props: { className?: string; delay?: number; dur
   );
 }
 
-export function CodeArtifact(props: { className?: string; delay?: number; duration?: number }) {
+export function CodeArtifact(props: { className?: string; delay?: number; duration?: number; float?: "slow" | "slower" | "gentle" }) {
   return (
     <Card {...props}>
       <pre className="whitespace-pre">
@@ -68,7 +73,7 @@ export function CodeArtifact(props: { className?: string; delay?: number; durati
   );
 }
 
-export function TerminalArtifact(props: { className?: string; delay?: number; duration?: number }) {
+export function TerminalArtifact(props: { className?: string; delay?: number; duration?: number; float?: "slow" | "slower" | "gentle" }) {
   return (
     <Card {...props}>
       <span className="text-accent">$</span> git push origin main
@@ -77,7 +82,7 @@ export function TerminalArtifact(props: { className?: string; delay?: number; du
   );
 }
 
-export function CssArtifact(props: { className?: string; delay?: number; duration?: number }) {
+export function CssArtifact(props: { className?: string; delay?: number; duration?: number; float?: "slow" | "slower" | "gentle" }) {
   return (
     <Card {...props}>
       <pre className="whitespace-pre">
@@ -89,14 +94,30 @@ export function CssArtifact(props: { className?: string; delay?: number; duratio
   );
 }
 
-/** The four hero artifacts, positioned around the corners. */
+/** The four hero artifacts, positioned around the corners. Only two appear on very narrow screens. */
 export function HeroArtifacts() {
   return (
     <>
-      <BrowserArtifact className="left-[4%] top-[18%]" delay={0} duration={7} />
-      <CodeArtifact className="right-[5%] top-[14%]" delay={900} duration={9} />
-      <TerminalArtifact className="left-[7%] bottom-[16%]" delay={1800} duration={8} />
-      <CssArtifact className="right-[7%] bottom-[18%]" delay={2600} duration={7.5} />
+      <BrowserArtifact
+        className="left-[4%] top-[18%] max-sm:left-[2%] max-sm:top-[10%] max-sm:opacity-25"
+        delay={0}
+        duration={12}
+      />
+      <CodeArtifact
+        className="right-[5%] top-[14%] max-sm:right-[2%] max-sm:top-[10%] max-sm:opacity-25"
+        delay={1200}
+        duration={15}
+      />
+      <TerminalArtifact
+        className="left-[7%] bottom-[16%] max-sm:hidden"
+        delay={2400}
+        duration={13}
+      />
+      <CssArtifact
+        className="right-[7%] bottom-[18%] max-sm:hidden"
+        delay={3600}
+        duration={14}
+      />
     </>
   );
 }
