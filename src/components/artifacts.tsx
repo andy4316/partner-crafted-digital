@@ -94,29 +94,24 @@ export function CssArtifact(props: { className?: string; delay?: number; duratio
   );
 }
 
-/** The four hero artifacts, positioned around the corners. Only two appear on very narrow screens. */
+/** Three hero artifacts, positioned around the corners. Only two appear on very narrow screens. */
 export function HeroArtifacts() {
   return (
     <>
       <BrowserArtifact
-        className="left-[4%] top-[18%] max-sm:left-[2%] max-sm:top-[10%] max-sm:opacity-25"
+        className="left-[4%] top-[18%] opacity-50 max-sm:left-[2%] max-sm:top-[10%] max-sm:opacity-25"
         delay={0}
-        duration={12}
+        duration={16}
       />
       <CodeArtifact
-        className="right-[5%] top-[14%] max-sm:right-[2%] max-sm:top-[10%] max-sm:opacity-25"
+        className="right-[5%] top-[14%] opacity-50 max-sm:right-[2%] max-sm:top-[10%] max-sm:opacity-25"
         delay={1200}
-        duration={15}
-      />
-      <TerminalArtifact
-        className="left-[7%] bottom-[16%] max-sm:hidden"
-        delay={2400}
-        duration={13}
+        duration={18}
       />
       <CssArtifact
-        className="right-[7%] bottom-[18%] max-sm:hidden"
-        delay={3600}
-        duration={14}
+        className="right-[7%] bottom-[18%] opacity-50 max-sm:hidden"
+        delay={2400}
+        duration={15}
       />
     </>
   );
