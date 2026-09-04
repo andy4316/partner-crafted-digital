@@ -1,10 +1,23 @@
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
+import {
+  FileText,
+  Monitor,
+  PenTool,
+  Printer,
+  Search,
+  Server,
+  TrendingUp,
+  Wrench,
+} from "lucide-react";
 
-import { BrowserArtifact, CodeArtifact, CssArtifact, TerminalArtifact } from "@/components/artifacts";
+import { BrowserArtifact, CssArtifact, TerminalArtifact } from "@/components/artifacts";
 import { ButtonLink } from "@/components/buttons";
 import { MarkDivider, PageHero } from "@/components/hero";
 import { Reveal } from "@/components/reveal";
 import { DarkCta, Eyebrow, Section, SiteLayout } from "@/components/site-layout";
+import { servicesQuery, type Service } from "@/lib/content";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -30,10 +43,28 @@ export const Route = createFileRoute("/")({
     ],
     links: [{ rel: "canonical", href: "https://partner-crafted-digital.lovable.app/" }],
   }),
+  loader: async ({ context }) => {
+    await context.queryClient.ensureQueryData(servicesQuery);
+  },
   component: Home,
 });
 
+function serviceIcon(title: Service["title"]) {
+  const cls = "h-5 w-5 text-accent";
+  if (title.toLowerCase().includes("hosting")) return <Server className={cls} />;
+  if (title.toLowerCase().includes("cms")) return <PenTool className={cls} />;
+  if (title.toLowerCase().includes("seo")) return <Search className={cls} />;
+  if (title.toLowerCase().includes("maintenance")) return <Wrench className={cls} />;
+  if (title.toLowerCase().includes("marketing")) return <TrendingUp className={cls} />;
+  if (title.toLowerCase().includes("flyers") || title.toLowerCase().includes("print"))
+    return <Printer className={cls} />;
+  if (title.toLowerCase().includes("content")) return <FileText className={cls} />;
+  return <Monitor className={cls} />;
+}
+
 function Home() {
+  const { data: services } = useSuspenseQuery(servicesQuery);
+
   return (
     <SiteLayout>
       <PageHero
@@ -54,10 +85,19 @@ function Home() {
         }
       />
 
-      <Section alt texture className="py-28 md:py-40">
-        <BrowserArtifact className="right-[2%] top-[10%] opacity-40" delay={0} float="gentle" />
-        <TerminalArtifact className="left-[2%] bottom-[12%] opacity-40" delay={1800} float="gentle" />
-        <div className="grid gap-12 lg:grid-cols-[minmax(140px,180px)_1fr]">
+      <Section alt texture>
+        <BrowserArtifact
+          className="right-[2%] top-[8%] opacity-30 max-sm:top-[4%] max-sm:opacity-20"
+          delay={0}
+          float="gentle"
+        />
+        <TerminalArtifact
+          className="left-[2%] bottom-[10%] opacity-30 max-sm:bottom-[4%] max-sm:opacity-20"
+          delay={1800}
+          float="gentle"
+        />
+
+        <div className="relative z-10 grid gap-12 lg:grid-cols-[minmax(140px,180px)_1fr]">
           <Reveal>
             <Eyebrow>What we do</Eyebrow>
           </Reveal>
@@ -85,81 +125,121 @@ function Home() {
               </div>
             </Reveal>
 
-            <div className="mt-20 grid gap-6 md:grid-cols-2">
-              <Reveal delay={400}>
-                <article className="group border border-border bg-white p-8 transition-colors hover:border-accent md:p-10">
-                  <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">
-                    Web & Digital
-                  </p>
-                  <h3 className="mt-6 text-2xl md:text-3xl">Websites that bring customers in.</h3>
-                  <p className="mt-4 text-ink-soft">
-                    Design, development, hosting, SEO and ongoing updates — built for small
-                    businesses in India.
-                  </p>
-                </article>
-              </Reveal>
-
-              <Reveal delay={500}>
-                <article className="group border border-border bg-white p-8 transition-colors hover:border-accent md:p-10">
-                  <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">
-                    Brand & Print
-                  </p>
-                  <h3 className="mt-6 text-2xl md:text-3xl">Marketing materials that match.</h3>
-                  <p className="mt-4 text-ink-soft">
-                    Business cards, flyers, brochures and branded collateral designed to look like
-                    they came from the same studio.
-                  </p>
-                </article>
-              </Reveal>
+            <div className="mt-16">
+              {services.map((service, i) => (
+                <Reveal key={service.id} delay={400 + i * 80}>
+                  <div
+                    className={cn(
+                      "group flex items-start gap-4 border-border py-6 md:gap-6",
+                      i !== services.length - 1 && "border-b",
+                    )}
+                  >
+                    <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-border bg-white transition-colors group-hover:border-accent">
+                      {serviceIcon(service.title)}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-serif text-xl font-bold md:text-2xl">{service.title}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-ink-soft md:text-base">
+                        {service.summary}
+                      </p>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
             </div>
           </div>
         </div>
       </Section>
 
       <Section alt>
-        <Reveal>
-          <Eyebrow>Why we're different</Eyebrow>
-          <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">
-            No lock-in. One partner, not five vendors.
-          </h2>
-        </Reveal>
-        <div className="mt-16 grid items-center gap-10 md:grid-cols-[1fr_auto_1fr]">
-          <Reveal delay={100}>
-            <h3 className="text-2xl">You own everything</h3>
-            <p className="mt-4 text-ink-soft">
-              Your domain is in your name. Your files are yours. If you ever want to leave, we hand
-              it all over and help the next person settle in. Staying should be a choice, not a
-              trap.
-            </p>
+        <div className="relative z-10">
+          <Reveal>
+            <Eyebrow>Why we're different</Eyebrow>
+            <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">
+              No lock-in. One partner, not five vendors.
+            </h2>
           </Reveal>
-          <MarkDivider className="md:h-40 md:w-16 md:flex-col" />
-          <Reveal delay={200}>
-            <h3 className="text-2xl">One person answers</h3>
-            <p className="mt-4 text-ink-soft">
-              No designer blaming the developer, no host blaming the SEO agency. You message us and
-              the thing gets fixed. That's the whole arrangement.
-            </p>
-          </Reveal>
+          <div className="mt-16 grid items-center gap-10 md:grid-cols-[1fr_auto_1fr_auto_1fr]">
+            <Reveal delay={100}>
+              <h3 className="text-2xl">You own everything</h3>
+              <p className="mt-4 text-ink-soft">
+                Your domain is in your name. Your files are yours. If you ever want to leave, we hand
+                it all over and help the next person settle in. Staying should be a choice, not a
+                trap.
+              </p>
+            </Reveal>
+
+            <MarkDivider className="hidden md:flex md:h-40 md:flex-col" />
+
+            <Reveal delay={200}>
+              <h3 className="text-2xl">One person answers</h3>
+              <p className="mt-4 text-ink-soft">
+                No designer blaming the developer, no host blaming the SEO agency. You message us and
+                the thing gets fixed. That's the whole arrangement.
+              </p>
+            </Reveal>
+
+            <MarkDivider className="hidden md:flex md:h-40 md:flex-col" />
+
+            <Reveal delay={300}>
+              <h3 className="text-2xl">Built from scratch, not a template</h3>
+              <p className="mt-4 text-ink-soft">
+                Every site is built from zero around what your business actually stands for — never a
+                theme with your logo dropped in.
+              </p>
+            </Reveal>
+          </div>
         </div>
       </Section>
 
       <Section texture>
-        <CssArtifact className="right-[3%] top-[14%] opacity-30" delay={0} float="slower" />
-        <Reveal>
-          <Eyebrow>A glimpse of the work</Eyebrow>
-          <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">
-            Built for real businesses, one at a time.
-          </h2>
-          <p className="mt-8 max-w-2xl text-ink-soft">
-            We don't run a template gallery. Every site starts with a conversation about who your
-            customers are and what they need to see before they call you.
-          </p>
-          <div className="mt-10">
-            <ButtonLink to="/work" variant="ghost">
-              Look at the work
-            </ButtonLink>
+        <CssArtifact
+          className="right-[3%] top-[10%] opacity-25 max-sm:hidden"
+          delay={0}
+          float="slower"
+        />
+
+        <div className="relative z-10 grid items-start gap-12 lg:grid-cols-2">
+          <div>
+            <Reveal>
+              <Eyebrow>A glimpse of the work</Eyebrow>
+              <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">
+                Built for real businesses, one at a time.
+              </h2>
+              <p className="mt-8 max-w-2xl text-ink-soft">
+                We don't run a template gallery. Every site starts with a conversation about who your
+                customers are and what they need to see before they call you.
+              </p>
+              <div className="mt-10">
+                <ButtonLink to="/work" variant="ghost">
+                  Look at the work
+                </ButtonLink>
+              </div>
+            </Reveal>
           </div>
-        </Reveal>
+
+          <Reveal delay={200}>
+            <div className="border border-border bg-white p-8 md:p-10">
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-soft">
+                At a glance
+              </p>
+              <div className="mt-8 grid grid-cols-3 gap-6">
+                <div>
+                  <p className="font-serif text-4xl font-bold text-accent">7</p>
+                  <p className="mt-1 text-sm text-ink-soft">Core services</p>
+                </div>
+                <div>
+                  <p className="font-serif text-4xl font-bold text-accent">3</p>
+                  <p className="mt-1 text-sm text-ink-soft">Pricing tiers</p>
+                </div>
+                <div>
+                  <p className="font-serif text-4xl font-bold text-accent">1</p>
+                  <p className="mt-1 text-sm text-ink-soft">Partner</p>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
       </Section>
 
       <DarkCta
