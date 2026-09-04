@@ -44,7 +44,10 @@ function Header() {
           <span className="truncate font-serif text-lg font-bold tracking-tight sm:text-xl">AB Digital</span>
         </Link>
 
-        <nav aria-label="Main" className="hidden flex-1 justify-center min-[860px]:flex">
+        <nav
+          aria-label="Main"
+          className="hidden min-[860px]:absolute min-[860px]:left-1/2 min-[860px]:top-1/2 min-[860px]:-translate-x-1/2 min-[860px]:-translate-y-1/2 min-[860px]:flex"
+        >
           <ul className="flex items-center gap-8">
             {NAV.slice(1).map((item) => (
               <li key={item.to}>
@@ -82,7 +85,7 @@ function Header() {
           </ul>
         </nav>
 
-        <div className="hidden items-center gap-6 min-[860px]:flex">
+        <div className="ml-auto hidden items-center gap-6 min-[860px]:flex">
           <span aria-hidden className="h-4 w-px bg-border" />
           <Link
             to="/contact"
@@ -135,21 +138,22 @@ function Header() {
 }
 
 function Footer() {
+  const scrollTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
   return (
     <footer className="border-t border-border bg-alt">
       <div className="mx-auto max-w-6xl px-6 py-16">
-        <div className="grid gap-10 md:grid-cols-3">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <div className="flex items-center gap-3">
-              <Mark className="h-5 w-auto text-ink" />
-              <p className="font-serif text-lg font-bold">{SITE_NAME}</p>
+              <Mark className="h-7 w-auto text-ink" title="AB Digital Consultancy logo" />
+              <p className="font-serif text-xl font-bold">{SITE_NAME}</p>
             </div>
-            <p className="mt-4 max-w-xs text-sm text-ink-soft">
-              A complete web partner for small and medium businesses across India.
-            </p>
+            <p className="mt-4 max-w-xs text-sm text-ink-soft">{TAGLINE}</p>
           </div>
+
           <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-soft">Pages</p>
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-soft">Sitemap</p>
             <ul className="mt-4 space-y-2 text-sm">
               {NAV.map((item) => (
                 <li key={item.to}>
@@ -160,10 +164,22 @@ function Footer() {
               ))}
             </ul>
           </div>
+
           <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-soft">
-              Talk to us
-            </p>
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-soft">Services</p>
+            <ul className="mt-4 space-y-2 text-sm text-ink-soft">
+              <li>Web Design & Development</li>
+              <li>Hosting & Domain Management</li>
+              <li>CMS & Content Updates</li>
+              <li>SEO & Local Visibility</li>
+              <li>Ongoing Maintenance</li>
+              <li>Digital Marketing Support</li>
+              <li>Flyers & Print Materials</li>
+            </ul>
+          </div>
+
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-soft">Talk to us</p>
             <a
               href={WHATSAPP_URL}
               rel="noopener"
@@ -174,11 +190,39 @@ function Footer() {
             <p className="mt-4 text-sm text-ink-soft">Bengaluru, Karnataka — working India-wide.</p>
           </div>
         </div>
-        <p className="mt-14 font-mono text-[11px] text-ink-soft">
-          © {new Date().getFullYear()} {SITE_NAME}. Built, hosted and looked after in India.
-        </p>
+      </div>
+
+      <div className="border-t border-border">
+        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-3 px-6 py-4 sm:flex-row sm:items-center">
+          <p className="font-mono text-[11px] text-ink-soft">
+            © {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
+          </p>
+          <button
+            type="button"
+            onClick={scrollTop}
+            className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-soft transition-colors hover:text-accent"
+          >
+            Back to top
+            <ArrowUp className="h-4 w-4" aria-hidden />
+          </button>
+        </div>
       </div>
     </footer>
+  );
+}
+
+function WhatsAppButton() {
+  return (
+    <a
+      href={WHATSAPP_URL}
+      rel="noopener"
+      aria-label="Chat on WhatsApp"
+      className="fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-ink text-white shadow-[0_8px_24px_-8px_rgba(13,17,23,0.5)] transition-transform duration-300 hover:scale-110"
+    >
+      <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5" aria-hidden>
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-9.091a5.865 5.865 0 0 1 5.86 5.868 5.838 5.838 0 0 1-1.178 3.522l.846 2.451-2.518-.661a5.86 5.86 0 1 1-3.01-11.18zm0-1.14A7.005 7.005 0 0 0 5.46 18.23l-3.235.847 1.087-3.151A7.005 7.005 0 1 0 12.05 4.151z" />
+      </svg>
+    </a>
   );
 }
 
@@ -188,6 +232,7 @@ export function SiteLayout({ children, className }: { children: ReactNode; class
       <Header />
       <main className={cn("flex-1", className)}>{children}</main>
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 }
@@ -212,7 +257,7 @@ export function Section({
       )}
     >
       {texture && <GridTexture />}
-      <div className="relative mx-auto max-w-6xl px-6 py-24 md:py-32">{children}</div>
+      <div className="relative z-10 mx-auto max-w-6xl px-6 py-24 md:py-32">{children}</div>
     </section>
   );
 }

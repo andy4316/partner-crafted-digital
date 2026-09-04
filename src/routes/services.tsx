@@ -171,7 +171,11 @@ function Services() {
       />
 
       <Section texture>
-        <CssArtifact className="right-[3%] top-[12%]" delay={600} duration={8} />
+        <CssArtifact
+          className="right-[3%] top-[12%] opacity-30 max-sm:hidden"
+          delay={600}
+          float="slower"
+        />
         <Reveal>
           <Eyebrow>Services</Eyebrow>
           <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">
@@ -200,7 +204,11 @@ function Services() {
       </Section>
 
       <Section texture>
-        <BrowserArtifact className="left-[2%] top-[16%]" delay={300} duration={7.5} />
+        <BrowserArtifact
+          className="left-[2%] top-[16%] opacity-30 max-sm:hidden"
+          delay={300}
+          float="slower"
+        />
         <Reveal>
           <Eyebrow>Questions</Eyebrow>
           <h2 className="mt-6 max-w-2xl text-3xl md:text-5xl">The things people ask first.</h2>
