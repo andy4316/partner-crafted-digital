@@ -30,7 +30,7 @@ function Watermark({ tone = "ink" }: { tone?: "ink" | "white" }) {
       className="pointer-events-none absolute left-1/2 top-1/2 w-[1200px] max-w-[190vw]"
     >
       <Mark
-        className={cn("w-full", tone === "ink" ? "text-ink opacity-[0.022]" : "text-white opacity-[0.05]")}
+        className={cn("w-full", tone === "ink" ? "text-ink opacity-[0.022] dark:opacity-[0.05]" : "text-white opacity-[0.05]")}
       />
     </div>
   );
@@ -38,7 +38,7 @@ function Watermark({ tone = "ink" }: { tone?: "ink" | "white" }) {
 
 export function StatusBadge({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-ink-soft">
+    <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-ink-soft">
       <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-accent" aria-hidden />
       {children}
     </span>

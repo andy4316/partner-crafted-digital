@@ -6,6 +6,7 @@ import { GridTexture } from "@/components/artifacts";
 import { ButtonLink } from "@/components/buttons";
 import { Mark } from "@/components/mark";
 import { Reveal } from "@/components/reveal";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { PHONE_DISPLAY, SITE_NAME, TAGLINE, WHATSAPP_URL } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -34,7 +35,7 @@ function Header() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
         scrolled || open
-          ? "border-b border-border bg-white/80 backdrop-blur-md"
+          ? "border-b border-border bg-background/80 backdrop-blur-md"
           : "border-b border-transparent bg-transparent",
       )}
     >
@@ -85,25 +86,30 @@ function Header() {
           </ul>
         </nav>
 
-        <div className="ml-auto hidden items-center gap-6 min-[860px]:flex">
+        <div className="ml-auto hidden items-center gap-5 min-[860px]:flex">
           <span aria-hidden className="h-4 w-px bg-border" />
+          <ThemeToggle />
           <Link
             to="/contact"
-            className="border border-ink px-4 py-2 font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-ink transition-all hover:bg-ink hover:text-white"
+            className="border border-ink px-4 py-2 font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-ink transition-all hover:bg-primary hover:text-primary-foreground"
           >
             Start Project
           </Link>
         </div>
 
-        <button
-          type="button"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-          className="grid h-9 w-9 shrink-0 place-items-center min-[860px]:hidden"
-        >
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        <div className="ml-auto flex items-center gap-2 min-[860px]:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className="grid h-9 w-9 shrink-0 place-items-center"
+          >
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
+
       </div>
 
       {open && (
@@ -217,7 +223,7 @@ function WhatsAppButton() {
       href={WHATSAPP_URL}
       rel="noopener"
       aria-label="Chat on WhatsApp"
-      className="fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-ink text-white shadow-[0_8px_24px_-8px_rgba(13,17,23,0.5)] transition-transform duration-300 hover:scale-110"
+      className="fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-[0_8px_24px_-8px_rgba(13,17,23,0.5)] transition-transform duration-300 hover:scale-110"
     >
       <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5" aria-hidden>
         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-9.091a5.865 5.865 0 0 1 5.86 5.868 5.838 5.838 0 0 1-1.178 3.522l.846 2.451-2.518-.661a5.86 5.86 0 1 1-3.01-11.18zm0-1.14A7.005 7.005 0 0 0 5.46 18.23l-3.235.847 1.087-3.151A7.005 7.005 0 1 0 12.05 4.151z" />
@@ -281,7 +287,7 @@ export function DarkCta({
   actionLabel?: string;
 }) {
   return (
-    <section className="relative overflow-hidden bg-ink text-white">
+    <section className="relative overflow-hidden bg-cta text-cta-foreground">
       <GridTexture dark />
       <div
         aria-hidden

@@ -8,8 +8,8 @@ const base =
   "group inline-flex items-center gap-2 rounded-[6px] px-6 py-3 font-mono text-xs uppercase tracking-[0.14em] transition-all duration-300 hover:scale-[1.03]";
 
 const styles = {
-  primary: "bg-ink text-white hover:bg-accent",
-  ghost: "border border-border bg-white text-ink hover:border-accent hover:text-accent",
+  primary: "btn-sweep bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground",
+  ghost: "border border-border bg-card text-ink hover:border-accent hover:text-accent",
 } as const;
 
 type Variant = keyof typeof styles;
@@ -17,9 +17,9 @@ type Variant = keyof typeof styles;
 function Inner({ children }: { children: ReactNode }) {
   return (
     <>
-      {children}
+      <span className="relative z-[2] inline-flex items-center gap-2">{children}</span>
       <ArrowRight
-        className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1"
+        className="relative z-[2] h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1"
         aria-hidden
       />
     </>
