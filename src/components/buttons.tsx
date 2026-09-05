@@ -19,7 +19,7 @@ function Inner({ children }: { children: ReactNode }) {
     <>
       <span className="relative z-[2] inline-flex items-center gap-2">{children}</span>
       <ArrowRight
-        className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1"
+        className="relative z-[2] h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1"
         aria-hidden
       />
     </>
