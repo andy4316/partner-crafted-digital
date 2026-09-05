@@ -134,7 +134,7 @@ function Home() {
                       i !== services.length - 1 && "border-b",
                     )}
                   >
-                    <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-border bg-white transition-colors group-hover:border-accent">
+                    <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-border bg-card transition-colors group-hover:border-accent">
                       {serviceIcon(service.title)}
                     </div>
                     <div className="min-w-0 flex-1">
@@ -219,7 +219,7 @@ function Home() {
           </div>
 
           <Reveal delay={200}>
-            <div className="border border-border bg-white p-8 md:p-10">
+            <div className="border border-border bg-card p-8 md:p-10">
               <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-soft">
                 At a glance
               </p>

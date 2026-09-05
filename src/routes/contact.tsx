@@ -35,7 +35,7 @@ export const Route = createFileRoute("/contact")({
 });
 
 const fieldClass =
-  "mt-2 w-full rounded-[6px] border border-border bg-white px-3 py-2.5 text-base outline-none transition-colors focus:border-accent";
+  "mt-2 w-full rounded-[6px] border border-border bg-card px-3 py-2.5 text-base outline-none transition-colors focus:border-accent";
 
 const labelClass = "font-mono text-[11px] uppercase tracking-[0.18em] text-ink-soft";
 
@@ -126,7 +126,7 @@ function Contact() {
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="inline-flex items-center gap-2 rounded-[6px] bg-ink px-6 py-3 font-mono text-xs uppercase tracking-[0.14em] text-white transition-all duration-300 hover:scale-[1.03] hover:bg-accent disabled:opacity-50"
+                className="inline-flex items-center gap-2 rounded-[6px] btn-sweep bg-primary px-6 py-3 font-mono text-xs uppercase tracking-[0.14em] text-primary-foreground transition-all duration-300 hover:scale-[1.03] hover:bg-accent disabled:opacity-50"
               >
                 {status === "sending" ? "Sending…" : "Send it across"}
               </button>

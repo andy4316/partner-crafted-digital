@@ -48,14 +48,14 @@ const SERVICE_ICONS = [Layout, Server, FileText, Search, Wrench, Megaphone, Prin
 function ServiceList() {
   const { data } = useSuspenseQuery(servicesQuery);
   return (
-    <div className="mt-14 border-t border-border">
+    <div className="mt-14 border-t border-border [&>*:last-child]:border-b-0 [&>*:last-child]:pb-0">
       {data.map((s, i) => {
         const Icon = SERVICE_ICONS[i % SERVICE_ICONS.length] ?? Layout;
         return (
           <Reveal
             key={s.id}
             delay={(i % 3) * 70}
-            className="group grid gap-6 border-b border-border py-10 md:grid-cols-[auto_1fr_1.2fr] md:items-start"
+            className="group grid gap-6 border-b border-border py-10 last:border-b-0 last:pb-0 md:grid-cols-[auto_1fr_1.2fr] md:items-start"
           >
             <Icon
               className="h-6 w-6 shrink-0 stroke-[1.25] text-accent transition-transform duration-300 group-hover:-translate-y-0.5"
@@ -94,7 +94,7 @@ function Pricing() {
           key={tier.id}
           delay={i * 90}
           className={cn(
-            "flex flex-col rounded-[6px] border bg-white p-8",
+            "group flex flex-col rounded-[6px] border bg-card p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.03] hover:border-accent hover:shadow-[0_24px_50px_-24px_color-mix(in_oklab,var(--accent)_45%,transparent)]",
             tier.recommended ? "border-accent" : "border-border",
           )}
         >
@@ -153,7 +153,7 @@ function Services() {
     <SiteLayout>
       <PageHero
         compact
-        badge="Design · Hosting · SEO · Print"
+        badge="Design · Hosting · SEO · Marketing"
         title={
           <>
             Everything a business needs online, <span className="text-accent">handled</span>.
