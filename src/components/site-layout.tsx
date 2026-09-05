@@ -6,6 +6,7 @@ import { GridTexture } from "@/components/artifacts";
 import { ButtonLink } from "@/components/buttons";
 import { Mark } from "@/components/mark";
 import { Reveal } from "@/components/reveal";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { PHONE_DISPLAY, SITE_NAME, TAGLINE, WHATSAPP_URL } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
