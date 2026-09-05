@@ -1,31 +1,30 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import founder from "@/assets/founder.jpg";
 import { ButtonLink } from "@/components/buttons";
+import { ExplodedMark } from "@/components/exploded-mark";
 import { MarkDivider, PageHero } from "@/components/hero";
-import lockup from "@/assets/ab-digital-lockup.png.asset.json";
 import { Reveal } from "@/components/reveal";
 import { DarkCta, Eyebrow, Section, SiteLayout } from "@/components/site-layout";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About the Founder | Web Developer in Bengaluru, India" },
+      { title: "The Idea Behind the Mark | AB Digital Consultancy, Bengaluru" },
       {
         name: "description",
         content:
-          "Why AB Digital Consultancy exists: a founder-led web developer in Bengaluru who builds websites for Indian businesses and stays on to look after them.",
+          "Two pillars, one arrow in the space between them. The thinking behind AB Digital Consultancy: a web partner in Bengaluru built on the relationship, not the transaction.",
       },
-      { property: "og:title", content: "About — AB Digital Consultancy" },
+      { property: "og:title", content: "The idea behind the mark — AB Digital Consultancy" },
       {
         property: "og:description",
-        content: "A founder-led web partner built around staying, not shipping and vanishing.",
+        content: "It's the relationship, not the transaction, that gets a business online and growing.",
       },
       { property: "og:url", content: "https://partner-crafted-digital.lovable.app/about" },
-      { name: "twitter:title", content: "About — AB Digital Consultancy" },
+      { name: "twitter:title", content: "The idea behind the mark — AB Digital Consultancy" },
       {
         name: "twitter:description",
-        content: "A founder-led web partner in Bengaluru, built around staying.",
+        content: "A web partner built on the relationship, not the transaction.",
       },
     ],
     links: [{ rel: "canonical", href: "https://partner-crafted-digital.lovable.app/about" }],
@@ -33,108 +32,122 @@ export const Route = createFileRoute("/about")({
   component: About,
 });
 
+const SPECS = [
+  {
+    id: "01",
+    label: "Component A — You",
+    body: "The business, already running. Customers, prices, a way of doing things. Nothing we build should ask you to change any of it.",
+  },
+  {
+    id: "02",
+    label: "Component B — Us",
+    body: "The side that stays. Hosting, updates, search health, the person who replies. Built once, then looked after indefinitely.",
+  },
+  {
+    id: "03",
+    label: "Assembly — the gap",
+    body: "Neither pillar carries the growth on its own. The arrow only exists because both stand there, holding the space between them.",
+  },
+] as const;
+
 function About() {
   return (
     <SiteLayout>
       <PageHero
         compact
-        badge="Founder-led, Bengaluru"
+        badge="Fig. 01 — the mark, disassembled"
         title={
           <>
-            Too many good businesses were being <span className="text-accent">let down</span>.
+            Two pillars, and the <span className="text-accent">arrow</span> between them.
           </>
         }
-        subtitle="So I started building websites the way I'd want mine looked after — properly, then permanently."
+        subtitle="Our whole way of working is drawn into the logo. Here it is, taken apart."
         actions={<ButtonLink to="/contact">Say hello</ButtonLink>}
       />
 
-      <Section>
-        <div className="grid gap-16 md:grid-cols-[1fr_1.15fr] md:items-start">
+      <Section texture>
+        <div className="grid gap-14 lg:grid-cols-[1.15fr_1fr] lg:items-center">
           <Reveal>
-            <img
-              src={founder}
-              alt="Founder of AB Digital Consultancy, a web design and SEO studio in Bengaluru, at his desk"
-              width={1024}
-              height={1280}
-              loading="lazy"
-              className="w-full rounded-md border border-border object-cover"
-            />
+            <div className="relative rounded-[6px] border border-border bg-card p-6 md:p-10">
+              <span
+                aria-hidden
+                className="blueprint-line absolute inset-x-6 top-3 h-px opacity-70"
+              />
+              <span
+                aria-hidden
+                className="blueprint-line-y absolute inset-y-6 left-3 w-px opacity-70"
+              />
+              <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-ink-soft">
+                AB-DC / mark / exploded view / rev. 3
+              </p>
+              <ExplodedMark className="mt-4" />
+            </div>
           </Reveal>
-          <Reveal delay={120} className="space-y-6 text-ink-soft">
-            <Eyebrow>The story</Eyebrow>
-            <p>
-              I kept meeting owners who had paid for a website once, years ago. It looked dated. The
-              phone number on it was wrong. Nobody knew the password. The person who built it had
-              stopped replying.
+
+          <Reveal delay={120}>
+            <Eyebrow>Specification</Eyebrow>
+            <h2 className="mt-6 text-3xl md:text-5xl">
+              It's the relationship, not the transaction.
+            </h2>
+            <p className="mt-6 text-ink-soft">
+              A website isn't a product you take delivery of once. It's a working part of the
+              business, and it needs someone standing behind it the day after launch and the year
+              after that.
             </p>
-            <p>
-              That isn't a technology problem. It's an abandonment problem. A website isn't a thing
-              you buy once — it's a part of your business that needs someone looking after it, the
-              same way your shop needs sweeping.
-            </p>
-            <p>
-              So the arrangement here is simple. We build it properly, then we stay. Prices change,
-              you send a message. Google changes something, we deal with it. You never have to
-              wonder who to call.
-            </p>
-            <p className="text-ink">
-              It was never about a single transaction. It's about building something that keeps
-              standing on its own, with someone standing behind it.
-            </p>
+            <dl className="mt-10 border-t border-border">
+              {SPECS.map((spec) => (
+                <div key={spec.id} className="grid gap-2 border-b border-border py-6 sm:grid-cols-[auto_1fr] sm:gap-8">
+                  <dt className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
+                    {spec.id}
+                  </dt>
+                  <dd>
+                    <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink">
+                      {spec.label}
+                    </p>
+                    <p className="mt-2 text-sm text-ink-soft">{spec.body}</p>
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </Reveal>
         </div>
       </Section>
 
       <Section alt>
-        <div className="grid gap-12 md:grid-cols-[auto_1fr] md:items-center">
-          <Reveal>
-            <img
-              src={lockup.url}
-              alt="AB Digital Consultancy logo: two navy pillars forming a hidden upward arrow, beside the wordmark"
-              width={420}
-              height={204}
-              className="w-full max-w-[320px]"
-            />
-          </Reveal>
-          <Reveal delay={120}>
-            <Eyebrow>The mark</Eyebrow>
-            <h2 className="mt-4 text-2xl md:text-4xl">
-              Two pillars, and an arrow you only see later.
-            </h2>
-            <p className="mt-5 max-w-2xl text-ink-soft">
-              The mark is two pillars — the work and the relationship. Between them, in the space
-              nobody designed on purpose, there's an arrow pointing up. That's the part we like:
-              growth happens in the gap between doing the work and sticking around.
-            </p>
-          </Reveal>
-        </div>
-      </Section>
-
-      <Section texture>
         <Reveal>
-          <Eyebrow>How we work</Eyebrow>
+          <Eyebrow>Operating notes</Eyebrow>
           <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">Slow to start, quick to answer.</h2>
         </Reveal>
         <div className="mt-16 grid items-center gap-10 md:grid-cols-[1fr_auto_1fr]">
           <Reveal delay={100}>
-            <h3 className="text-2xl">We ask first</h3>
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-soft">
+              Before the build
+            </p>
+            <h3 className="mt-3 text-2xl">We ask first</h3>
             <p className="mt-4 text-ink-soft">
-              Before anything is designed, we talk about who your customers are and what they need
-              to see before they call you. Most of the value is decided in that conversation.
+              Nothing gets designed until we know who your customers are and what they need to see
+              before they call you. Most of the value is decided in that conversation.
             </p>
           </Reveal>
-          <MarkDivider className="md:h-40 md:w-16 md:flex-col" />
+          <MarkDivider className="hidden md:flex md:h-40 md:w-16 md:flex-col" />
           <Reveal delay={200}>
-            <h3 className="text-2xl">Then we stay</h3>
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-soft">
+              After the build
+            </p>
+            <h3 className="mt-3 text-2xl">Then we stay</h3>
             <p className="mt-4 text-ink-soft">
               Launch day is the middle of the job, not the end. Updates, hosting, backups and search
-              health continue quietly in the background while you run the business.
+              health continue quietly while you run the business.
             </p>
           </Reveal>
         </div>
       </Section>
 
-      <DarkCta title="If that sounds like the way you'd want to work, say hello." actionLabel="Contact us" />
+      <DarkCta
+        title="If that's the way you'd want to work, say hello."
+        body="Tell us about the business. We'll tell you plainly what it needs and what it costs."
+        actionLabel="Contact us"
+      />
     </SiteLayout>
   );
 }
