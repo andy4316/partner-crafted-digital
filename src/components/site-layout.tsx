@@ -85,8 +85,9 @@ function Header() {
           </ul>
         </nav>
 
-        <div className="ml-auto hidden items-center gap-6 min-[860px]:flex">
+        <div className="ml-auto hidden items-center gap-5 min-[860px]:flex">
           <span aria-hidden className="h-4 w-px bg-border" />
+          <ThemeToggle />
           <Link
             to="/contact"
             className="border border-ink px-4 py-2 font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-ink transition-all hover:bg-primary hover:text-primary-foreground"
@@ -95,15 +96,19 @@ function Header() {
           </Link>
         </div>
 
-        <button
-          type="button"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-          className="grid h-9 w-9 shrink-0 place-items-center min-[860px]:hidden"
-        >
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        <div className="ml-auto flex items-center gap-2 min-[860px]:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className="grid h-9 w-9 shrink-0 place-items-center"
+          >
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
+
       </div>
 
       {open && (
