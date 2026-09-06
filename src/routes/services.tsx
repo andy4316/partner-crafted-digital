@@ -40,6 +40,9 @@ export const Route = createFileRoute("/services")({
     ],
     links: [{ rel: "canonical", href: "https://partner-crafted-digital.lovable.app/services" }],
   }),
+  loader: async ({ context }) => {
+    await context.queryClient.ensureQueryData(servicesQuery);
+  },
   component: Services,
 });
 
