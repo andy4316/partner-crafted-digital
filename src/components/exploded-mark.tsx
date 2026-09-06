@@ -52,8 +52,8 @@ export function ExplodedMark({ className }: { className?: string }) {
       <g stroke="var(--border)" strokeWidth="1">
         <line x1="118" y1="176" x2="52" y2="222" />
         <line x1="52" y1="222" x2="150" y2="222" />
-        <line x1="352" y1="132" x2="410" y2="96" />
-        <line x1="330" y1="96" x2="410" y2="96" />
+        <line x1="352" y1="132" x2="404" y2="96" />
+        <line x1="404" y1="96" x2="446" y2="96" />
         <line x1="230" y1="222" x2="230" y2="256" strokeDasharray="4 4" />
       </g>
       <g stroke="var(--accent)" strokeWidth="1">
@@ -80,16 +80,18 @@ export function ExplodedMark({ className }: { className?: string }) {
       </text>
 
       <text
-        x="336"
+        x="446"
         y="82"
+        textAnchor="end"
         className="fill-[var(--foreground)] font-mono text-[12px] uppercase"
         style={{ letterSpacing: "0.2em" }}
       >
         Us
       </text>
       <text
-        x="336"
+        x="446"
         y="68"
+        textAnchor="end"
         className="fill-[var(--ink-soft)] font-mono text-[9px]"
         style={{ letterSpacing: "0.12em" }}
       >
