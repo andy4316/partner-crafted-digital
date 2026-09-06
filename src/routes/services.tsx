@@ -40,50 +40,240 @@ export const Route = createFileRoute("/services")({
     ],
     links: [{ rel: "canonical", href: "https://partner-crafted-digital.lovable.app/services" }],
   }),
+  loader: async ({ context }) => {
+    await context.queryClient.ensureQueryData(servicesQuery);
+  },
   component: Services,
 });
 
-const SERVICE_ICONS = [Layout, Server, FileText, Search, Wrench, Megaphone, Printer] as const;
+type Detail = {
+  icon: typeof Layout;
+  tag: string;
+  how: string[];
+  fit: string;
+};
 
-function ServiceList() {
+const DETAIL: { match: string; detail: Detail }[] = [
+  {
+    match: "web design",
+    detail: {
+      icon: Layout,
+      tag: "Build",
+      how: [
+        "We sit with you for an hour and write down what the site has to do.",
+        "You see a first draft of the real pages, not a stock template.",
+        "Two rounds of changes, then we build and test it on real phones.",
+      ],
+      fit: "Best if you have no site yet, or one you are quietly embarrassed by.",
+    },
+  },
+  {
+    match: "hosting",
+    detail: {
+      icon: Server,
+      tag: "Run",
+      how: [
+        "We buy or move the domain and keep it renewed in your name.",
+        "The site sits on fast hosting with a security certificate included.",
+        "Backups run automatically, and we watch for downtime so you don't have to.",
+      ],
+      fit: "Best if nobody in your team wants to think about renewals again.",
+    },
+  },
+  {
+    match: "cms",
+    detail: {
+      icon: FileText,
+      tag: "Edit",
+      how: [
+        "The pages you change often get simple editing controls.",
+        "We show you how in one short call and leave you a written note.",
+        "Prefer to send us the text instead? Write on WhatsApp and we do it.",
+      ],
+      fit: "Best if prices, menus, offers or team members change through the year.",
+    },
+  },
+  {
+    match: "seo",
+    detail: {
+      icon: Search,
+      tag: "Be found",
+      how: [
+        "Every page gets a clear title and description written for real searches.",
+        "Your Google Business profile, map listing and reviews get set up properly.",
+        "We check each month what people searched before they called you.",
+      ],
+      fit: "Best if customers in your city should find you before they find a competitor.",
+    },
+  },
+  {
+    match: "maintenance",
+    detail: {
+      icon: Wrench,
+      tag: "Care",
+      how: [
+        "Updates and security patches are applied quietly in the background.",
+        "Broken links, slow pages and form failures get fixed as we spot them.",
+        "You write, a person answers — no ticket number, no queue.",
+      ],
+      fit: "Best if a website going down for a day would cost you real business.",
+    },
+  },
+  {
+    match: "marketing",
+    detail: {
+      icon: Megaphone,
+      tag: "Reach",
+      how: [
+        "We plan a simple month of posts around what you actually sell.",
+        "Ad budgets stay small and measured — we tell you what worked.",
+        "Everything points back to the site, so enquiries land in one place.",
+      ],
+      fit: "Best if the site is live and you now want more people seeing it.",
+    },
+  },
+  {
+    match: "print",
+    detail: {
+      icon: Printer,
+      tag: "Print",
+      how: [
+        "Flyers, cards, menus and banners drawn in the same brand as the site.",
+        "Print-ready files sent to your printer, in the sizes they ask for.",
+        "One look online and offline, so people recognise you both places.",
+      ],
+      fit: "Best if you hand out anything on paper — most local businesses do.",
+    },
+  },
+];
+
+const FALLBACK: Detail = {
+  icon: Layout,
+  tag: "Work",
+  how: ["We scope it with you, agree a price, and build it."],
+  fit: "Tell us the business and we'll say plainly if it fits.",
+};
+
+function detailFor(title: string): Detail {
+  const t = title.toLowerCase();
+  return DETAIL.find((d) => t.includes(d.match))?.detail ?? FALLBACK;
+}
+
+function slugify(title: string) {
+  return title
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+function ServiceIndex() {
   const { data } = useSuspenseQuery(servicesQuery);
   return (
-    <div className="mt-14 border-t border-border [&>*:last-child]:border-b-0 [&>*:last-child]:pb-0">
-      {data.map((s, i) => {
-        const Icon = SERVICE_ICONS[i % SERVICE_ICONS.length] ?? Layout;
-        return (
-          <Reveal
-            key={s.id}
-            delay={(i % 3) * 70}
-            className="group grid gap-6 border-b border-border py-10 last:border-b-0 last:pb-0 md:grid-cols-[auto_1fr_1.2fr] md:items-start"
+    <ul className="mt-12 grid gap-x-10 gap-y-3 border-t border-border pt-8 sm:grid-cols-2 lg:grid-cols-3">
+      {data.map((s, i) => (
+        <li key={s.id}>
+          <a
+            href={`#${slugify(s.title)}`}
+            className="group flex items-baseline gap-3 py-1 font-mono text-xs uppercase tracking-[0.14em] text-ink-soft transition-colors hover:text-accent"
           >
-            <Icon
-              className="h-6 w-6 shrink-0 stroke-[1.25] text-accent transition-transform duration-300 group-hover:-translate-y-0.5"
-              aria-hidden
-            />
-            <div>
-              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-soft">
-                {String(i + 1).padStart(2, "0")}
-              </p>
-              <h3 className="mt-2 text-2xl">{s.title}</h3>
+            <span className="text-accent">{String(i + 1).padStart(2, "0")}</span>
+            <span className="border-b border-transparent group-hover:border-accent">{s.title}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function ServiceSections() {
+  const { data } = useSuspenseQuery(servicesQuery);
+  return (
+    <div>
+      {data.map((s, i) => {
+        const d = detailFor(s.title);
+        const Icon = d.icon;
+        const alt = i % 2 === 1;
+        return (
+          <section
+            key={s.id}
+            id={slugify(s.title)}
+            className={cn(
+              "relative scroll-mt-24 border-t border-border",
+              alt ? "bg-alt" : "bg-background",
+            )}
+          >
+            <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+              <Reveal className="grid gap-10 md:grid-cols-[1fr_1.35fr] md:gap-16">
+                <div className="md:sticky md:top-28 md:self-start">
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span aria-hidden className="h-px w-8 bg-border" />
+                    <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-soft">
+                      {d.tag}
+                    </span>
+                  </div>
+                  <Icon className="mt-8 h-8 w-8 stroke-[1.1] text-accent" aria-hidden />
+                  <h2 className="mt-6 text-3xl md:text-4xl">{s.title}</h2>
+                  <p className="mt-5 max-w-md text-ink-soft">{s.summary}</p>
+                  <p className="mt-6 max-w-md border-l-2 border-accent pl-4 font-mono text-xs leading-relaxed text-ink-soft">
+                    {d.fit}
+                  </p>
+                  <div className="mt-8">
+                    <ButtonLink to="/contact" variant="ghost">
+                      Ask about this
+                    </ButtonLink>
+                  </div>
+                </div>
+
+                <div className="grid gap-10">
+                  <div>
+                    <h3 className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-soft">
+                      What's included
+                    </h3>
+                    <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+                      {s.points.map((p) => (
+                        <li
+                          key={p}
+                          className="flex gap-3 rounded-[6px] border border-border bg-card p-4 text-sm text-ink-soft"
+                        >
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" aria-hidden />
+                          {p}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h3 className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-soft">
+                      How it goes
+                    </h3>
+                    <ol className="mt-5 border-t border-border">
+                      {d.how.map((step, n) => (
+                        <li
+                          key={step}
+                          className="flex gap-5 border-b border-border py-4 text-sm text-ink-soft"
+                        >
+                          <span className="font-mono text-xs text-accent">
+                            {String(n + 1).padStart(2, "0")}
+                          </span>
+                          <span className="max-w-xl">{step}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                </div>
+              </Reveal>
             </div>
-            <div>
-              <p className="font-mono text-sm leading-relaxed text-ink-soft">{s.summary}</p>
-              <ul className="mt-4 space-y-1.5">
-                {s.points.map((p) => (
-                  <li key={p} className="flex gap-3 font-mono text-xs text-ink-soft">
-                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" aria-hidden />
-                    {p}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
+          </section>
         );
       })}
     </div>
   );
 }
+
 
 function Pricing() {
   const { data } = useSuspenseQuery(pricingQuery);
@@ -181,11 +371,20 @@ function Services() {
           <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">
             The full list, in plain language.
           </h2>
+          <p className="mt-6 max-w-2xl text-ink-soft">
+            Seven things we do. Jump to whichever one you came here for — each has what's included
+            and how the work actually goes.
+          </p>
         </Reveal>
         <Suspense fallback={<Loading />}>
-          <ServiceList />
+          <ServiceIndex />
         </Suspense>
       </Section>
+
+      <Suspense fallback={null}>
+        <ServiceSections />
+      </Suspense>
+
 
       <Section alt>
         <Reveal>
