@@ -368,11 +368,20 @@ function Services() {
           <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">
             The full list, in plain language.
           </h2>
+          <p className="mt-6 max-w-2xl text-ink-soft">
+            Seven things we do. Jump to whichever one you came here for — each has what's included
+            and how the work actually goes.
+          </p>
         </Reveal>
         <Suspense fallback={<Loading />}>
-          <ServiceList />
+          <ServiceIndex />
         </Suspense>
       </Section>
+
+      <Suspense fallback={null}>
+        <ServiceSections />
+      </Suspense>
+
 
       <Section alt>
         <Reveal>
