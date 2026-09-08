@@ -54,7 +54,7 @@ function Header() {
               <li key={item.to}>
                 <Link
                   to={item.to}
-                  className="group relative flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-ink-soft transition-colors hover:text-ink"
+                  className="group relative flex items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-ink-soft transition-colors hover:text-ink"
                   activeProps={{ className: "text-ink" }}
                 >
                   {({ isActive }) =>
@@ -121,7 +121,7 @@ function Header() {
                   to={item.to}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    "block py-1 font-mono text-sm uppercase tracking-[0.14em]",
+                    "block py-1 font-mono text-sm font-semibold uppercase tracking-[0.14em]",
                     item.label === "ISO" && "inline-block rounded-full bg-iso px-3 py-1 text-white",
                   )}
                 >
