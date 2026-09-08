@@ -245,6 +245,7 @@ function Home() {
       <DarkCta
         title="Tell us about your business. We'll tell you honestly what it needs."
         body="No sales call, no jargon. A short message is enough to start."
+        note="Tell us about your business and we'll put together a real sample of what your site could look like — before you decide anything."
         actionLabel="Get in touch"
       />
     </SiteLayout>
