@@ -121,7 +121,7 @@ function Header() {
                   to={item.to}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    "block py-1 font-mono text-sm uppercase tracking-[0.14em]",
+                    "block py-1 font-mono text-sm font-semibold uppercase tracking-[0.14em]",
                     item.label === "ISO" && "inline-block rounded-full bg-iso px-3 py-1 text-white",
                   )}
                 >
