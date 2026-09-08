@@ -54,7 +54,7 @@ function Header() {
               <li key={item.to}>
                 <Link
                   to={item.to}
-                  className="group relative flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-ink-soft transition-colors hover:text-ink"
+                  className="group relative flex items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-ink-soft transition-colors hover:text-ink"
                   activeProps={{ className: "text-ink" }}
                 >
                   {({ isActive }) =>
