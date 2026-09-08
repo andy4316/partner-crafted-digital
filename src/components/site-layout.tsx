@@ -106,9 +106,10 @@ function Header() {
                   to={item.to}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    "block py-1 font-mono text-sm font-semibold uppercase tracking-[0.14em]",
-                    item.label === "ISO" && "inline-block rounded-full bg-iso px-3 py-1 text-white",
+                    "block py-1.5 text-[15px] text-ink-soft transition-colors hover:text-ink",
+                    item.label === "ISO" && "inline-block rounded-full bg-iso px-3 py-1 font-medium text-white",
                   )}
+                  activeProps={{ className: "text-ink font-medium" }}
                 >
                   {item.label}
                 </Link>
