@@ -264,11 +264,13 @@ export function Eyebrow({ children }: { children: ReactNode }) {
 export function DarkCta({
   title,
   body,
+  note,
   actionTo = "/contact",
   actionLabel = "Start a conversation",
 }: {
   title: string;
   body?: string;
+  note?: string;
   actionTo?: string;
   actionLabel?: string;
 }) {
@@ -285,6 +287,11 @@ export function DarkCta({
         <Reveal>
           <h2 className="max-w-3xl text-3xl md:text-5xl">{title}</h2>
           {body && <p className="mt-6 max-w-xl text-white/70">{body}</p>}
+          {note && (
+            <p className="mt-6 max-w-xl border-l-2 border-accent pl-4 font-serif text-lg text-white">
+              {note}
+            </p>
+          )}
           <div className="mt-10">
             <ButtonLink
               to={actionTo}

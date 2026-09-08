@@ -77,7 +77,13 @@ function Contact() {
         }
         subtitle="A short note is enough. No sales call, no pressure — just an honest answer about what your business needs."
         actions={
-          <ButtonAnchor href={WHATSAPP_URL}>WhatsApp {PHONE_DISPLAY}</ButtonAnchor>
+          <div className="flex flex-col items-center gap-4">
+            <ButtonAnchor href={WHATSAPP_URL}>WhatsApp {PHONE_DISPLAY}</ButtonAnchor>
+            <p className="max-w-md text-sm text-ink-soft">
+              Tell us about your business and we'll put together a real sample of what your site
+              could look like — before you decide anything.
+            </p>
+          </div>
         }
       />
 
