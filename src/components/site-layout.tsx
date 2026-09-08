@@ -49,37 +49,22 @@ function Header() {
           aria-label="Main"
           className="hidden min-[860px]:absolute min-[860px]:left-1/2 min-[860px]:top-1/2 min-[860px]:-translate-x-1/2 min-[860px]:-translate-y-1/2 min-[860px]:flex"
         >
-          <ul className="flex items-center gap-8">
+          <ul className="flex items-center gap-10">
             {NAV.slice(1).map((item) => (
               <li key={item.to}>
                 <Link
                   to={item.to}
-                  className="group relative flex items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-ink-soft transition-colors hover:text-ink"
-                  activeProps={{ className: "text-ink" }}
+                  className={cn(
+                    "text-[13px] text-ink-soft transition-colors hover:text-ink",
+                    item.label === "ISO" &&
+                      "rounded-full bg-iso px-3 py-1 font-medium text-white hover:text-white hover:opacity-90",
+                  )}
+                  activeProps={{
+                    className:
+                      item.label === "ISO" ? "text-white" : "text-ink font-medium",
+                  }}
                 >
-                  {({ isActive }) =>
-                    item.label === "ISO" ? (
-                      <span
-                        className={cn(
-                          "rounded-full bg-iso px-3 py-1 text-white transition-opacity hover:opacity-90",
-                          isActive && "ring-1 ring-iso ring-offset-1",
-                        )}
-                      >
-                        {item.label}
-                      </span>
-                    ) : (
-                      <>
-                        <span
-                          aria-hidden
-                          className={cn(
-                            "h-1 w-1 bg-accent transition-opacity duration-300",
-                            isActive ? "opacity-100" : "opacity-0",
-                          )}
-                        />
-                        {item.label}
-                      </>
-                    )
-                  }
+                  {item.label}
                 </Link>
               </li>
             ))}
@@ -121,9 +106,10 @@ function Header() {
                   to={item.to}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    "block py-1 font-mono text-sm font-semibold uppercase tracking-[0.14em]",
-                    item.label === "ISO" && "inline-block rounded-full bg-iso px-3 py-1 text-white",
+                    "block py-1.5 text-[15px] text-ink-soft transition-colors hover:text-ink",
+                    item.label === "ISO" && "inline-block rounded-full bg-iso px-3 py-1 font-medium text-white",
                   )}
+                  activeProps={{ className: "text-ink font-medium" }}
                 >
                   {item.label}
                 </Link>
