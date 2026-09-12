@@ -62,19 +62,16 @@ function Contact() {
         }
       />
 
-      <Section>
+      <Section id="sample">
         <div className="grid gap-16 md:grid-cols-[1.2fr_1fr]">
           <Reveal>
             <Eyebrow>Send a note</Eyebrow>
             <h2 className="mt-4 text-2xl">Tell us about your business.</h2>
-            <EnquiryForm
-              kind="enquiry"
-              idPrefix="enquiry"
-              messageLabel="What do you need?"
-              messagePlaceholder="A website, hosting, SEO, print work — and anything we should know."
-              submitLabel="Send it across"
-              successLine="Got it. We'll reply within a working day — usually sooner."
-            />
+            <p className="mt-3 max-w-md text-ink-soft">
+              One form for everything — a question, a project, or a free sample of your site. Pick
+              what you need at the top.
+            </p>
+            <EnquiryForm />
           </Reveal>
 
           <Reveal delay={120}>
@@ -96,27 +93,6 @@ function Contact() {
             </p>
           </Reveal>
         </div>
-      </Section>
-
-      <Section id="sample" alt>
-        <Reveal>
-          <Eyebrow>Free sample</Eyebrow>
-          <h2 className="mt-4 max-w-2xl text-3xl md:text-4xl">
-            Ask for a real sample of your site, before you decide anything.
-          </h2>
-          <p className="mt-6 max-w-xl text-ink-soft">
-            Share a few details about your business and we'll design a sample of what your site
-            could look like. No cost, no obligation.
-          </p>
-          <EnquiryForm
-            kind="sample_request"
-            idPrefix="sample"
-            messageLabel="What should the sample show?"
-            messagePlaceholder="What you sell, who your customers are, and any site you like the look of."
-            submitLabel="Request my free sample"
-            successLine="Request received. We'll be in touch about your sample within a working day."
-          />
-        </Reveal>
       </Section>
     </SiteLayout>
   );
