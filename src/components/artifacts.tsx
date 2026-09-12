@@ -34,7 +34,7 @@ function Card({
       aria-hidden
       style={duration ? { animationDelay: `${delay}ms`, animationDuration: `${duration}s` } : { animationDelay: `${delay}ms` }}
       className={cn(
-        "pointer-events-none absolute block rounded-md border border-border bg-card/85 p-3 font-mono text-[11px] leading-relaxed text-ink-soft shadow-[0_18px_40px_-28px_rgba(13,17,23,0.45)] backdrop-blur-sm max-sm:p-2 max-sm:text-[10px] max-sm:opacity-30",
+        "pointer-events-none absolute block rounded-md border border-ink/20 bg-card/95 p-3 font-mono text-[11px] font-medium leading-relaxed text-ink shadow-lg backdrop-blur-md max-sm:p-2 max-sm:text-[10px]",
         floatClass,
         className,
       )}
@@ -99,17 +99,17 @@ export function HeroArtifacts() {
   return (
     <>
       <BrowserArtifact
-        className="left-[4%] top-[18%] opacity-50 max-sm:left-[2%] max-sm:top-[10%] max-sm:opacity-25"
+        className="left-[3%] top-[17%] opacity-90 max-lg:top-[12%] max-md:left-[2%] max-md:top-[10%] max-md:opacity-80"
         delay={0}
         duration={16}
       />
       <CodeArtifact
-        className="right-[5%] top-[14%] opacity-50 max-sm:right-[2%] max-sm:top-[10%] max-sm:opacity-25"
+        className="right-[3%] top-[14%] opacity-90 max-lg:top-[10%] max-md:right-[2%] max-md:top-[10%] max-md:opacity-80"
         delay={1200}
         duration={18}
       />
       <CssArtifact
-        className="right-[7%] bottom-[18%] opacity-50 max-sm:hidden"
+        className="right-[5%] bottom-[16%] opacity-90 max-md:hidden"
         delay={2400}
         duration={15}
       />

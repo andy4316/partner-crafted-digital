@@ -11,13 +11,12 @@ import {
   Wrench,
 } from "lucide-react";
 
-import { BrowserArtifact, CssArtifact, TerminalArtifact } from "@/components/artifacts";
+import { BrowserArtifact, TerminalArtifact } from "@/components/artifacts";
 import { ButtonLink } from "@/components/buttons";
 import { MarkDivider, PageHero } from "@/components/hero";
 import { Reveal } from "@/components/reveal";
 import { DarkCta, Eyebrow, Section, SiteLayout } from "@/components/site-layout";
 import { servicesQuery, type Service } from "@/lib/content";
-import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -87,12 +86,12 @@ function Home() {
 
       <Section alt texture>
         <BrowserArtifact
-          className="right-[2%] top-[8%] opacity-30 max-sm:top-[4%] max-sm:opacity-20"
+          className="right-[2%] top-[5%] opacity-90 max-md:right-3 max-md:top-3 max-md:opacity-80"
           delay={0}
           float="gentle"
         />
         <TerminalArtifact
-          className="left-[2%] bottom-[10%] opacity-30 max-sm:bottom-[4%] max-sm:opacity-20"
+          className="bottom-[3%] left-[2%] opacity-90 max-md:bottom-3 max-md:left-3 max-md:opacity-80"
           delay={1800}
           float="gentle"
         />
@@ -125,25 +124,18 @@ function Home() {
               </div>
             </Reveal>
 
-            <div className="mt-16">
+            <div className="mt-14 grid gap-4 md:grid-cols-2">
               {services.map((service, i) => (
                 <Reveal key={service.id} delay={400 + i * 80}>
-                  <div
-                    className={cn(
-                      "group flex items-start gap-4 border-border py-6 md:gap-6",
-                      i !== services.length - 1 && "border-b",
-                    )}
-                  >
-                    <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-border bg-card transition-colors group-hover:border-accent">
+                  <article className="group h-full rounded-lg border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lg md:p-7">
+                    <div className="grid h-11 w-11 place-items-center rounded-md border border-accent/20 bg-accent/10 transition-colors group-hover:bg-accent/15">
                       {serviceIcon(service.title)}
                     </div>
-                    <div className="min-w-0 flex-1">
-                      <h3 className="font-serif text-xl font-bold md:text-2xl">{service.title}</h3>
-                      <p className="mt-1 text-sm leading-relaxed text-ink-soft md:text-base">
-                        {service.summary}
-                      </p>
-                    </div>
-                  </div>
+                    <h3 className="mt-6 font-serif text-xl font-bold md:text-2xl">{service.title}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-ink-soft md:text-base">
+                      {service.summary}
+                    </p>
+                  </article>
                 </Reveal>
               ))}
             </div>
@@ -193,12 +185,6 @@ function Home() {
       </Section>
 
       <Section texture>
-        <CssArtifact
-          className="right-[3%] top-[10%] opacity-25 max-sm:hidden"
-          delay={0}
-          float="slower"
-        />
-
         <div className="relative z-10 grid items-start gap-12 lg:grid-cols-2">
           <div>
             <Reveal>

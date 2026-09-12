@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 const base =
-  "group inline-flex items-center gap-2 rounded-[6px] px-6 py-3 font-mono text-xs uppercase tracking-[0.14em] transition-all duration-300 hover:scale-[1.03]";
+  "group inline-flex items-center gap-2 rounded-[6px] px-6 py-3 font-mono text-xs font-medium uppercase tracking-[0.14em] transition-all duration-300 hover:scale-[1.03]";
 
 const styles = {
   primary: "btn-sweep bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground",

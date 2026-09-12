@@ -7,6 +7,7 @@ import { ButtonLink } from "@/components/buttons";
 import { Mark } from "@/components/mark";
 import { Reveal } from "@/components/reveal";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Button } from "@/components/ui/button";
 import { PHONE_DISPLAY, SITE_NAME, TAGLINE, WHATSAPP_URL } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -39,23 +40,23 @@ function Header() {
           : "border-b border-transparent bg-transparent",
       )}
     >
-      <div className="mx-auto flex max-w-6xl items-center px-4 py-3.5 sm:px-6 sm:py-5 lg:px-10">
+      <div className="mx-auto grid max-w-7xl grid-cols-[1fr_auto] items-center gap-4 px-4 py-3.5 sm:px-6 sm:py-5 min-[980px]:grid-cols-[minmax(210px,1fr)_auto_minmax(210px,1fr)] min-[980px]:gap-6 lg:px-10">
         <Link to="/" className="group flex min-w-0 items-center gap-2.5 sm:gap-3.5" onClick={() => setOpen(false)}>
           <Mark className="h-7 w-auto shrink-0 text-ink sm:h-8" title="AB Digital Consultancy logo" />
-          <span className="truncate font-serif text-lg font-bold tracking-tight sm:text-xl">AB Digital</span>
+          <span className="truncate font-serif text-lg font-semibold sm:text-xl">AB Digital</span>
         </Link>
 
         <nav
           aria-label="Main"
-          className="hidden min-[860px]:absolute min-[860px]:left-1/2 min-[860px]:top-1/2 min-[860px]:-translate-x-1/2 min-[860px]:-translate-y-1/2 min-[860px]:flex"
+          className="hidden min-[980px]:flex"
         >
-          <ul className="flex items-center gap-10">
+          <ul className="flex items-center gap-6 lg:gap-8 xl:gap-10">
             {NAV.slice(1).map((item) => (
               <li key={item.to}>
                 <Link
                   to={item.to}
                   className={cn(
-                    "text-[13px] text-ink-soft transition-colors hover:text-ink",
+                    "text-[13px] font-medium text-ink-soft transition-colors hover:text-ink",
                     item.label === "ISO" &&
                       "rounded-full bg-iso px-3 py-1 font-medium text-white hover:text-white hover:opacity-90",
                   )}
@@ -71,7 +72,7 @@ function Header() {
           </ul>
         </nav>
 
-        <div className="ml-auto hidden items-center gap-5 min-[860px]:flex">
+        <div className="hidden items-center justify-self-end gap-4 min-[980px]:flex lg:gap-5">
           <span aria-hidden className="h-4 w-px bg-border" />
           <ThemeToggle />
           <Link
@@ -82,7 +83,7 @@ function Header() {
           </Link>
         </div>
 
-        <div className="ml-auto flex items-center gap-2 min-[860px]:hidden">
+        <div className="flex items-center justify-self-end gap-2 min-[980px]:hidden">
           <ThemeToggle />
           <button
             type="button"
@@ -98,7 +99,7 @@ function Header() {
       </div>
 
       {open && (
-        <nav aria-label="Mobile" className="border-t border-border px-4 py-3 min-[860px]:hidden sm:px-6">
+        <nav aria-label="Mobile" className="border-t border-border px-4 py-3 min-[980px]:hidden sm:px-6">
           <ul className="space-y-2">
             {NAV.map((item) => (
               <li key={item.to}>
@@ -106,7 +107,7 @@ function Header() {
                   to={item.to}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    "block py-1.5 text-[15px] text-ink-soft transition-colors hover:text-ink",
+                    "block py-1.5 text-[15px] font-medium text-ink-soft transition-colors hover:text-ink",
                     item.label === "ISO" && "inline-block rounded-full bg-iso px-3 py-1 font-medium text-white",
                   )}
                   activeProps={{ className: "text-ink font-medium" }}
@@ -130,12 +131,10 @@ function Header() {
 }
 
 function Footer() {
-  const scrollTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
-
   return (
     <footer className="border-t border-border bg-alt">
-      <div className="mx-auto max-w-6xl px-6 py-16">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10">
+        <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-[1.15fr_0.75fr_1.15fr_1fr]">
           <div>
             <div className="flex items-center gap-3">
               <Mark className="h-7 w-auto text-ink" title="AB Digital Consultancy logo" />
@@ -180,41 +179,85 @@ function Footer() {
               WhatsApp {PHONE_DISPLAY}
             </a>
             <p className="mt-4 text-sm text-ink-soft">Bengaluru, Karnataka — working India-wide.</p>
+            <p className="mt-4 max-w-xs text-sm font-medium text-ink">
+              Ask for a free sample before you decide anything.
+            </p>
           </div>
         </div>
       </div>
 
       <div className="border-t border-border">
-        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-3 px-6 py-4 sm:flex-row sm:items-center">
-          <p className="font-mono text-[11px] text-ink-soft">
+        <div className="mx-auto max-w-7xl px-6 py-4 lg:px-10">
+          <p className="font-mono text-[11px] font-medium text-ink">
             © {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
           </p>
-          <button
-            type="button"
-            onClick={scrollTop}
-            className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-soft transition-colors hover:text-accent"
-          >
-            Back to top
-            <ArrowUp className="h-4 w-4" aria-hidden />
-          </button>
         </div>
       </div>
     </footer>
   );
 }
 
-function WhatsAppButton() {
+function FloatingControls() {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    let frame = 0;
+    const updateProgress = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        setProgress(scrollable > 0 ? Math.min(100, (window.scrollY / scrollable) * 100) : 0);
+      });
+    };
+    updateProgress();
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    return () => {
+      window.removeEventListener("scroll", updateProgress);
+      window.removeEventListener("resize", updateProgress);
+      cancelAnimationFrame(frame);
+    };
+  }, []);
+
   return (
-    <a
-      href={WHATSAPP_URL}
-      rel="noopener"
-      aria-label="Chat on WhatsApp"
-      className="fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-[0_8px_24px_-8px_rgba(13,17,23,0.5)] transition-transform duration-300 hover:scale-110"
-    >
-      <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5" aria-hidden>
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-9.091a5.865 5.865 0 0 1 5.86 5.868 5.838 5.838 0 0 1-1.178 3.522l.846 2.451-2.518-.661a5.86 5.86 0 1 1-3.01-11.18zm0-1.14A7.005 7.005 0 0 0 5.46 18.23l-3.235.847 1.087-3.151A7.005 7.005 0 1 0 12.05 4.151z" />
-      </svg>
-    </a>
+    <div className="fixed bottom-5 right-4 z-50 flex items-center gap-3 sm:bottom-6 sm:right-6">
+      <Button
+        type="button"
+        variant="ghost"
+        size="icon"
+        aria-label="Back to top"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className="relative h-11 w-11 rounded-full border-0 bg-card text-ink shadow-lg hover:bg-card hover:text-accent"
+      >
+        <svg className="absolute inset-0 h-full w-full -rotate-90" viewBox="0 0 44 44" aria-hidden>
+          <circle cx="22" cy="22" r="20" fill="none" stroke="var(--border)" strokeWidth="1.5" />
+          <circle
+            cx="22"
+            cy="22"
+            r="20"
+            fill="none"
+            stroke="var(--accent)"
+            strokeWidth="2"
+            pathLength="100"
+            strokeDasharray="100"
+            strokeDashoffset={100 - progress}
+            strokeLinecap="round"
+          />
+        </svg>
+        <ArrowUp className="relative h-4 w-4" aria-hidden />
+      </Button>
+
+      <a
+        href={WHATSAPP_URL}
+        rel="noopener"
+        aria-label="Chat on WhatsApp"
+        className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform duration-300 hover:scale-110"
+      >
+        <svg viewBox="0 0 32 32" fill="currentColor" className="h-6 w-6" aria-hidden>
+          <path d="M16.04 3A12.8 12.8 0 0 0 5.02 22.29L3.2 28.94l6.8-1.78A12.8 12.8 0 1 0 16.04 3Zm0 23.44c-1.88 0-3.72-.5-5.33-1.45l-.38-.22-4.04 1.06 1.08-3.94-.25-.4a10.64 10.64 0 1 1 8.92 4.95Zm5.84-7.96c-.32-.16-1.9-.94-2.2-1.05-.29-.1-.5-.16-.71.16-.21.32-.82 1.05-1 1.26-.19.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.59a9.62 9.62 0 0 1-1.78-2.22c-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.18.21-.32.32-.53.1-.22.05-.4-.03-.56-.08-.16-.71-1.72-.98-2.36-.25-.62-.52-.53-.71-.54h-.61c-.21 0-.56.08-.85.4-.29.32-1.11 1.09-1.11 2.65 0 1.57 1.14 3.08 1.3 3.3.16.21 2.24 3.42 5.43 4.8.76.33 1.35.52 1.81.67.76.24 1.46.21 2 .13.61-.09 1.9-.77 2.16-1.51.27-.75.27-1.38.19-1.51-.08-.14-.29-.22-.61-.38Z" />
+        </svg>
+      </a>
+    </div>
   );
 }
 
@@ -224,7 +267,7 @@ export function SiteLayout({ children, className }: { children: ReactNode; class
       <Header />
       <main className={cn("flex-1", className)}>{children}</main>
       <Footer />
-      <WhatsAppButton />
+      <FloatingControls />
     </div>
   );
 }
