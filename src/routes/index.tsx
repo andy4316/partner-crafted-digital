@@ -11,7 +11,7 @@ import {
   Wrench,
 } from "lucide-react";
 
-import { BrowserArtifact, TerminalArtifact } from "@/components/artifacts";
+import { BrowserArtifact, CssArtifact, TerminalArtifact } from "@/components/artifacts";
 import { ButtonLink } from "@/components/buttons";
 import { MarkDivider, PageHero } from "@/components/hero";
 import { Reveal } from "@/components/reveal";
