@@ -1,11 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, type FormEvent } from "react";
 
 import { ButtonAnchor } from "@/components/buttons";
+import { EnquiryForm } from "@/components/enquiry-form";
 import { PageHero } from "@/components/hero";
 import { Reveal } from "@/components/reveal";
 import { Eyebrow, Section, SiteLayout } from "@/components/site-layout";
-import { supabase } from "@/integrations/supabase/client";
 import { PHONE_DISPLAY, WHATSAPP_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/contact")({
