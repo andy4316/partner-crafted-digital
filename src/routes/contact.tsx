@@ -33,36 +33,7 @@ export const Route = createFileRoute("/contact")({
   component: Contact,
 });
 
-const fieldClass =
-  "mt-2 w-full rounded-[6px] border border-border bg-card px-3 py-2.5 text-base outline-none transition-colors focus:border-accent";
-
-const labelClass = "font-mono text-[11px] uppercase tracking-[0.18em] text-ink-soft";
-
 function Contact() {
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const data = new FormData(form);
-    setStatus("sending");
-
-    const { error } = await supabase.from("contact_enquiries").insert({
-      name: String(data.get("name") ?? "").trim(),
-      business: String(data.get("business") ?? "").trim() || null,
-      phone: String(data.get("phone") ?? "").trim(),
-      message: String(data.get("message") ?? "").trim(),
-    });
-
-    if (error) {
-      console.error(error);
-      setStatus("error");
-      return;
-    }
-    form.reset();
-    setStatus("sent");
-  }
-
   return (
     <SiteLayout>
       <PageHero
