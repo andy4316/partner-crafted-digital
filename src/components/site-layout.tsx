@@ -141,6 +141,21 @@ function Footer() {
               <p className="font-serif text-xl font-bold">{SITE_NAME}</p>
             </div>
             <p className="mt-4 max-w-xs text-sm text-ink-soft">{TAGLINE}</p>
+
+            <div className="mt-6 inline-flex flex-col gap-2 rounded-md border border-border bg-card p-3 font-mono text-[11px] leading-relaxed text-ink-soft">
+              <div className="flex items-center gap-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-40" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+                </span>
+                <span className="text-ink">Systems online</span>
+              </div>
+              <div className="space-y-0.5 opacity-80">
+                <p>Build: static + edge</p>
+                <p>Region: Bengaluru, IN</p>
+                <p>SSL: active</p>
+              </div>
+            </div>
           </div>
 
           <div>
