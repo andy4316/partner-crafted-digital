@@ -1,9 +1,9 @@
 # Active tasks
 
-- [ ] Rebalance shared header and strengthen typography
-- [ ] Increase floating artifact card legibility and protect responsive layouts
-- [ ] Convert homepage services to a responsive card grid
-- [ ] Remove the overlapping Work-section CSS artifact
-- [ ] Rebalance footer and strengthen copyright
-- [ ] Add separated scroll-progress and WhatsApp controls
-- [ ] Verify mobile, tablet, desktop, interactions, and diagnostics
+- [x] Rebalance shared header and strengthen typography
+- [x] Increase floating artifact card legibility and protect responsive layouts
+- [x] Convert homepage services to a responsive card grid
+- [x] Remove the overlapping Work-section CSS artifact
+- [x] Rebalance footer and strengthen copyright
+- [x] Add separated scroll-progress and WhatsApp controls
+- [x] Verify mobile, tablet, desktop, interactions, and diagnostics
