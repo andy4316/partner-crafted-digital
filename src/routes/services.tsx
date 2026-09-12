@@ -362,7 +362,7 @@ function Services() {
 
       <Section texture>
         <CssArtifact
-          className="right-[3%] top-[12%] opacity-30 max-sm:hidden"
+          className="right-[3%] top-[8%] opacity-90 max-md:hidden"
           delay={600}
           float="slower"
         />
