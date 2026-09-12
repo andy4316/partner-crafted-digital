@@ -40,7 +40,11 @@ export function ButtonLink({
   className?: string;
 }) {
   return (
-    <Link to={to} hash={hash} className={cn(base, styles[variant], className)}>
+    <Link
+      to={to}
+      {...(hash ? { hash } : {})}
+      className={cn(base, styles[variant], className)}
+    >
       <Inner>{children}</Inner>
     </Link>
   );
