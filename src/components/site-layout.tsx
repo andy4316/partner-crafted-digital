@@ -356,7 +356,7 @@ export function DarkCta({
               {note}
             </p>
           )}
-          <div className="mt-10">
+          <div className="mt-10 flex flex-wrap gap-4">
             <ButtonLink
               to={actionTo}
               variant="ghost"
@@ -364,6 +364,11 @@ export function DarkCta({
             >
               {actionLabel}
             </ButtonLink>
+            {sampleAction && (
+              <ButtonLink to="/contact" hash="sample" variant="ghost">
+                Request a free sample
+              </ButtonLink>
+            )}
           </div>
         </Reveal>
       </div>
