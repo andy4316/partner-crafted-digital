@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { ButtonAnchor } from "@/components/buttons";
+import { ButtonAnchor, ButtonLink } from "@/components/buttons";
 import { EnquiryForm } from "@/components/enquiry-form";
 import { PageHero } from "@/components/hero";
 import { Reveal } from "@/components/reveal";
