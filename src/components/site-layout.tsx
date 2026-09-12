@@ -142,27 +142,19 @@ function Footer() {
             </div>
             <p className="mt-4 max-w-xs text-sm text-ink-soft">{TAGLINE}</p>
 
-            <div className="relative mt-6 h-44 w-full max-w-xs overflow-hidden rounded-lg border border-border bg-card">
-              <GridTexture className="opacity-60" />
-              <Mark className="absolute left-1/2 top-1/2 h-auto w-36 -translate-x-1/2 -translate-y-1/2 text-ink/[0.05]" title="" />
-
-              <div className="relative z-10 flex h-full flex-col justify-between p-4">
-                <div className="flex items-center gap-2">
-                  <span className="relative flex h-2 w-2">
+            <div className="mt-6 w-full max-w-xs rounded-lg border border-border bg-card p-4">
+              <p className="font-mono text-3xl font-semibold leading-none tracking-tight text-ink">AB—001</p>
+              <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.22em] text-ink-soft">Studio build v1.4</p>
+              <div className="mt-4 h-px w-full bg-border" />
+              <div className="mt-4 flex items-center justify-between">
+                <span className="inline-flex items-center gap-2 rounded-full border border-border px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-ink">
+                  <span className="relative flex h-1.5 w-1.5">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-40" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
                   </span>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-soft">Project AB-001</span>
-                </div>
-
-                <div className="space-y-2">
-                  <div className="float-gentle w-fit -rotate-2 rounded border border-border bg-background/95 px-2.5 py-1.5 font-mono text-[10px] text-ink shadow-sm">
-                    <span className="text-accent">.brand</span> {"{ color: #E2A33B; }"}
-                  </div>
-                  <div className="float-gentle ml-4 w-fit rotate-1 rounded border border-border bg-background/95 px-2.5 py-1.5 font-mono text-[10px] text-ink shadow-sm" style={{ animationDelay: "1200ms" }}>
-                    &lt;MadeInBengaluru /&gt;
-                  </div>
-                </div>
+                  Accepting work
+                </span>
+                <Mark className="h-5 w-auto text-ink/30" title="" />
               </div>
             </div>
           </div>
