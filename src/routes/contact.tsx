@@ -1,11 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, type FormEvent } from "react";
 
-import { ButtonAnchor } from "@/components/buttons";
+import { ButtonAnchor, ButtonLink } from "@/components/buttons";
+import { EnquiryForm } from "@/components/enquiry-form";
 import { PageHero } from "@/components/hero";
 import { Reveal } from "@/components/reveal";
 import { Eyebrow, Section, SiteLayout } from "@/components/site-layout";
-import { supabase } from "@/integrations/supabase/client";
 import { PHONE_DISPLAY, WHATSAPP_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/contact")({
@@ -34,36 +33,7 @@ export const Route = createFileRoute("/contact")({
   component: Contact,
 });
 
-const fieldClass =
-  "mt-2 w-full rounded-[6px] border border-border bg-card px-3 py-2.5 text-base outline-none transition-colors focus:border-accent";
-
-const labelClass = "font-mono text-[11px] uppercase tracking-[0.18em] text-ink-soft";
-
 function Contact() {
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const data = new FormData(form);
-    setStatus("sending");
-
-    const { error } = await supabase.from("contact_enquiries").insert({
-      name: String(data.get("name") ?? "").trim(),
-      business: String(data.get("business") ?? "").trim() || null,
-      phone: String(data.get("phone") ?? "").trim(),
-      message: String(data.get("message") ?? "").trim(),
-    });
-
-    if (error) {
-      console.error(error);
-      setStatus("error");
-      return;
-    }
-    form.reset();
-    setStatus("sent");
-  }
-
   return (
     <SiteLayout>
       <PageHero
@@ -78,7 +48,12 @@ function Contact() {
         subtitle="A short note is enough. No sales call, no pressure — just an honest answer about what your business needs."
         actions={
           <div className="flex flex-col items-center gap-4">
-            <ButtonAnchor href={WHATSAPP_URL}>WhatsApp {PHONE_DISPLAY}</ButtonAnchor>
+            <div className="flex flex-wrap justify-center gap-4">
+              <ButtonAnchor href={WHATSAPP_URL}>WhatsApp {PHONE_DISPLAY}</ButtonAnchor>
+              <ButtonLink to="/contact" hash="sample" variant="ghost">
+                Request a free sample
+              </ButtonLink>
+            </div>
             <p className="max-w-md text-sm text-ink-soft">
               Tell us about your business and we'll put together a real sample of what your site
               could look like — before you decide anything.
@@ -91,65 +66,15 @@ function Contact() {
         <div className="grid gap-16 md:grid-cols-[1.2fr_1fr]">
           <Reveal>
             <Eyebrow>Send a note</Eyebrow>
-            <form onSubmit={handleSubmit} className="mt-8 max-w-xl space-y-6">
-              <div>
-                <label htmlFor="name" className={labelClass}>
-                  Your name
-                </label>
-                <input id="name" name="name" required autoComplete="name" className={fieldClass} />
-              </div>
-              <div>
-                <label htmlFor="business" className={labelClass}>
-                  Business name
-                </label>
-                <input
-                  id="business"
-                  name="business"
-                  autoComplete="organization"
-                  className={fieldClass}
-                />
-              </div>
-              <div>
-                <label htmlFor="phone" className={labelClass}>
-                  Phone or WhatsApp
-                </label>
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  required
-                  autoComplete="tel"
-                  className={fieldClass}
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className={labelClass}>
-                  What do you need?
-                </label>
-                <textarea id="message" name="message" required rows={4} className={fieldClass} />
-              </div>
-
-              <button
-                type="submit"
-                disabled={status === "sending"}
-                className="inline-flex items-center gap-2 rounded-[6px] btn-sweep bg-primary px-6 py-3 font-mono text-xs font-medium uppercase tracking-[0.14em] text-primary-foreground transition-all duration-300 hover:scale-[1.03] hover:bg-accent disabled:opacity-50"
-              >
-                {status === "sending" ? "Sending…" : "Send it across"}
-              </button>
-
-              <p aria-live="polite" className="text-sm">
-                {status === "sent" && (
-                  <span className="text-accent">
-                    Got it. We'll reply within a working day — usually sooner.
-                  </span>
-                )}
-                {status === "error" && (
-                  <span className="text-ink-soft">
-                    That didn't go through. Please message us on WhatsApp instead.
-                  </span>
-                )}
-              </p>
-            </form>
+            <h2 className="mt-4 text-2xl">Tell us about your business.</h2>
+            <EnquiryForm
+              kind="enquiry"
+              idPrefix="enquiry"
+              messageLabel="What do you need?"
+              messagePlaceholder="A website, hosting, SEO, print work — and anything we should know."
+              submitLabel="Send it across"
+              successLine="Got it. We'll reply within a working day — usually sooner."
+            />
           </Reveal>
 
           <Reveal delay={120}>
@@ -171,6 +96,27 @@ function Contact() {
             </p>
           </Reveal>
         </div>
+      </Section>
+
+      <Section id="sample" alt>
+        <Reveal>
+          <Eyebrow>Free sample</Eyebrow>
+          <h2 className="mt-4 max-w-2xl text-3xl md:text-4xl">
+            Ask for a real sample of your site, before you decide anything.
+          </h2>
+          <p className="mt-6 max-w-xl text-ink-soft">
+            Share a few details about your business and we'll design a sample of what your site
+            could look like. No cost, no obligation.
+          </p>
+          <EnquiryForm
+            kind="sample_request"
+            idPrefix="sample"
+            messageLabel="What should the sample show?"
+            messagePlaceholder="What you sell, who your customers are, and any site you like the look of."
+            submitLabel="Request my free sample"
+            successLine="Request received. We'll be in touch about your sample within a working day."
+          />
+        </Reveal>
       </Section>
     </SiteLayout>
   );

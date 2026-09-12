@@ -293,14 +293,17 @@ export function Section({
   className,
   alt = false,
   texture = false,
+  id,
 }: {
   children: ReactNode;
   className?: string;
   alt?: boolean;
   texture?: boolean;
+  id?: string;
 }) {
   return (
     <section
+      id={id}
       className={cn(
         "relative overflow-hidden border-t border-border",
         alt ? "bg-alt" : "bg-background",
@@ -326,12 +329,14 @@ export function DarkCta({
   note,
   actionTo = "/contact",
   actionLabel = "Start a conversation",
+  sampleAction = false,
 }: {
   title: string;
   body?: string;
   note?: string;
   actionTo?: string;
   actionLabel?: string;
+  sampleAction?: boolean;
 }) {
   return (
     <section className="relative overflow-hidden bg-cta text-cta-foreground">
@@ -351,7 +356,7 @@ export function DarkCta({
               {note}
             </p>
           )}
-          <div className="mt-10">
+          <div className="mt-10 flex flex-wrap gap-4">
             <ButtonLink
               to={actionTo}
               variant="ghost"
@@ -359,6 +364,11 @@ export function DarkCta({
             >
               {actionLabel}
             </ButtonLink>
+            {sampleAction && (
+              <ButtonLink to="/contact" hash="sample" variant="ghost">
+                Request a free sample
+              </ButtonLink>
+            )}
           </div>
         </Reveal>
       </div>

@@ -28,17 +28,23 @@ function Inner({ children }: { children: ReactNode }) {
 
 export function ButtonLink({
   to,
+  hash,
   children,
   variant = "primary",
   className,
 }: {
   to: string;
+  hash?: string;
   children: ReactNode;
   variant?: Variant;
   className?: string;
 }) {
   return (
-    <Link to={to} className={cn(base, styles[variant], className)}>
+    <Link
+      to={to}
+      {...(hash ? { hash } : {})}
+      className={cn(base, styles[variant], className)}
+    >
       <Inner>{children}</Inner>
     </Link>
   );
