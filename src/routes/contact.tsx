@@ -92,6 +92,27 @@ function Contact() {
           </Reveal>
         </div>
       </Section>
+
+      <Section id="sample" alt>
+        <Reveal>
+          <Eyebrow>Free sample</Eyebrow>
+          <h2 className="mt-4 max-w-2xl text-3xl md:text-4xl">
+            Ask for a real sample of your site, before you decide anything.
+          </h2>
+          <p className="mt-6 max-w-xl text-ink-soft">
+            Share a few details about your business and we'll design a sample of what your site
+            could look like. No cost, no obligation.
+          </p>
+          <EnquiryForm
+            kind="sample_request"
+            idPrefix="sample"
+            messageLabel="What should the sample show?"
+            messagePlaceholder="What you sell, who your customers are, and any site you like the look of."
+            submitLabel="Request my free sample"
+            successLine="Request received. We'll be in touch about your sample within a working day."
+          />
+        </Reveal>
+      </Section>
     </SiteLayout>
   );
 }
