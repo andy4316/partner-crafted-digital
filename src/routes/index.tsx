@@ -11,7 +11,7 @@ import {
   Wrench,
 } from "lucide-react";
 
-import { BrowserArtifact, TerminalArtifact } from "@/components/artifacts";
+import { BrowserArtifact, CssArtifact, TerminalArtifact } from "@/components/artifacts";
 import { ButtonLink } from "@/components/buttons";
 import { MarkDivider, PageHero } from "@/components/hero";
 import { Reveal } from "@/components/reveal";
@@ -185,6 +185,11 @@ function Home() {
       </Section>
 
       <Section texture>
+        <CssArtifact
+          className="right-[5%] bottom-[6%] opacity-60 max-md:hidden"
+          delay={1200}
+          float="gentle"
+        />
         <div className="relative z-10 grid items-start gap-12 lg:grid-cols-2">
           <div>
             <Reveal>
