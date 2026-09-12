@@ -293,14 +293,17 @@ export function Section({
   className,
   alt = false,
   texture = false,
+  id,
 }: {
   children: ReactNode;
   className?: string;
   alt?: boolean;
   texture?: boolean;
+  id?: string;
 }) {
   return (
     <section
+      id={id}
       className={cn(
         "relative overflow-hidden border-t border-border",
         alt ? "bg-alt" : "bg-background",
