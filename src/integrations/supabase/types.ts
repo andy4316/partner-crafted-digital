@@ -54,26 +54,38 @@ export type Database = {
         Row: {
           business: string | null
           created_at: string
+          email: string | null
+          enquiry_type: string
           id: string
+          industry: string | null
           message: string
           name: string
           phone: string
+          website: string | null
         }
         Insert: {
           business?: string | null
           created_at?: string
+          email?: string | null
+          enquiry_type?: string
           id?: string
+          industry?: string | null
           message: string
           name: string
           phone: string
+          website?: string | null
         }
         Update: {
           business?: string | null
           created_at?: string
+          email?: string | null
+          enquiry_type?: string
           id?: string
+          industry?: string | null
           message?: string
           name?: string
           phone?: string
+          website?: string | null
         }
         Relationships: []
       }
