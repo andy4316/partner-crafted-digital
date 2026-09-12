@@ -404,7 +404,7 @@ function Services() {
 
       <Section texture>
         <BrowserArtifact
-          className="left-[2%] top-[16%] opacity-30 max-sm:hidden"
+          className="left-[2%] top-[10%] opacity-90 max-md:hidden"
           delay={300}
           float="slower"
         />
