@@ -329,12 +329,14 @@ export function DarkCta({
   note,
   actionTo = "/contact",
   actionLabel = "Start a conversation",
+  sampleAction = false,
 }: {
   title: string;
   body?: string;
   note?: string;
   actionTo?: string;
   actionLabel?: string;
+  sampleAction?: boolean;
 }) {
   return (
     <section className="relative overflow-hidden bg-cta text-cta-foreground">
