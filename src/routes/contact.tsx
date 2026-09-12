@@ -61,65 +61,15 @@ function Contact() {
         <div className="grid gap-16 md:grid-cols-[1.2fr_1fr]">
           <Reveal>
             <Eyebrow>Send a note</Eyebrow>
-            <form onSubmit={handleSubmit} className="mt-8 max-w-xl space-y-6">
-              <div>
-                <label htmlFor="name" className={labelClass}>
-                  Your name
-                </label>
-                <input id="name" name="name" required autoComplete="name" className={fieldClass} />
-              </div>
-              <div>
-                <label htmlFor="business" className={labelClass}>
-                  Business name
-                </label>
-                <input
-                  id="business"
-                  name="business"
-                  autoComplete="organization"
-                  className={fieldClass}
-                />
-              </div>
-              <div>
-                <label htmlFor="phone" className={labelClass}>
-                  Phone or WhatsApp
-                </label>
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  required
-                  autoComplete="tel"
-                  className={fieldClass}
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className={labelClass}>
-                  What do you need?
-                </label>
-                <textarea id="message" name="message" required rows={4} className={fieldClass} />
-              </div>
-
-              <button
-                type="submit"
-                disabled={status === "sending"}
-                className="inline-flex items-center gap-2 rounded-[6px] btn-sweep bg-primary px-6 py-3 font-mono text-xs font-medium uppercase tracking-[0.14em] text-primary-foreground transition-all duration-300 hover:scale-[1.03] hover:bg-accent disabled:opacity-50"
-              >
-                {status === "sending" ? "Sending…" : "Send it across"}
-              </button>
-
-              <p aria-live="polite" className="text-sm">
-                {status === "sent" && (
-                  <span className="text-accent">
-                    Got it. We'll reply within a working day — usually sooner.
-                  </span>
-                )}
-                {status === "error" && (
-                  <span className="text-ink-soft">
-                    That didn't go through. Please message us on WhatsApp instead.
-                  </span>
-                )}
-              </p>
-            </form>
+            <h2 className="mt-4 text-2xl">Tell us about your business.</h2>
+            <EnquiryForm
+              kind="enquiry"
+              idPrefix="enquiry"
+              messageLabel="What do you need?"
+              messagePlaceholder="A website, hosting, SEO, print work — and anything we should know."
+              submitLabel="Send it across"
+              successLine="Got it. We'll reply within a working day — usually sooner."
+            />
           </Reveal>
 
           <Reveal delay={120}>
