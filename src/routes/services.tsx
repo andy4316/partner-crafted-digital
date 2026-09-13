@@ -361,7 +361,7 @@ function PricingQuickJump({ onJump }: { onJump: () => void }) {
       onClick={onJump}
       aria-label="Jump to pricing"
       className={cn(
-        "fixed right-4 bottom-20 z-40 h-auto rounded-full border border-border bg-card px-3.5 py-2 font-mono text-[11px] font-medium text-ink shadow-lg transition-all duration-300 hover:border-accent hover:bg-card hover:text-accent sm:right-6 sm:bottom-24",
+        "fixed right-4 bottom-20 z-[60] h-auto rounded-full border border-border bg-card px-3.5 py-2 font-mono text-[11px] font-medium text-ink shadow-lg transition-all duration-300 hover:border-accent hover:bg-card hover:text-accent sm:right-6 sm:bottom-24",
         visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-2 opacity-0",
       )}
     >
