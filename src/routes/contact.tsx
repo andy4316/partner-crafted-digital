@@ -12,7 +12,7 @@ const SERVICES: ServiceChoice[] = ["website", "iso", "other"];
 
 export const Route = createFileRoute("/contact")({
   validateSearch: (search: Record<string, unknown>) => {
-    const raw = String(search.service ?? "");
+    const raw = String(search["service"] ?? "");
     return { service: SERVICES.includes(raw as ServiceChoice) ? (raw as ServiceChoice) : undefined };
   },
   head: () => ({

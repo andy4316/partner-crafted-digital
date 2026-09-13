@@ -370,7 +370,7 @@ export function DarkCta({
             <ButtonLink
               to={actionTo}
               hash={actionHash}
-              search={actionSearch}
+              {...(actionSearch ? { search: actionSearch } : {})}
               variant="ghost"
               className="border-white/30 bg-transparent text-white hover:border-white hover:text-white"
             >
