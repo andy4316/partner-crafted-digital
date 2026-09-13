@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { FileText, Layout, Megaphone, Printer, Search, Server, Wrench } from "lucide-react";
-import { Suspense } from "react";
+import { FileText, Layout, Megaphone, Printer, Search, Server, Tag, Wrench } from "lucide-react";
+import { Suspense, useEffect, useRef, useState } from "react";
 
 import { BrowserArtifact, CssArtifact } from "@/components/artifacts";
 import { ButtonLink } from "@/components/buttons";
@@ -338,27 +338,95 @@ function Loading() {
   return <p className="mt-14 text-sm text-ink-soft">Loading…</p>;
 }
 
+function PricingQuickJump({ onJump }: { onJump: () => void }) {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const hero = document.getElementById("services-hero");
+    if (!hero) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setVisible(!entry?.isIntersecting),
+      { threshold: 0 },
+    );
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <button
+      type="button"
+      onClick={onJump}
+      aria-label="Jump to pricing"
+      className={cn(
+        "fixed right-4 bottom-20 z-40 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-2 font-mono text-[11px] font-medium text-ink shadow-lg transition-all duration-300 hover:border-accent hover:text-accent sm:right-6 sm:bottom-24",
+        visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-2 opacity-0",
+      )}
+    >
+      <Tag className="h-3.5 w-3.5" aria-hidden />
+      Pricing
+    </button>
+  );
+}
+
 function Services() {
+  const [pricingHighlighted, setPricingHighlighted] = useState(false);
+  const highlightTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(
+    () => () => {
+      if (highlightTimer.current) clearTimeout(highlightTimer.current);
+    },
+    [],
+  );
+
+  const jumpToPricing = () => {
+    const pricing = document.getElementById("pricing");
+    if (!pricing) return;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    pricing.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+    setPricingHighlighted(false);
+    if (highlightTimer.current) clearTimeout(highlightTimer.current);
+    requestAnimationFrame(() => {
+      setPricingHighlighted(true);
+      highlightTimer.current = setTimeout(() => setPricingHighlighted(false), 1100);
+    });
+  };
+
   return (
     <SiteLayout>
-      <PageHero
-        compact
-        badge="Design · Hosting · SEO · Marketing"
-        title={
-          <>
-            Everything a business needs online, <span className="text-accent">handled</span>.
-          </>
-        }
-        subtitle="One partner for the website, the hosting, the search visibility and the printed things — with clear pricing and nothing hidden."
-        actions={
-          <>
-            <ButtonLink to="/contact">Get a quote</ButtonLink>
-            <ButtonLink to="/work" variant="ghost">
-              See the work
-            </ButtonLink>
-          </>
-        }
-      />
+      <div id="services-hero">
+        <PageHero
+          compact
+          badge="Design · Hosting · SEO · Marketing"
+          title={
+            <>
+              Everything a business needs online, <span className="text-accent">handled</span>.
+            </>
+          }
+          subtitle="One partner for the website, the hosting, the search visibility and the printed things — with clear pricing and nothing hidden."
+          actions={
+            <>
+              <ButtonLink to="/contact">Get a quote</ButtonLink>
+              <ButtonLink to="/work" variant="ghost">
+                See the work
+              </ButtonLink>
+              <span className="basis-full" aria-hidden />
+              <a
+                href="#pricing"
+                onClick={(event) => {
+                  event.preventDefault();
+                  jumpToPricing();
+                }}
+                className="-mt-1 text-sm text-ink-soft underline decoration-border underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
+              >
+                ↓ Just here for pricing?
+              </a>
+            </>
+          }
+        />
+      </div>
 
       <Section texture>
         <CssArtifact
@@ -386,10 +454,15 @@ function Services() {
       </Suspense>
 
 
-      <Section alt>
+      <Section id="pricing" alt className="scroll-mt-24">
         <Reveal>
           <Eyebrow>Pricing</Eyebrow>
-          <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">
+          <h2
+            className={cn(
+              "mt-6 max-w-3xl rounded-[6px] text-3xl md:text-5xl",
+              pricingHighlighted && "pricing-arrival-pulse",
+            )}
+          >
             One price to build it. One price to keep it alive.
           </h2>
           <p className="mt-6 max-w-2xl text-ink-soft">
@@ -418,6 +491,7 @@ function Services() {
       </Section>
 
       <DarkCta title="Not sure which plan fits? Tell us the business and we'll say plainly." />
+      <PricingQuickJump onJump={jumpToPricing} />
     </SiteLayout>
   );
 }

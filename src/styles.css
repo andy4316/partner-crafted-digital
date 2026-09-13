@@ -359,6 +359,25 @@
   animation: scroll-dot 2.2s ease-in-out infinite;
 }
 
+@keyframes pricing-arrival {
+  0% {
+    background-color: transparent;
+    box-shadow: 0 0 0 0 transparent;
+  }
+  28% {
+    background-color: color-mix(in oklab, var(--accent) 12%, transparent);
+    box-shadow: 0 0 0 8px color-mix(in oklab, var(--accent) 7%, transparent);
+  }
+  100% {
+    background-color: transparent;
+    box-shadow: 0 0 0 14px transparent;
+  }
+}
+
+@utility pricing-arrival-pulse {
+  animation: pricing-arrival 1s ease-out;
+}
+
 /* Animated underline for nav links */
 @utility nav-link {
   position: relative;
