@@ -23,6 +23,15 @@ export type PricingTier = {
 
 export type Faq = { id: string; question: string; answer: string };
 
+/** Stable anchor id for a service section on the Services page. */
+export function serviceSlug(title: string) {
+  return title
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
 export type CaseStudy = {
   id: string;
   client_name: string;
