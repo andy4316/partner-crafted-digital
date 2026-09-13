@@ -33,21 +33,15 @@ function Header() {
 
   return (
     <header
+      data-docked={scrolled}
+      data-menu-open={open}
       className={cn(
-        "fixed left-1/2 z-50 w-full -translate-x-1/2 border transition-[top,width,max-width,border-radius,background-color,border-color,box-shadow] duration-[350ms] ease-in-out",
-        scrolled
-          ? "top-4 w-[calc(100%-2rem)] max-w-[1100px] border-border bg-background/95 shadow-lg backdrop-blur-xl sm:w-[88%]"
-          : "top-0 max-w-none rounded-none border-transparent bg-transparent shadow-none",
-        scrolled && !open && "rounded-full",
-        scrolled && open && "rounded-[24px]",
-        !scrolled && open && "border-b-border bg-background/95 backdrop-blur-xl",
+        "docking-header",
+        !scrolled && open && "docking-header-open-at-top",
       )}
     >
       <div
-        className={cn(
-          "mx-auto grid max-w-7xl grid-cols-[1fr_auto] items-center gap-4 px-4 transition-[padding] duration-[350ms] ease-in-out sm:px-6 min-[980px]:grid-cols-[minmax(210px,1fr)_auto_minmax(210px,1fr)] min-[980px]:gap-6 lg:px-10",
-          scrolled ? "py-2.5 sm:py-3" : "py-3.5 sm:py-5",
-        )}
+        className="docking-header-inner mx-auto grid max-w-7xl grid-cols-[1fr_auto] items-center gap-4 px-4 sm:px-6 min-[980px]:grid-cols-[minmax(210px,1fr)_auto_minmax(210px,1fr)] min-[980px]:gap-6 lg:px-7"
       >
         <Link to="/" className="group flex min-w-0 items-center gap-2.5 sm:gap-3.5" onClick={() => setOpen(false)}>
           <Mark className="h-7 w-auto shrink-0 text-ink sm:h-8" title="AB Digital Consultancy logo" />
@@ -85,7 +79,7 @@ function Header() {
           <ThemeToggle />
           <Link
             to="/contact"
-            className="border border-ink px-4 py-2 font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-ink transition-all hover:bg-primary hover:text-primary-foreground"
+            className="whitespace-nowrap border border-ink px-4 py-2 font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-ink transition-all hover:bg-primary hover:text-primary-foreground"
           >
             Start Project
           </Link>
