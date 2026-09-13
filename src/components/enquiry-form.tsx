@@ -21,6 +21,13 @@ const schema = z.object({
 
 type Status = "idle" | "sending" | "sent" | "error";
 type Kind = "enquiry" | "sample_request";
+export type ServiceChoice = "website" | "iso" | "other";
+
+const SERVICE_OPTIONS: { value: ServiceChoice; label: string }[] = [
+  { value: "website", label: "Website Development" },
+  { value: "iso", label: "ISO Certification" },
+  { value: "other", label: "Not sure yet / Something else" },
+];
 
 const KIND_OPTIONS: { value: Kind; label: string }[] = [
   { value: "enquiry", label: "General enquiry" },
