@@ -7,3 +7,4 @@
 - [x] Rebalance footer and strengthen copyright
 - [x] Add separated scroll-progress and WhatsApp controls
 - [x] Verify mobile, tablet, desktop, interactions, and diagnostics
+- [x] Add Services hero and floating pricing shortcuts with arrival highlight
