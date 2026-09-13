@@ -346,12 +346,19 @@ function PricingQuickJump({ onJump }: { onJump: () => void }) {
     const hero = document.getElementById("services-hero");
     if (!hero) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => setVisible(!entry?.isIntersecting),
-      { threshold: 0 },
-    );
-    observer.observe(hero);
-    return () => observer.disconnect();
+    let frame = 0;
+    const updateVisibility = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => setVisible(hero.getBoundingClientRect().bottom <= 80));
+    };
+    updateVisibility();
+    window.addEventListener("scroll", updateVisibility, { passive: true });
+    window.addEventListener("resize", updateVisibility);
+    return () => {
+      window.removeEventListener("scroll", updateVisibility);
+      window.removeEventListener("resize", updateVisibility);
+      cancelAnimationFrame(frame);
+    };
   }, []);
 
   return (
