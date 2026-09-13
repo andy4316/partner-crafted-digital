@@ -397,10 +397,15 @@ function Services() {
     pricing.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
     setPricingHighlighted(false);
     if (highlightTimer.current) clearTimeout(highlightTimer.current);
-    requestAnimationFrame(() => {
+    const showHighlight = () => {
       setPricingHighlighted(true);
       highlightTimer.current = setTimeout(() => setPricingHighlighted(false), 1100);
-    });
+    };
+    if (reduceMotion) {
+      showHighlight();
+    } else {
+      highlightTimer.current = setTimeout(showHighlight, 700);
+    }
   };
 
   return (
