@@ -79,7 +79,7 @@ function Header() {
           <ThemeToggle />
           <Link
             to="/contact"
-            className="border border-ink px-4 py-2 font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-ink transition-all hover:bg-primary hover:text-primary-foreground"
+            className="whitespace-nowrap border border-ink px-4 py-2 font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-ink transition-all hover:bg-primary hover:text-primary-foreground"
           >
             Start Project
           </Link>
