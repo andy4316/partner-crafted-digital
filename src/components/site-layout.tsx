@@ -79,6 +79,8 @@ function Header() {
           <ThemeToggle />
           <Link
             to="/contact"
+            hash="enquiry-form"
+            search={{ service: "website" }}
             className="whitespace-nowrap border border-ink px-4 py-2 font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-ink transition-all hover:bg-primary hover:text-primary-foreground"
           >
             Start Project
@@ -121,6 +123,8 @@ function Header() {
           </ul>
           <Link
             to="/contact"
+            hash="enquiry-form"
+            search={{ service: "website" }}
             onClick={() => setOpen(false)}
             className="mt-3 block border border-ink px-4 py-2.5 text-center font-mono text-[11px] uppercase tracking-[0.2em] text-ink"
           >
@@ -331,6 +335,8 @@ export function DarkCta({
   note,
   actionTo = "/contact",
   actionLabel = "Start a conversation",
+  actionHash = "enquiry-form",
+  actionSearch,
   sampleAction = false,
 }: {
   title: string;
@@ -338,6 +344,8 @@ export function DarkCta({
   note?: string;
   actionTo?: string;
   actionLabel?: string;
+  actionHash?: string;
+  actionSearch?: Record<string, string>;
   sampleAction?: boolean;
 }) {
   return (
@@ -361,13 +369,15 @@ export function DarkCta({
           <div className="mt-10 flex flex-wrap gap-4">
             <ButtonLink
               to={actionTo}
+              hash={actionHash}
+              {...(actionSearch ? { search: actionSearch } : {})}
               variant="ghost"
               className="border-white/30 bg-transparent text-white hover:border-white hover:text-white"
             >
               {actionLabel}
             </ButtonLink>
             {sampleAction && (
-              <ButtonLink to="/contact" hash="sample" variant="ghost">
+              <ButtonLink to="/contact" hash="enquiry-form" variant="ghost">
                 Request a free sample
               </ButtonLink>
             )}

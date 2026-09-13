@@ -15,7 +15,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { faqsQuery, pricingQuery, servicesQuery } from "@/lib/content";
+import { faqsQuery, pricingQuery, serviceSlug, servicesQuery } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/services")({
@@ -160,13 +160,7 @@ function detailFor(title: string): Detail {
   return DETAIL.find((d) => t.includes(d.match))?.detail ?? FALLBACK;
 }
 
-function slugify(title: string) {
-  return title
-    .toLowerCase()
-    .replace(/&/g, "and")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
-}
+const slugify = serviceSlug;
 
 function ServiceIndex() {
   const { data } = useSuspenseQuery(servicesQuery);
@@ -223,7 +217,12 @@ function ServiceSections() {
                     {d.fit}
                   </p>
                   <div className="mt-8">
-                    <ButtonLink to="/contact" variant="ghost">
+                    <ButtonLink
+                      to="/contact"
+                      hash="enquiry-form"
+                      search={{ service: "website" }}
+                      variant="ghost"
+                    >
                       Ask about this
                     </ButtonLink>
                   </div>
@@ -307,7 +306,12 @@ function Pricing() {
             ))}
           </ul>
           <div className="mt-10">
-            <ButtonLink to="/contact" variant="ghost">
+            <ButtonLink
+              to="/contact"
+              hash="enquiry-form"
+              search={{ service: "website" }}
+              variant="ghost"
+            >
               Talk about {tier.name}
             </ButtonLink>
           </div>
@@ -388,6 +392,25 @@ function Services() {
     },
     [],
   );
+
+  // Sections render inside Suspense, so scroll to the hash target once it exists.
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "");
+    if (!hash) return;
+    let attempts = 0;
+    let timer: ReturnType<typeof setTimeout>;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const tryScroll = () => {
+      const target = document.getElementById(hash);
+      if (target) {
+        target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+        return;
+      }
+      if (attempts++ < 40) timer = setTimeout(tryScroll, 100);
+    };
+    timer = setTimeout(tryScroll, 60);
+    return () => clearTimeout(timer);
+  }, []);
 
   const jumpToPricing = () => {
     const pricing = document.getElementById("pricing");
