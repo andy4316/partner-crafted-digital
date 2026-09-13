@@ -25,7 +25,7 @@ function Header() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => setScrolled(window.scrollY > 70);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -34,13 +34,21 @@ function Header() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-        scrolled || open
-          ? "border-b border-border bg-background/80 backdrop-blur-md"
-          : "border-b border-transparent bg-transparent",
+        "fixed left-1/2 z-50 w-full -translate-x-1/2 border transition-[top,width,max-width,border-radius,background-color,border-color,box-shadow] duration-[350ms] ease-in-out",
+        scrolled
+          ? "top-4 w-[calc(100%-2rem)] max-w-[1100px] border-border bg-background/95 shadow-lg backdrop-blur-xl sm:w-[88%]"
+          : "top-0 max-w-none rounded-none border-transparent bg-transparent shadow-none",
+        scrolled && !open && "rounded-full",
+        scrolled && open && "rounded-[24px]",
+        !scrolled && open && "border-b-border bg-background/95 backdrop-blur-xl",
       )}
     >
-      <div className="mx-auto grid max-w-7xl grid-cols-[1fr_auto] items-center gap-4 px-4 py-3.5 sm:px-6 sm:py-5 min-[980px]:grid-cols-[minmax(210px,1fr)_auto_minmax(210px,1fr)] min-[980px]:gap-6 lg:px-10">
+      <div
+        className={cn(
+          "mx-auto grid max-w-7xl grid-cols-[1fr_auto] items-center gap-4 px-4 transition-[padding] duration-[350ms] ease-in-out sm:px-6 min-[980px]:grid-cols-[minmax(210px,1fr)_auto_minmax(210px,1fr)] min-[980px]:gap-6 lg:px-10",
+          scrolled ? "py-2.5 sm:py-3" : "py-3.5 sm:py-5",
+        )}
+      >
         <Link to="/" className="group flex min-w-0 items-center gap-2.5 sm:gap-3.5" onClick={() => setOpen(false)}>
           <Mark className="h-7 w-auto shrink-0 text-ink sm:h-8" title="AB Digital Consultancy logo" />
           <span className="truncate font-serif text-lg font-semibold sm:text-xl">AB Digital</span>
