@@ -14,6 +14,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 import { faqsQuery, pricingQuery, servicesQuery } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
@@ -354,18 +355,19 @@ function PricingQuickJump({ onJump }: { onJump: () => void }) {
   }, []);
 
   return (
-    <button
+    <Button
       type="button"
+      variant="ghost"
       onClick={onJump}
       aria-label="Jump to pricing"
       className={cn(
-        "fixed right-4 bottom-20 z-40 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-2 font-mono text-[11px] font-medium text-ink shadow-lg transition-all duration-300 hover:border-accent hover:text-accent sm:right-6 sm:bottom-24",
+        "fixed right-4 bottom-20 z-40 h-auto rounded-full border border-border bg-card px-3.5 py-2 font-mono text-[11px] font-medium text-ink shadow-lg transition-all duration-300 hover:border-accent hover:bg-card hover:text-accent sm:right-6 sm:bottom-24",
         visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-2 opacity-0",
       )}
     >
       <Tag className="h-3.5 w-3.5" aria-hidden />
       Pricing
-    </button>
+    </Button>
   );
 }
 
