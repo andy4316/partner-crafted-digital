@@ -306,7 +306,12 @@ function Pricing() {
             ))}
           </ul>
           <div className="mt-10">
-            <ButtonLink to="/contact" variant="ghost">
+            <ButtonLink
+              to="/contact"
+              hash="enquiry-form"
+              search={{ service: "website" }}
+              variant="ghost"
+            >
               Talk about {tier.name}
             </ButtonLink>
           </div>
@@ -387,6 +392,24 @@ function Services() {
     },
     [],
   );
+
+  // Sections render inside Suspense, so scroll to the hash target once it exists.
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "");
+    if (!hash) return;
+    let attempts = 0;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const tryScroll = () => {
+      const target = document.getElementById(hash);
+      if (target) {
+        target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+        return;
+      }
+      if (attempts++ < 40) timer = setTimeout(tryScroll, 100);
+    };
+    let timer = setTimeout(tryScroll, 60);
+    return () => clearTimeout(timer);
+  }, []);
 
   const jumpToPricing = () => {
     const pricing = document.getElementById("pricing");
