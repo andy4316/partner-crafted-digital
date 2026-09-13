@@ -47,8 +47,15 @@ const KIND_COPY: Record<Kind, { placeholder: string; submit: string; success: st
   },
 };
 
-export function EnquiryForm({ defaultKind = "enquiry" }: { defaultKind?: Kind }) {
+export function EnquiryForm({
+  defaultKind = "enquiry",
+  defaultService = "website",
+}: {
+  defaultKind?: Kind;
+  defaultService?: ServiceChoice;
+}) {
   const [kind, setKind] = useState<Kind>(defaultKind);
+  const [service, setService] = useState<ServiceChoice>(defaultService);
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
 
@@ -77,6 +84,7 @@ export function EnquiryForm({ defaultKind = "enquiry" }: { defaultKind?: Kind })
       website: values.website ? values.website : null,
       message: values.message,
       enquiry_type: kind,
+      service_type: service,
     });
 
     if (insertError) {
@@ -94,6 +102,27 @@ export function EnquiryForm({ defaultKind = "enquiry" }: { defaultKind?: Kind })
 
   return (
     <form onSubmit={handleSubmit} className="mt-8 max-w-xl space-y-6" noValidate>
+      <fieldset>
+        <legend className={labelClass}>What is this about?</legend>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {SERVICE_OPTIONS.map((option) => (
+            <button
+              key={option.value}
+              type="button"
+              onClick={() => setService(option.value)}
+              aria-pressed={service === option.value}
+              className={`rounded-[6px] border px-4 py-2 font-mono text-[11px] font-medium uppercase tracking-[0.14em] transition-colors ${
+                service === option.value
+                  ? "border-accent bg-accent/10 text-accent"
+                  : "border-border bg-card text-ink-soft hover:text-ink"
+              }`}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+      </fieldset>
+
       <fieldset>
         <legend className={labelClass}>I'm here to…</legend>
         <div className="mt-3 inline-flex rounded-full border border-border bg-card p-1">
