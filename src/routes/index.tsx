@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   FileText,
   Monitor,
@@ -16,7 +16,7 @@ import { ButtonLink } from "@/components/buttons";
 import { MarkDivider, PageHero } from "@/components/hero";
 import { Reveal } from "@/components/reveal";
 import { DarkCta, Eyebrow, Section, SiteLayout } from "@/components/site-layout";
-import { servicesQuery, type Service } from "@/lib/content";
+import { serviceSlug, servicesQuery, type Service } from "@/lib/content";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -76,7 +76,9 @@ function Home() {
         subtitle="Most web developers hand you a website and disappear. We stay — hosting it, updating it, and picking up the phone when something breaks."
         actions={
           <>
-            <ButtonLink to="/contact">Start a conversation</ButtonLink>
+            <ButtonLink to="/contact" hash="enquiry-form" search={{ service: "website" }}>
+              Start a conversation
+            </ButtonLink>
             <ButtonLink to="/services" variant="ghost">
               See what we do
             </ButtonLink>
@@ -127,15 +129,24 @@ function Home() {
             <div className="mt-14 grid gap-4 md:grid-cols-2">
               {services.map((service, i) => (
                 <Reveal key={service.id} delay={400 + i * 80}>
-                  <article className="group h-full rounded-lg border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lg md:p-7">
-                    <div className="grid h-11 w-11 place-items-center rounded-md border border-accent/20 bg-accent/10 transition-colors group-hover:bg-accent/15">
-                      {serviceIcon(service.title)}
-                    </div>
-                    <h3 className="mt-6 font-serif text-xl font-bold md:text-2xl">{service.title}</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-ink-soft md:text-base">
-                      {service.summary}
-                    </p>
-                  </article>
+                  <Link
+                    to="/services"
+                    hash={serviceSlug(service.title)}
+                    className="group block h-full rounded-lg border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lg md:p-7"
+                    aria-label={`${service.title} — see details on the Services page`}
+                  >
+                    <article>
+                      <div className="grid h-11 w-11 place-items-center rounded-md border border-accent/20 bg-accent/10 transition-colors group-hover:bg-accent/15">
+                        {serviceIcon(service.title)}
+                      </div>
+                      <h3 className="mt-6 font-serif text-xl font-bold md:text-2xl">
+                        {service.title}
+                      </h3>
+                      <p className="mt-3 text-sm leading-relaxed text-ink-soft md:text-base">
+                        {service.summary}
+                      </p>
+                    </article>
+                  </Link>
                 </Reveal>
               ))}
             </div>
