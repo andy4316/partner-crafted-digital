@@ -377,7 +377,7 @@ export function DarkCta({
               {actionLabel}
             </ButtonLink>
             {sampleAction && (
-              <ButtonLink to="/contact" hash="sample" variant="ghost">
+              <ButtonLink to="/contact" hash="enquiry-form" variant="ghost">
                 Request a free sample
               </ButtonLink>
             )}
