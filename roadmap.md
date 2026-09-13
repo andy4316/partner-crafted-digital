@@ -9,3 +9,4 @@
 - [x] Verify mobile, tablet, desktop, interactions, and diagnostics
 - [x] Add Services hero and floating pricing shortcuts with arrival highlight
 - [x] Upgrade the site-wide header to a responsive docking-pill scroll pattern
+- [x] Smooth the docking transition and tighten the docked pill proportions
