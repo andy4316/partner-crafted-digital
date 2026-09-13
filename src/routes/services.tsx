@@ -398,6 +398,7 @@ function Services() {
     const hash = window.location.hash.replace("#", "");
     if (!hash) return;
     let attempts = 0;
+    let timer: ReturnType<typeof setTimeout>;
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const tryScroll = () => {
       const target = document.getElementById(hash);
@@ -407,7 +408,7 @@ function Services() {
       }
       if (attempts++ < 40) timer = setTimeout(tryScroll, 100);
     };
-    let timer = setTimeout(tryScroll, 60);
+    timer = setTimeout(tryScroll, 60);
     return () => clearTimeout(timer);
   }, []);
 
