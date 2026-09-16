@@ -102,42 +102,6 @@ export function EnquiryForm({
 
   return (
     <form onSubmit={handleSubmit} className="mt-8 max-w-xl space-y-6" noValidate>
-      <div>
-        <label htmlFor={id("service")} className={labelClass}>
-          What is this about?
-        </label>
-        <div className="relative mt-2">
-          <select
-            id={id("service")}
-            name="service"
-            value={service}
-            onChange={(e) => setService(e.target.value as ServiceChoice)}
-            className={`${fieldClass} appearance-none pr-10 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-ink`}
-          >
-            {SERVICE_OPTIONS.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-          <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-ink-soft">
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="m6 9 6 6 6-6" />
-            </svg>
-          </span>
-        </div>
-      </div>
-
       <fieldset>
         <legend className={labelClass}>I'm here to…</legend>
         <div className="mt-3 inline-flex rounded-full border border-border bg-card p-1">
