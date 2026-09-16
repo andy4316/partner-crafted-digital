@@ -238,21 +238,21 @@ export function EnquiryForm({
             className={fieldClass}
           />
         </div>
-      </div>
 
-      <div>
-        <label htmlFor={id("message")} className={labelClass}>
-          What do you need?
-        </label>
-        <textarea
-          id={id("message")}
-          name="message"
-          required
-          rows={4}
-          maxLength={2000}
-          placeholder={copy.placeholder}
-          className={fieldClass}
-        />
+        <div className={kind === "sample_request" ? "sm:col-span-2" : undefined}>
+          <label htmlFor={id("message")} className={labelClass}>
+            What do you need?
+          </label>
+          <textarea
+            id={id("message")}
+            name="message"
+            required
+            rows={kind === "enquiry" ? 6 : 4}
+            maxLength={2000}
+            placeholder={copy.placeholder}
+            className={fieldClass}
+          />
+        </div>
       </div>
 
       <button
