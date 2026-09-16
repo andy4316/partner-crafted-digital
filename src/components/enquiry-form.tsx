@@ -84,7 +84,7 @@ export function EnquiryForm({
       website: values.website ? values.website : null,
       message: values.message,
       enquiry_type: kind,
-      service_type: service,
+      service_type: kind === "sample_request" ? "website" : service,
     });
 
     if (insertError) {
