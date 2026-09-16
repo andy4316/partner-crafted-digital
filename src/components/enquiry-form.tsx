@@ -137,6 +137,43 @@ export function EnquiryForm({
             className={fieldClass}
           />
         </div>
+        {kind === "enquiry" && (
+          <div>
+            <label htmlFor={id("service")} className={labelClass}>
+              What is this about?
+            </label>
+            <div className="relative mt-2">
+              <select
+                id={id("service")}
+                name="service"
+                value={service}
+                onChange={(e) => setService(e.target.value as ServiceChoice)}
+                className={`${fieldClass} appearance-none pr-10 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-ink`}
+              >
+                {SERVICE_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-ink-soft">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        )}
         <div>
           <label htmlFor={id("business")} className={labelClass}>
             Business name
