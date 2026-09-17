@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ButtonLink } from "@/components/buttons";
 import { ExplodedMark } from "@/components/exploded-mark";
 import { MarkDivider, PageHero } from "@/components/hero";
+import { Mark } from "@/components/mark";
 import { Reveal } from "@/components/reveal";
 import { DarkCta, Eyebrow, Section, SiteLayout } from "@/components/site-layout";
 
@@ -48,6 +49,36 @@ const SPECS = [
     label: "Assembly — the gap",
     body: "Neither pillar carries the growth on its own. The arrow only exists because both stand there, holding the space between them.",
   },
+] as const;
+
+const PRINCIPLES = [
+  {
+    id: "01",
+    title: "We say no more than we say yes.",
+    body: "If something doesn't help your customers, we won't build it just because it's billable.",
+  },
+  {
+    id: "02",
+    title: "Nothing ships without you seeing it first.",
+    body: "No surprise launches, no \"trust the process.\"",
+  },
+  {
+    id: "03",
+    title: "Ownership isn't a feature, it's the default.",
+    body: "Your domain, your code, your data — from day one, not after a dispute.",
+  },
+  {
+    id: "04",
+    title: "We stay after launch.",
+    body: "A site that gets abandoned the day it goes live isn't finished, it's parked.",
+  },
+] as const;
+
+const BOUNDARIES = [
+  "We won't sell you ads you don't need, just to pad an invoice.",
+  "We won't lock your site behind a platform you can't leave.",
+  "We won't disappear the day your site goes live.",
+  "We won't pretend a template is a custom build.",
 ] as const;
 
 function About() {
