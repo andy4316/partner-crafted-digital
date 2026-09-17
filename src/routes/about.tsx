@@ -113,6 +113,65 @@ function About() {
         </div>
       </Section>
 
+      <Section>
+        <Reveal>
+          <Eyebrow>How we actually work</Eyebrow>
+          <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">
+            Four things that don't change, no matter what we're building.
+          </h2>
+        </Reveal>
+        <Reveal delay={100}>
+          <ol className="mt-12 border-t border-border">
+            {PRINCIPLES.map((p) => (
+              <li key={p.id} className="flex gap-5 border-b border-border py-6">
+                <span className="font-mono text-xs text-accent">{p.id}</span>
+                <div className="max-w-xl">
+                  <h3 className="text-lg font-bold text-ink">{p.title}</h3>
+                  <p className="mt-2 text-sm text-ink-soft">{p.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
+      </Section>
+
+      <Section alt>
+        <Reveal>
+          <Eyebrow>Boundaries, on purpose</Eyebrow>
+          <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">
+            A few things we've decided never to do.
+          </h2>
+          <ul className="mt-12 max-w-3xl space-y-7">
+            {BOUNDARIES.map((line) => (
+              <li key={line} className="flex gap-4 text-lg leading-relaxed text-ink">
+                <span aria-hidden className="shrink-0 text-accent">—</span>
+                <span>{line}</span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+      </Section>
+
+      {/* Build note — a small technical-log aside, treated like the AB—001 nameplate */}
+      <section className="border-t border-border bg-background">
+        <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
+          <Reveal className="relative max-w-2xl overflow-hidden rounded-lg border border-border bg-card p-6 md:p-8">
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-ink-soft">
+              Build note — 2026
+            </p>
+            <div className="mt-4 h-px w-full bg-border" />
+            <p className="mt-5 max-w-xl text-sm leading-relaxed text-ink-soft">
+              AB Digital started from a repeated complaint, not a business plan. Small business
+              owners kept describing the same experience — a website built once, then abandoned, by
+              someone impossible to reach the moment something broke. This was built to be the
+              opposite of that: one person, answerable, for as long as the site needs to keep
+              working.
+            </p>
+            <Mark className="mt-6 h-5 w-auto text-ink/30" title="" />
+          </Reveal>
+        </div>
+      </section>
+
       <Section alt>
         <Reveal>
           <Eyebrow>Operating notes</Eyebrow>
