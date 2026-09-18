@@ -5,19 +5,25 @@ import { supabase } from "@/integrations/supabase/client";
 import { PHONE_DISPLAY, WHATSAPP_URL } from "@/lib/site";
 
 const fieldClass =
-  "mt-2 w-full rounded-[6px] border border-border bg-card px-3 py-2.5 text-base outline-none transition-colors focus:border-accent";
+  "mt-2 w-full rounded-[6px] border bg-card px-3 py-2.5 text-base text-ink outline-none transition-colors placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
+
+const validFieldClass = "border-border focus:border-accent";
+const invalidFieldClass = "border-iso bg-card ring-1 ring-iso focus:border-iso focus-visible:ring-iso";
 
 const labelClass = "font-mono text-[11px] uppercase tracking-[0.18em] text-ink-soft";
 
 const schema = z.object({
-  name: z.string().trim().min(2, "Please tell us your name").max(100),
-  business: z.string().trim().max(120).optional().or(z.literal("")),
-  email: z.string().trim().email("Please enter a valid email address").max(255),
-  phone: z.string().trim().min(6, "Please add a phone or WhatsApp number").max(30),
-  industry: z.string().trim().max(120).optional().or(z.literal("")),
-  website: z.string().trim().max(255).optional().or(z.literal("")),
-  message: z.string().trim().min(10, "A line or two about your business helps").max(2000),
+  name: z.string().trim().min(2, "Please tell us your name.").max(100, "Please keep your name under 100 characters."),
+  business: z.string().trim().max(120, "Please keep the business name under 120 characters.").optional().or(z.literal("")),
+  email: z.string().trim().email("Please enter a valid email address.").max(255, "Please keep the email under 255 characters."),
+  phone: z.string().trim().min(6, "Please add a phone or WhatsApp number.").max(30, "Please keep the phone number under 30 characters."),
+  industry: z.string().trim().max(120, "Please keep this description under 120 characters.").optional().or(z.literal("")),
+  website: z.string().trim().max(255, "Please keep the website address under 255 characters.").optional().or(z.literal("")),
+  message: z.string().trim().min(10, "A line or two about your business helps.").max(2000, "Please keep your note under 2,000 characters."),
 });
+
+type FieldName = keyof z.infer<typeof schema>;
+type FieldErrors = Partial<Record<FieldName, string>>;
 
 type Status = "idle" | "sending" | "sent" | "error";
 type Kind = "enquiry" | "sample_request";
@@ -58,6 +64,16 @@ export function EnquiryForm({
   const [service, setService] = useState<ServiceChoice>(defaultService);
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+
+  function clearFieldError(field: FieldName) {
+    setFieldErrors((current) => {
+      if (!current[field]) return current;
+      const next = { ...current };
+      delete next[field];
+      return next;
+    });
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -66,13 +82,30 @@ export function EnquiryForm({
     const parsed = schema.safeParse(raw);
 
     if (!parsed.success) {
-      setStatus("error");
-      setError(parsed.error.issues[0]?.message ?? "Please check the details and try again.");
+      const nextErrors: FieldErrors = {};
+      for (const issue of parsed.error.issues) {
+        const field = issue.path[0];
+        if (typeof field === "string" && field in schema.shape && !nextErrors[field as FieldName]) {
+          nextErrors[field as FieldName] = issue.message;
+        }
+      }
+      setStatus("idle");
+      setError(null);
+      setFieldErrors(nextErrors);
+
+      const firstField = Object.keys(nextErrors)[0];
+      if (firstField) {
+        requestAnimationFrame(() => {
+          const target = form.elements.namedItem(firstField);
+          if (target instanceof HTMLElement) target.focus();
+        });
+      }
       return;
     }
 
     setStatus("sending");
     setError(null);
+    setFieldErrors({});
 
     const values = parsed.data;
     const { error: insertError } = await supabase.from("contact_enquiries").insert({
@@ -98,7 +131,22 @@ export function EnquiryForm({
   }
 
   const id = (field: string) => `enquiry-${field}`;
+  const errorId = (field: FieldName) => `${id(field)}-error`;
+  const fieldProps = (field: FieldName) => ({
+    "aria-invalid": fieldErrors[field] ? true : undefined,
+    "aria-describedby": fieldErrors[field] ? errorId(field) : undefined,
+    onInput: () => clearFieldError(field),
+    className: `${fieldClass} ${fieldErrors[field] ? invalidFieldClass : validFieldClass}`,
+  });
+  const fieldError = (field: FieldName) =>
+    fieldErrors[field] ? (
+      <p id={errorId(field)} className="mt-2 flex items-start gap-2 text-sm font-medium text-iso">
+        <span aria-hidden>!</span>
+        <span>{fieldErrors[field]}</span>
+      </p>
+    ) : null;
   const copy = KIND_COPY[kind];
+  const errorCount = Object.keys(fieldErrors).length;
 
   return (
     <form onSubmit={handleSubmit} className="mt-8 max-w-xl space-y-6" noValidate>
@@ -134,8 +182,9 @@ export function EnquiryForm({
             required
             autoComplete="name"
             maxLength={100}
-            className={fieldClass}
+            {...fieldProps("name")}
           />
+          {fieldError("name")}
         </div>
         {kind === "enquiry" && (
           <div>
@@ -148,7 +197,7 @@ export function EnquiryForm({
                 name="service"
                 value={service}
                 onChange={(e) => setService(e.target.value as ServiceChoice)}
-                className={`${fieldClass} appearance-none pr-10 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-ink`}
+                className={`${fieldClass} ${validFieldClass} appearance-none pr-10 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-ink`}
               >
                 {SERVICE_OPTIONS.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -183,8 +232,9 @@ export function EnquiryForm({
             name="business"
             autoComplete="organization"
             maxLength={120}
-            className={fieldClass}
+            {...fieldProps("business")}
           />
+          {fieldError("business")}
         </div>
         <div>
           <label htmlFor={id("email")} className={labelClass}>
@@ -197,8 +247,9 @@ export function EnquiryForm({
             required
             autoComplete="email"
             maxLength={255}
-            className={fieldClass}
+            {...fieldProps("email")}
           />
+          {fieldError("email")}
         </div>
         <div>
           <label htmlFor={id("phone")} className={labelClass}>
@@ -211,8 +262,9 @@ export function EnquiryForm({
             required
             autoComplete="tel"
             maxLength={30}
-            className={fieldClass}
+            {...fieldProps("phone")}
           />
+          {fieldError("phone")}
         </div>
         <div>
           <label htmlFor={id("industry")} className={labelClass}>
@@ -223,8 +275,9 @@ export function EnquiryForm({
             name="industry"
             maxLength={120}
             placeholder="Dental clinic, boutique, exporter…"
-            className={fieldClass}
+            {...fieldProps("industry")}
           />
+          {fieldError("industry")}
         </div>
         <div>
           <label htmlFor={id("website")} className={labelClass}>
@@ -235,8 +288,9 @@ export function EnquiryForm({
             name="website"
             maxLength={255}
             placeholder="yourbusiness.in"
-            className={fieldClass}
+            {...fieldProps("website")}
           />
+          {fieldError("website")}
         </div>
 
         <div className={kind === "sample_request" ? "sm:col-span-2" : undefined}>
@@ -250,8 +304,9 @@ export function EnquiryForm({
             rows={kind === "enquiry" ? 6 : 4}
             maxLength={2000}
             placeholder={copy.placeholder}
-            className={fieldClass}
+            {...fieldProps("message")}
           />
+          {fieldError("message")}
         </div>
       </div>
 
@@ -263,7 +318,12 @@ export function EnquiryForm({
         {status === "sending" ? "Sending…" : copy.submit}
       </button>
 
-      <p aria-live="polite" className="text-sm">
+      <p aria-live="assertive" className="text-sm">
+        {errorCount > 0 && (
+          <span className="font-medium text-iso">
+            Please correct {errorCount} {errorCount === 1 ? "field" : "fields"} marked in the form.
+          </span>
+        )}
         {status === "sent" && <span className="text-accent">{copy.success}</span>}
         {status === "error" && error && (
           <span className="text-ink-soft">
