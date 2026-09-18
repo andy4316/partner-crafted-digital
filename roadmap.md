@@ -11,4 +11,3 @@
 - [x] Upgrade the site-wide header to a responsive docking-pill scroll pattern
 - [x] Smooth the docking transition and tighten the docked pill proportions
 - [x] Integrate new About sections with textured backgrounds, artifacts, and alternating rhythm
-- [ ] Integrate new About sections with textured backgrounds, artifacts, and alternating rhythm
