@@ -10,4 +10,4 @@
 - [x] Add Services hero and floating pricing shortcuts with arrival highlight
 - [x] Upgrade the site-wide header to a responsive docking-pill scroll pattern
 - [x] Smooth the docking transition and tighten the docked pill proportions
-- [ ] Integrate new About sections with textured backgrounds, artifacts, and alternating rhythm
+- [x] Integrate new About sections with textured backgrounds, artifacts, and alternating rhythm

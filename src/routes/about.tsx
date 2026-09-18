@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+import { BrowserArtifact, CodeArtifact, TerminalArtifact } from "@/components/artifacts";
 import { ButtonLink } from "@/components/buttons";
 import { ExplodedMark } from "@/components/exploded-mark";
 import { MarkDivider, PageHero } from "@/components/hero";
@@ -144,13 +145,29 @@ function About() {
         </div>
       </Section>
 
-      <Section>
-        <Reveal>
-          <Eyebrow>How we actually work</Eyebrow>
-          <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">
-            Four things that don't change, no matter what we're building.
-          </h2>
-        </Reveal>
+      <Section alt texture>
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_260px] lg:items-start">
+          <Reveal>
+            <Eyebrow>How we actually work</Eyebrow>
+            <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">
+              Four things that don't change, no matter what we're building.
+            </h2>
+          </Reveal>
+          <div className="relative h-24 sm:h-28" aria-hidden>
+            <BrowserArtifact
+              className="left-0 top-0 w-[220px] opacity-70"
+              delay={500}
+              duration={17}
+              float="gentle"
+            />
+            <CodeArtifact
+              className="bottom-0 right-0 hidden opacity-60 sm:block"
+              delay={1800}
+              duration={19}
+              float="slower"
+            />
+          </div>
+        </div>
         <Reveal delay={100}>
           <ol className="mt-12 border-t border-border">
             {PRINCIPLES.map((p) => (
@@ -166,7 +183,7 @@ function About() {
         </Reveal>
       </Section>
 
-      <Section alt>
+      <Section texture>
         <Reveal>
           <Eyebrow>Boundaries, on purpose</Eyebrow>
           <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">
@@ -183,31 +200,51 @@ function About() {
         </Reveal>
       </Section>
 
-      {/* Build note — a small technical-log aside, treated like the AB—001 nameplate */}
-      <section className="border-t border-border bg-background">
-        <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
-          <Reveal className="relative max-w-2xl overflow-hidden rounded-lg border border-border bg-card p-6 md:p-8">
-            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-ink-soft">
-              Build note — 2026
-            </p>
-            <div className="mt-4 h-px w-full bg-border" />
-            <p className="mt-5 max-w-xl text-sm leading-relaxed text-ink-soft">
+      {/* Build note — a quiet full-width interlude, with the label treated as a nameplate. */}
+      <Section alt texture contentClassName="py-16 md:py-20">
+        <Reveal className="grid items-center gap-8 md:grid-cols-[minmax(0,1fr)_auto] md:gap-16">
+          <div className="max-w-3xl">
+            <div className="inline-flex border border-border bg-card px-4 py-2">
+              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-ink-soft">
+                Build note — 2026
+              </p>
+            </div>
+            <p className="mt-6 text-sm leading-relaxed text-ink-soft md:text-base">
               AB Digital started from a repeated complaint, not a business plan. Small business
               owners kept describing the same experience — a website built once, then abandoned, by
               someone impossible to reach the moment something broke. This was built to be the
               opposite of that: one person, answerable, for as long as the site needs to keep
               working.
             </p>
-            <Mark className="mt-6 h-5 w-auto text-ink/30" title="" />
-          </Reveal>
-        </div>
-      </section>
-
-      <Section alt>
-        <Reveal>
-          <Eyebrow>Operating notes</Eyebrow>
-          <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">Slow to start, quick to answer.</h2>
+          </div>
+          <div className="flex items-center gap-5 md:flex-col md:items-end" aria-hidden>
+            <span className="h-px w-16 bg-border md:h-16 md:w-px" />
+            <Mark className="h-9 w-auto text-ink/25 md:h-12" title="" />
+          </div>
         </Reveal>
+      </Section>
+
+      <Section texture>
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_260px] lg:items-start">
+          <Reveal>
+            <Eyebrow>Operating notes</Eyebrow>
+            <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">Slow to start, quick to answer.</h2>
+          </Reveal>
+          <div className="relative h-24 sm:h-28" aria-hidden>
+            <TerminalArtifact
+              className="left-0 top-1 opacity-70"
+              delay={900}
+              duration={18}
+              float="gentle"
+            />
+            <CodeArtifact
+              className="bottom-0 right-0 hidden opacity-60 sm:block"
+              delay={2300}
+              duration={20}
+              float="slower"
+            />
+          </div>
+        </div>
         <div className="mt-16 grid items-center gap-10 md:grid-cols-[1fr_auto_1fr]">
           <Reveal delay={100}>
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-soft">
