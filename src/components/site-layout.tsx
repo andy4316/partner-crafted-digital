@@ -297,12 +297,14 @@ export function SiteLayout({ children, className }: { children: ReactNode; class
 export function Section({
   children,
   className,
+  contentClassName,
   alt = false,
   texture = false,
   id,
 }: {
   children: ReactNode;
   className?: string;
+  contentClassName?: string;
   alt?: boolean;
   texture?: boolean;
   id?: string;
@@ -317,7 +319,9 @@ export function Section({
       )}
     >
       {texture && <GridTexture />}
-      <div className="relative z-10 mx-auto max-w-6xl px-6 py-24 md:py-32">{children}</div>
+      <div className={cn("relative z-10 mx-auto max-w-6xl px-6 py-24 md:py-32", contentClassName)}>
+        {children}
+      </div>
     </section>
   );
 }
