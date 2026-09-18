@@ -321,7 +321,7 @@ export function EnquiryForm({
       <p aria-live="assertive" className="text-sm">
         {errorCount > 0 && (
           <span className="font-medium text-iso">
-            Please correct {errorCount} {errorCount === 1 ? "field" : "fields"} marked below.
+            Please correct {errorCount} {errorCount === 1 ? "field" : "fields"} marked in the form.
           </span>
         )}
         {status === "sent" && <span className="text-accent">{copy.success}</span>}
