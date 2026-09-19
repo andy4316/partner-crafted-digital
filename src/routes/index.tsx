@@ -92,7 +92,7 @@ function Home() {
             <Reveal>
               <Eyebrow>What we do</Eyebrow>
             </Reveal>
-            <div className="relative mt-12 hidden h-40 min-[1101px]:block" aria-hidden>
+            <div className="relative mt-12 hidden h-48 min-[1101px]:block" aria-hidden>
               <BrowserArtifact className="left-0 top-0 w-[180px] opacity-75" delay={0} float="gentle" />
               <TerminalArtifact className="bottom-0 left-0 opacity-65" delay={1800} float="gentle" />
             </div>

@@ -146,7 +146,7 @@ function About() {
       </Section>
 
       <Section alt texture>
-        <div className="grid gap-8 min-[1101px]:grid-cols-[minmax(0,1fr)_260px] min-[1101px]:items-start">
+        <div className="grid gap-12 min-[1101px]:grid-cols-[minmax(0,1fr)_260px] min-[1101px]:items-start">
           <Reveal>
             <Eyebrow>How we actually work</Eyebrow>
             <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">
@@ -225,7 +225,7 @@ function About() {
       </Section>
 
       <Section texture>
-        <div className="grid gap-8 min-[1101px]:grid-cols-[minmax(0,1fr)_260px] min-[1101px]:items-start">
+        <div className="grid gap-12 min-[1101px]:grid-cols-[minmax(0,1fr)_260px] min-[1101px]:items-start">
           <Reveal>
             <Eyebrow>Operating notes</Eyebrow>
             <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">Slow to start, quick to answer.</h2>
