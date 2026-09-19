@@ -146,14 +146,14 @@ function About() {
       </Section>
 
       <Section alt texture>
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_260px] lg:items-start">
+        <div className="grid gap-12 min-[1101px]:grid-cols-[minmax(0,1fr)_260px] min-[1101px]:items-start">
           <Reveal>
             <Eyebrow>How we actually work</Eyebrow>
             <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">
               Four things that don't change, no matter what we're building.
             </h2>
           </Reveal>
-          <div className="relative h-24 sm:h-28" aria-hidden>
+          <div className="relative hidden h-48 min-[1101px]:block" aria-hidden>
             <BrowserArtifact
               className="left-0 top-0 w-[220px] opacity-70"
               delay={500}
@@ -161,7 +161,7 @@ function About() {
               float="gentle"
             />
             <CodeArtifact
-              className="bottom-0 right-0 hidden opacity-60 sm:block"
+              className="bottom-0 right-0 opacity-60"
               delay={1800}
               duration={19}
               float="slower"
@@ -225,12 +225,12 @@ function About() {
       </Section>
 
       <Section texture>
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_260px] lg:items-start">
+        <div className="grid gap-12 min-[1101px]:grid-cols-[minmax(0,1fr)_260px] min-[1101px]:items-start">
           <Reveal>
             <Eyebrow>Operating notes</Eyebrow>
             <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">Slow to start, quick to answer.</h2>
           </Reveal>
-          <div className="relative h-24 sm:h-28" aria-hidden>
+          <div className="relative hidden h-48 min-[1101px]:block" aria-hidden>
             <TerminalArtifact
               className="left-0 top-1 opacity-70"
               delay={900}
@@ -238,7 +238,7 @@ function About() {
               float="gentle"
             />
             <CodeArtifact
-              className="bottom-0 right-0 hidden opacity-60 sm:block"
+              className="bottom-0 right-0 opacity-60"
               delay={2300}
               duration={20}
               float="slower"

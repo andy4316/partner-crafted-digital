@@ -87,21 +87,16 @@ function Home() {
       />
 
       <Section alt texture>
-        <BrowserArtifact
-          className="right-[2%] top-[5%] opacity-90 max-md:right-3 max-md:top-3 max-md:opacity-80"
-          delay={0}
-          float="gentle"
-        />
-        <TerminalArtifact
-          className="bottom-[3%] left-[2%] opacity-90 max-md:bottom-3 max-md:left-3 max-md:opacity-80"
-          delay={1800}
-          float="gentle"
-        />
-
         <div className="relative z-10 grid gap-12 lg:grid-cols-[minmax(140px,180px)_1fr]">
-          <Reveal>
-            <Eyebrow>What we do</Eyebrow>
-          </Reveal>
+          <div>
+            <Reveal>
+              <Eyebrow>What we do</Eyebrow>
+            </Reveal>
+            <div className="relative mt-12 hidden h-48 min-[1101px]:block" aria-hidden>
+              <BrowserArtifact className="left-0 top-0 w-[180px] opacity-75" delay={0} float="gentle" />
+              <TerminalArtifact className="bottom-0 left-0 opacity-65" delay={1800} float="gentle" />
+            </div>
+          </div>
 
           <div>
             <Reveal delay={100}>
@@ -196,11 +191,6 @@ function Home() {
       </Section>
 
       <Section texture>
-        <CssArtifact
-          className="right-[5%] bottom-[6%] opacity-60 max-md:hidden"
-          delay={1200}
-          float="gentle"
-        />
         <div className="relative z-10 grid items-start gap-12 lg:grid-cols-2">
           <div>
             <Reveal>
@@ -216,6 +206,9 @@ function Home() {
                 <ButtonLink to="/work" variant="ghost">
                   Look at the work
                 </ButtonLink>
+              </div>
+              <div className="relative mt-12 hidden h-20 min-[1101px]:block" aria-hidden>
+                <CssArtifact className="left-0 top-0 opacity-60" delay={1200} float="gentle" />
               </div>
             </Reveal>
           </div>

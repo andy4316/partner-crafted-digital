@@ -466,21 +466,21 @@ function Services() {
       </div>
 
       <Section texture>
-        <CssArtifact
-          className="right-[3%] top-[8%] opacity-90 max-md:hidden"
-          delay={600}
-          float="slower"
-        />
-        <Reveal>
-          <Eyebrow>Services</Eyebrow>
-          <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">
-            The full list, in plain language.
-          </h2>
-          <p className="mt-6 max-w-2xl text-ink-soft">
-            Seven things we do. Jump to whichever one you came here for — each has what's included
-            and how the work actually goes.
-          </p>
-        </Reveal>
+        <div className="relative z-10 grid gap-8 min-[1101px]:grid-cols-[minmax(0,1fr)_200px]">
+          <Reveal>
+            <Eyebrow>Services</Eyebrow>
+            <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl">
+              The full list, in plain language.
+            </h2>
+            <p className="mt-6 max-w-2xl text-ink-soft">
+              Seven things we do. Jump to whichever one you came here for — each has what's included
+              and how the work actually goes.
+            </p>
+          </Reveal>
+          <div className="relative hidden h-24 min-[1101px]:block" aria-hidden>
+            <CssArtifact className="right-0 top-0 opacity-75" delay={600} float="slower" />
+          </div>
+        </div>
         <Suspense fallback={<Loading />}>
           <ServiceIndex />
         </Suspense>
@@ -513,15 +513,15 @@ function Services() {
       </Section>
 
       <Section texture>
-        <BrowserArtifact
-          className="left-[2%] top-[10%] opacity-90 max-md:hidden"
-          delay={300}
-          float="slower"
-        />
-        <Reveal>
-          <Eyebrow>Questions</Eyebrow>
-          <h2 className="mt-6 max-w-2xl text-3xl md:text-5xl">The things people ask first.</h2>
-        </Reveal>
+        <div className="relative z-10 grid gap-8 min-[1101px]:grid-cols-[240px_minmax(0,1fr)]">
+          <div className="relative hidden h-24 min-[1101px]:block" aria-hidden>
+            <BrowserArtifact className="left-0 top-0 w-[220px] opacity-75" delay={300} float="slower" />
+          </div>
+          <Reveal>
+            <Eyebrow>Questions</Eyebrow>
+            <h2 className="mt-6 max-w-2xl text-3xl md:text-5xl">The things people ask first.</h2>
+          </Reveal>
+        </div>
         <Suspense fallback={<Loading />}>
           <Faqs />
         </Suspense>
