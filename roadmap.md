@@ -11,3 +11,7 @@
 - [x] Upgrade the site-wide header to a responsive docking-pill scroll pattern
 - [x] Smooth the docking transition and tighten the docked pill proportions
 - [x] Integrate new About sections with textured backgrounds, artifacts, and alternating rhythm
+- [ ] Inventory floating artifacts across all six pages, including position, visibility, and stacking
+- [ ] Detect and fix card-to-card and card-to-content collisions from 1100px through 1920px
+- [ ] Verify exact 1100px hiding behavior and continuous desktop resizing on every page
+- [ ] Report page-by-page findings, fixes, and final clearances
