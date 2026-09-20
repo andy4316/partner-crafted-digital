@@ -1,5 +1,9 @@
 # Active tasks
 
+- [x] Rebuild the ISO Consultancy page with the supplied eight-section structure
+- [x] Add the animated six-standard globe diagram with reduced-motion support
+- [x] Verify ISO contact preselection, FAQ behavior, metadata, and responsive layouts
+
 - [x] Rebalance shared header and strengthen typography
 - [x] Increase floating artifact card legibility and protect responsive layouts
 - [x] Convert homepage services to a responsive card grid
