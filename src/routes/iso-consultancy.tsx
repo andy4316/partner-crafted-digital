@@ -298,13 +298,13 @@ function Iso() {
       />
 
       <Section texture>
-        <Reveal>
+        <Reveal className="mx-auto max-w-4xl text-center">
           <Eyebrow>About ISO Certification</Eyebrow>
-          <h2 className="mt-6 max-w-4xl text-3xl md:text-5xl">
+          <h2 className="mt-6 text-3xl md:text-5xl">
             What ISO certification actually means for a small business.
           </h2>
         </Reveal>
-        <Reveal delay={100} className="mt-12 grid gap-7 text-ink-soft md:grid-cols-3 md:gap-10">
+        <Reveal delay={100} className="mx-auto mt-12 max-w-3xl space-y-6 text-left text-ink-soft">
           <p>
             ISO certification is formal, independent proof that your business follows a recognised international standard — for quality, safety, environmental responsibility, information security, or a dozen other areas depending on which standard applies to you. It isn't a plaque you buy. It's issued only after an accredited certification body audits your actual processes and confirms they meet the standard's requirements.
           </p>
