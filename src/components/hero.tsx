@@ -55,12 +55,14 @@ export function PageHero({
   subtitle,
   actions,
   compact = false,
+  artifactAccentLabel,
 }: {
   badge: string;
   title: ReactNode;
   subtitle: ReactNode;
   actions?: ReactNode;
   compact?: boolean;
+  artifactAccentLabel?: string;
 }) {
   return (
     <section
@@ -71,7 +73,7 @@ export function PageHero({
     >
       <GridTexture />
       <Watermark />
-      <HeroArtifacts />
+      <HeroArtifacts {...(artifactAccentLabel ? { accentLabel: artifactAccentLabel } : {})} />
 
       <div className="relative z-10 mx-auto w-full max-w-5xl px-6 py-20 text-center">
         <div className="cascade" style={{ animationDelay: "80ms" }}>

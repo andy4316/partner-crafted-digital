@@ -460,6 +460,48 @@
   animation: pricing-arrival 1s ease-out;
 }
 
+/* ISO practice area: shared system, scoped red signal. */
+@utility iso-page {
+  --accent: var(--iso-red);
+  --ring: var(--iso-red);
+}
+
+@keyframes iso-globe-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@utility iso-globe-spin {
+  transform-origin: center;
+  animation: iso-globe-rotate 26s linear infinite;
+}
+
+@keyframes iso-spoke-pulse {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  16%,
+  76% {
+    opacity: 1;
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+
+@utility iso-spoke-dot {
+  offset-rotate: 0deg;
+  animation: iso-spoke-pulse 3s linear infinite;
+}
+
+@utility iso-highlight-card {
+  background-color: color-mix(in oklab, var(--accent) 7%, var(--card));
+  box-shadow: 0 20px 55px -36px color-mix(in oklab, var(--accent) 60%, transparent);
+}
+
 /* Animated underline for nav links */
 @utility nav-link {
   position: relative;

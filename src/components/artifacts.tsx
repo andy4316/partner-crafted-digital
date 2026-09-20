@@ -85,12 +85,21 @@ export function TerminalArtifact(props: { className?: string; delay?: number; du
   );
 }
 
-export function CssArtifact(props: { className?: string; delay?: number; duration?: number; float?: "slow" | "slower" | "gentle" }) {
+export function CssArtifact({
+  accentLabel = "#0969DA",
+  ...props
+}: {
+  className?: string;
+  delay?: number;
+  duration?: number;
+  float?: "slow" | "slower" | "gentle";
+  accentLabel?: string;
+}) {
   return (
     <Card {...props} kind="css">
       <pre className="whitespace-pre">
         .cta {"{"}
-        {"\n"} background: <span className="text-accent">#0969DA</span>;{"\n"}
+        {"\n"} background: <span className="text-accent">{accentLabel}</span>;{"\n"}
         {"}"}
       </pre>
     </Card>
@@ -98,7 +107,7 @@ export function CssArtifact(props: { className?: string; delay?: number; duratio
 }
 
 /** Three hero artifacts, positioned around the corners. Only two appear on very narrow screens. */
-export function HeroArtifacts() {
+export function HeroArtifacts({ accentLabel }: { accentLabel?: string }) {
   return (
     <>
       <BrowserArtifact
@@ -115,6 +124,7 @@ export function HeroArtifacts() {
         className="right-[3%] bottom-[10%] opacity-90 xl:right-[5%] xl:bottom-[16%]"
         delay={2400}
         duration={15}
+        {...(accentLabel ? { accentLabel } : {})}
       />
     </>
   );
