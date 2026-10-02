@@ -11,5 +11,15 @@ export default defineConfig({
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
+    // Use TanStack Start's OWN prerender system (independent of the Nitro
+    // preset) to generate real static HTML for every route into
+    // .output/public. We keep the default Cloudflare server build as-is
+    // (it's the proven, working path) and simply ignore/discard
+    // .output/server + .wrangler when deploying to Hostinger — only
+    // .output/public's contents get uploaded.
+    prerender: {
+      enabled: true,
+      crawlLinks: true,
+    },
   },
 });
