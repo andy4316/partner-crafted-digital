@@ -195,6 +195,12 @@ export function EnquiryForm({
             Or WhatsApp {PHONE_DISPLAY}
           </a>
         </div>
+        <p className="mt-4 text-sm text-ink-soft">
+          Or email us directly at{" "}
+          <a href={EMAIL_URL} className="font-mono text-accent">
+            {EMAIL}
+          </a>
+        </p>
       </div>
     );
   }
