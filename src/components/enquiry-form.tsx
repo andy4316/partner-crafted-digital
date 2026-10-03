@@ -381,7 +381,6 @@ export function EnquiryForm({
             Please correct {errorCount} {errorCount === 1 ? "field" : "fields"} marked in the form.
           </span>
         )}
-        {status === "sent" && <span className="text-accent">{copy.success}</span>}
         {status === "error" && error && (
           <span className="text-ink-soft">
             {error}{" "}
