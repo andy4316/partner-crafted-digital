@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { z } from "zod";
 
 import { supabase } from "@/integrations/supabase/client";
@@ -65,6 +65,14 @@ export function EnquiryForm({
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+  const [submitted, setSubmitted] = useState<{ kind: Kind; service: ServiceChoice; name: string } | null>(null);
+  const confirmationRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (status === "sent") {
+      confirmationRef.current?.focus();
+    }
+  }, [status]);
 
   function clearFieldError(field: FieldName) {
     setFieldErrors((current) => {
@@ -127,6 +135,11 @@ export function EnquiryForm({
     }
 
     form.reset();
+    setSubmitted({
+      kind,
+      service: kind === "sample_request" ? "website" : service,
+      name: values.name,
+    });
     setStatus("sent");
   }
 
