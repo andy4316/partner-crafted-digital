@@ -160,9 +160,53 @@ export function EnquiryForm({
     ) : null;
   const copy = KIND_COPY[kind];
   const errorCount = Object.keys(fieldErrors).length;
+  const serviceLabel = (value: ServiceChoice) =>
+    SERVICE_OPTIONS.find((option) => option.value === value)?.label ?? value;
+
+  if (status === "sent" && submitted) {
+    return (
+      <div
+        ref={confirmationRef}
+        tabIndex={-1}
+        role="status"
+        aria-live="polite"
+        className="mt-8 max-w-xl rounded-[8px] border border-accent/40 bg-card p-8 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      >
+        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent">
+          {submitted.kind === "sample_request" ? "Sample request received" : "Enquiry received"}
+        </p>
+        <h3 className="mt-3 text-xl">Thanks, {submitted.name.split(" ")[0]}.</h3>
+        <p className="mt-3 text-ink-soft">{KIND_COPY[submitted.kind].success}</p>
+        <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-soft">
+          About: <span className="text-ink">{serviceLabel(submitted.service)}</span>
+        </p>
+        <div className="mt-6 flex flex-wrap items-center gap-4">
+          <button
+            type="button"
+            onClick={() => {
+              setStatus("idle");
+              setSubmitted(null);
+            }}
+            className="inline-flex items-center gap-2 rounded-[6px] border border-border px-5 py-2.5 font-mono text-xs font-medium uppercase tracking-[0.14em] text-ink transition-colors hover:border-accent hover:text-accent"
+          >
+            Send another note
+          </button>
+          <a href={WHATSAPP_URL} rel="noopener" className="text-sm text-accent">
+            Or WhatsApp {PHONE_DISPLAY}
+          </a>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit} className="mt-8 max-w-xl space-y-6" noValidate>
+      {defaultService === "iso" && (
+        <p className="inline-flex items-center gap-2 rounded-full border border-iso/30 bg-iso/5 px-4 py-2 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-iso">
+          <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-iso" />
+          ISO Certification enquiry
+        </p>
+      )}
       <fieldset>
         <legend className={labelClass}>I'm here to…</legend>
         <div className="mt-3 inline-flex rounded-full border border-border bg-card p-1">
