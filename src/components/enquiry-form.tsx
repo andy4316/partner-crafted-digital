@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { z } from "zod";
 
 import { supabase } from "@/integrations/supabase/client";
-import { PHONE_DISPLAY, WHATSAPP_URL } from "@/lib/site";
+import { EMAIL, EMAIL_URL, PHONE_DISPLAY, WHATSAPP_URL } from "@/lib/site";
 
 const fieldClass =
   "mt-2 w-full rounded-[6px] border bg-card px-3 py-2.5 text-base text-ink outline-none transition-colors placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
