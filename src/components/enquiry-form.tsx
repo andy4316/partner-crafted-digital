@@ -392,6 +392,10 @@ export function EnquiryForm({
             {error}{" "}
             <a href={WHATSAPP_URL} rel="noopener" className="text-accent">
               WhatsApp {PHONE_DISPLAY}
+            </a>{" "}
+            or email{" "}
+            <a href={EMAIL_URL} className="text-accent">
+              {EMAIL}
             </a>
           </span>
         )}
