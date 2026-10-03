@@ -6,7 +6,7 @@ import { EnquiryForm, type ServiceChoice } from "@/components/enquiry-form";
 import { PageHero } from "@/components/hero";
 import { Reveal } from "@/components/reveal";
 import { Eyebrow, Section, SiteLayout } from "@/components/site-layout";
-import { PHONE_DISPLAY, WHATSAPP_URL } from "@/lib/site";
+import { EMAIL, EMAIL_URL, PHONE_DISPLAY, WHATSAPP_URL } from "@/lib/site";
 
 const SERVICES: ServiceChoice[] = ["website", "iso", "other"];
 
@@ -108,6 +108,12 @@ function Contact() {
                 WhatsApp {PHONE_DISPLAY}
               </ButtonAnchor>
             </div>
+            <p className="mt-6 text-sm text-ink-soft">
+              Prefer email? Write to us at{" "}
+              <a href={EMAIL_URL} className="font-mono text-accent">
+                {EMAIL}
+              </a>
+            </p>
             <p className="mt-10 font-mono text-xs text-ink-soft">
               Bengaluru, Karnataka. Working with businesses anywhere in India.
               <br />

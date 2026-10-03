@@ -8,7 +8,7 @@ import { Mark } from "@/components/mark";
 import { Reveal } from "@/components/reveal";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
-import { PHONE_DISPLAY, SITE_NAME, TAGLINE, WHATSAPP_URL } from "@/lib/site";
+import { EMAIL, EMAIL_URL, PHONE_DISPLAY, SITE_NAME, TAGLINE, WHATSAPP_URL } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 const NAV = [
@@ -199,6 +199,9 @@ function Footer() {
               className="mt-4 inline-block font-mono text-sm text-accent"
             >
               WhatsApp {PHONE_DISPLAY}
+            </a>
+            <a href={EMAIL_URL} className="mt-2 inline-block font-mono text-sm text-accent">
+              {EMAIL}
             </a>
             <p className="mt-4 text-sm text-ink-soft">Bengaluru, Karnataka — working India-wide.</p>
             <p className="mt-4 max-w-xs text-sm font-medium text-ink">
