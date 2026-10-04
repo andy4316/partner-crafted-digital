@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://partner-crafted-digital.lovable.app/sitemap.xml
+Sitemap: https://abdigitalconsultancy.in/sitemap.xml
