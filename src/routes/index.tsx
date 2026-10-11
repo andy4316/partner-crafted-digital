@@ -33,14 +33,14 @@ export const Route = createFileRoute("/")({
         content:
           "Design, hosting, SEO, maintenance and print — handled by one team that stays after launch.",
       },
-      { property: "og:url", content: "https://partner-crafted-digital.lovable.app/" },
+      { property: "og:url", content: "https://abdigitalconsultancy.in/" },
       { name: "twitter:title", content: "AB Digital Consultancy — A website is only the beginning" },
       {
         name: "twitter:description",
         content: "Websites, hosting, SEO and maintenance for small businesses in India.",
       },
     ],
-    links: [{ rel: "canonical", href: "https://partner-crafted-digital.lovable.app/" }],
+    links: [{ rel: "canonical", href: "https://abdigitalconsultancy.in/" }],
   }),
   loader: async ({ context }) => {
     await context.queryClient.ensureQueryData(servicesQuery);

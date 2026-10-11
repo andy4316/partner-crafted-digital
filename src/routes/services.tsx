@@ -32,14 +32,14 @@ export const Route = createFileRoute("/services")({
         property: "og:description",
         content: "Everything we do, and exactly what it costs. Three plans, no hidden extras.",
       },
-      { property: "og:url", content: "https://partner-crafted-digital.lovable.app/services" },
+      { property: "og:url", content: "https://abdigitalconsultancy.in/services" },
       { name: "twitter:title", content: "Services & Pricing — AB Digital Consultancy" },
       {
         name: "twitter:description",
         content: "Website packages from ₹12,000, with hosting, SEO and care included.",
       },
     ],
-    links: [{ rel: "canonical", href: "https://partner-crafted-digital.lovable.app/services" }],
+    links: [{ rel: "canonical", href: "https://abdigitalconsultancy.in/services" }],
   }),
   loader: async ({ context }) => {
     await context.queryClient.ensureQueryData(servicesQuery);

@@ -22,14 +22,14 @@ export const Route = createFileRoute("/about")({
         property: "og:description",
         content: "It's the relationship, not the transaction, that gets a business online and growing.",
       },
-      { property: "og:url", content: "https://partner-crafted-digital.lovable.app/about" },
+      { property: "og:url", content: "https://abdigitalconsultancy.in/about" },
       { name: "twitter:title", content: "The idea behind the mark — AB Digital Consultancy" },
       {
         name: "twitter:description",
         content: "A web partner built on the relationship, not the transaction.",
       },
     ],
-    links: [{ rel: "canonical", href: "https://partner-crafted-digital.lovable.app/about" }],
+    links: [{ rel: "canonical", href: "https://abdigitalconsultancy.in/about" }],
   }),
   component: About,
 });

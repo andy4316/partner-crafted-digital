@@ -28,14 +28,14 @@ export const Route = createFileRoute("/contact")({
         property: "og:description",
         content: "A short note or a WhatsApp message is enough to start.",
       },
-      { property: "og:url", content: "https://partner-crafted-digital.lovable.app/contact" },
+      { property: "og:url", content: "https://abdigitalconsultancy.in/contact" },
       { name: "twitter:title", content: "Contact — AB Digital Consultancy" },
       {
         name: "twitter:description",
         content: "WhatsApp +91 90521 42231, or send a short note.",
       },
     ],
-    links: [{ rel: "canonical", href: "https://partner-crafted-digital.lovable.app/contact" }],
+    links: [{ rel: "canonical", href: "https://abdigitalconsultancy.in/contact" }],
   }),
   component: Contact,
 });

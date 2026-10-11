@@ -3,7 +3,7 @@ import type {} from "@tanstack/react-start";
 
 // TODO: replace with your project URL once a project name or custom domain is set.
 // Canonical public origin used for canonical tags and this sitemap.
-const BASE_URL = "https://partner-crafted-digital.lovable.app";
+const BASE_URL = "https://abdigitalconsultancy.in";
 
 interface SitemapEntry {
   path: string;

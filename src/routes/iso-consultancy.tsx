@@ -179,7 +179,7 @@ export const Route = createFileRoute("/iso-consultancy")({
       { property: "og:type", content: "website" },
       {
         property: "og:url",
-        content: "https://partner-crafted-digital.lovable.app/iso-consultancy",
+        content: "https://abdigitalconsultancy.in/iso-consultancy",
       },
       { name: "twitter:card", content: "summary" },
       {
@@ -189,7 +189,7 @@ export const Route = createFileRoute("/iso-consultancy")({
       { name: "twitter:description", content: DESCRIPTION },
     ],
     links: [
-      { rel: "canonical", href: "https://partner-crafted-digital.lovable.app/iso-consultancy" },
+      { rel: "canonical", href: "https://abdigitalconsultancy.in/iso-consultancy" },
     ],
     scripts: [
       {

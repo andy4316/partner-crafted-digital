@@ -22,14 +22,14 @@ export const Route = createFileRoute("/work")({
         property: "og:description",
         content: "Considered, bespoke work for Indian businesses. Problem, build, outcome.",
       },
-      { property: "og:url", content: "https://partner-crafted-digital.lovable.app/work" },
+      { property: "og:url", content: "https://abdigitalconsultancy.in/work" },
       { name: "twitter:title", content: "Work — AB Digital Consultancy" },
       {
         name: "twitter:description",
         content: "Problem, build, outcome — websites we thought hard about.",
       },
     ],
-    links: [{ rel: "canonical", href: "https://partner-crafted-digital.lovable.app/work" }],
+    links: [{ rel: "canonical", href: "https://abdigitalconsultancy.in/work" }],
   }),
   component: Work,
 });
