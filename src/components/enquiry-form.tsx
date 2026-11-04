@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { z } from "zod";
 
-import { supabase } from "@/integrations/supabase/client";
 import { EMAIL, EMAIL_URL, PHONE_DISPLAY, WHATSAPP_URL } from "@/lib/site";
 
 const fieldClass =
@@ -116,19 +115,32 @@ export function EnquiryForm({
     setFieldErrors({});
 
     const values = parsed.data;
-    const { error: insertError } = await supabase.from("contact_enquiries").insert({
-      name: values.name,
-      business: values.business ? values.business : null,
-      email: values.email,
-      phone: values.phone,
-      industry: values.industry ? values.industry : null,
-      website: values.website ? values.website : null,
-      message: values.message,
-      enquiry_type: kind,
-      service_type: kind === "sample_request" ? "website" : service,
-    });
+    const honeypot = raw["company_site"];
+    let sent = false;
+    try {
+      const response = await fetch("/enquiry.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: values.name,
+          business: values.business ? values.business : null,
+          email: values.email,
+          phone: values.phone,
+          industry: values.industry ? values.industry : null,
+          website: values.website ? values.website : null,
+          message: values.message,
+          enquiry_type: kind,
+          service_type: kind === "sample_request" ? "website" : service,
+          company_site: typeof honeypot === "string" ? honeypot : "",
+        }),
+      });
+      const result = (await response.json().catch(() => null)) as { ok?: boolean } | null;
+      sent = response.ok && result?.ok === true;
+    } catch {
+      sent = false;
+    }
 
-    if (insertError) {
+    if (!sent) {
       setStatus("error");
       setError("That didn't go through. Please message us on WhatsApp instead.");
       return;
@@ -207,6 +219,13 @@ export function EnquiryForm({
 
   return (
     <form onSubmit={handleSubmit} className="mt-8 max-w-xl space-y-6" noValidate>
+      <div
+        aria-hidden="true"
+        style={{ position: "absolute", left: "-10000px", top: "auto", width: 1, height: 1, overflow: "hidden" }}
+      >
+        <label htmlFor={id("company_site")}>Leave this field empty</label>
+        <input id={id("company_site")} name="company_site" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
       {defaultService === "iso" && (
         <p className="inline-flex items-center gap-2 rounded-full border border-iso/30 bg-iso/5 px-4 py-2 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-iso">
           <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-iso" />
