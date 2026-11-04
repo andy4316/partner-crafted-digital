@@ -34,3 +34,4 @@ dist-ssr
 # Enquiry handler secrets and runtime data
 enquiry-config.php
 enquiry-data/
+*.html
