@@ -35,3 +35,14 @@ dist-ssr
 enquiry-config.php
 enquiry-data/
 *.html
+*.js
+*.xml
+*.txt
+*.css
+*.php
+*.json
+*.png
+*.zip
+*.json
+*.zip
+package-lock.json
