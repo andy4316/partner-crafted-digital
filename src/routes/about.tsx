@@ -7,6 +7,8 @@ import { MarkDivider, PageHero } from "@/components/hero";
 import { Mark } from "@/components/mark";
 import { Reveal } from "@/components/reveal";
 import { DarkCta, Eyebrow, Section, SiteLayout } from "@/components/site-layout";
+import { BUSINESS_ID } from "@/lib/site";
+import { jsonLd } from "@/lib/structured-data";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -30,6 +32,13 @@ export const Route = createFileRoute("/about")({
       },
     ],
     links: [{ rel: "canonical", href: "https://abdigitalconsultancy.in/about" }],
+    scripts: [
+      jsonLd({
+        "@type": "AboutPage",
+        url: "https://abdigitalconsultancy.in/about",
+        about: { "@id": BUSINESS_ID },
+      }),
+    ],
   }),
   component: About,
 });

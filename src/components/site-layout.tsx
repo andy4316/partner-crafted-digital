@@ -212,10 +212,13 @@ function Footer() {
       </div>
 
       <div className="border-t border-border">
-        <div className="mx-auto max-w-7xl px-6 py-4 lg:px-10">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2 px-6 py-4 lg:px-10">
           <p className="font-mono text-[11px] font-medium text-ink">
             © {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
           </p>
+          <Link to="/terms" className="font-mono text-[11px] font-medium text-ink transition-colors hover:text-accent">
+            Terms
+          </Link>
         </div>
       </div>
     </footer>

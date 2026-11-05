@@ -1,0 +1,22 @@
+# AB Digital Consultancy: agent-readiness rules for Hostinger.
+
+AddType "text/markdown; charset=utf-8" .md
+
+# Serve the Markdown version of a page when a client asks for it with
+# "Accept: text/markdown". Everyone else keeps getting the normal HTML page.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_ACCEPT} text/markdown [NC]
+  RewriteRule ^$ /index.md [L]
+  RewriteCond %{HTTP_ACCEPT} text/markdown [NC]
+  RewriteRule ^(services|work|about|iso-consultancy|contact|terms)/?$ /$1.md [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Tell caches that HTML and Markdown are different versions of these pages.
+  Header merge Vary Accept
+  # Advertise the site summary on every page (RFC 8288).
+  <FilesMatch "\.html$">
+    Header set Link "</llms.txt>; rel=\"describedby\"; type=\"text/plain\""
+  </FilesMatch>
+</IfModule>

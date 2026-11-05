@@ -1,4 +1,8 @@
 export const SITE_NAME = "AB Digital Consultancy";
+export const SITE_URL = "https://abdigitalconsultancy.in";
+export const BUSINESS_ID = `${SITE_URL}/#business`;
+/** Official social and directory profiles, used as schema.org sameAs links. */
+export const SAME_AS: string[] = [];
 export const TAGLINE = "A website is only the beginning.";
 export const PHONE_DISPLAY = "+91 90521 42231";
 export const EMAIL = "hello@abdigitalconsultancy.in";

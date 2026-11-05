@@ -16,10 +16,19 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { faqsQuery, pricingQuery, serviceSlug, servicesQuery } from "@/lib/content";
+import { faqSchema, pricingSchema, servicesSchema } from "@/lib/structured-data";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/services")({
-  head: () => ({
+  loader: async ({ context }) => {
+    const [services, pricing, faqs] = await Promise.all([
+      context.queryClient.ensureQueryData(servicesQuery),
+      context.queryClient.ensureQueryData(pricingQuery),
+      context.queryClient.ensureQueryData(faqsQuery),
+    ]);
+    return { services, pricing, faqs };
+  },
+  head: ({ loaderData }) => ({
     meta: [
       { title: "Affordable Business Website Packages & Pricing India | AB Digital" },
       {
@@ -40,10 +49,14 @@ export const Route = createFileRoute("/services")({
       },
     ],
     links: [{ rel: "canonical", href: "https://abdigitalconsultancy.in/services" }],
+    scripts: loaderData
+      ? [
+          servicesSchema(loaderData.services),
+          pricingSchema(loaderData.pricing),
+          faqSchema(loaderData.faqs),
+        ]
+      : [],
   }),
-  loader: async ({ context }) => {
-    await context.queryClient.ensureQueryData(servicesQuery);
-  },
   component: Services,
 });
 

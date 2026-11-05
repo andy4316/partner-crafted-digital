@@ -6,7 +6,8 @@ import { EnquiryForm, type ServiceChoice } from "@/components/enquiry-form";
 import { PageHero } from "@/components/hero";
 import { Reveal } from "@/components/reveal";
 import { Eyebrow, Section, SiteLayout } from "@/components/site-layout";
-import { EMAIL, EMAIL_URL, PHONE_DISPLAY, WHATSAPP_URL } from "@/lib/site";
+import { BUSINESS_ID, EMAIL, EMAIL_URL, PHONE_DISPLAY, WHATSAPP_URL } from "@/lib/site";
+import { jsonLd } from "@/lib/structured-data";
 
 const SERVICES: ServiceChoice[] = ["website", "iso", "other"];
 
@@ -36,6 +37,13 @@ export const Route = createFileRoute("/contact")({
       },
     ],
     links: [{ rel: "canonical", href: "https://abdigitalconsultancy.in/contact" }],
+    scripts: [
+      jsonLd({
+        "@type": "ContactPage",
+        url: "https://abdigitalconsultancy.in/contact",
+        about: { "@id": BUSINESS_ID },
+      }),
+    ],
   }),
   component: Contact,
 });

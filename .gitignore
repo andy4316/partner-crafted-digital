@@ -46,3 +46,4 @@ enquiry-data/
 *.json
 *.zip
 package-lock.json
+!public/llms.txt

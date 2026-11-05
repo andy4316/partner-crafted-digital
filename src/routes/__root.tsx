@@ -12,6 +12,9 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { BUSINESS_ID, EMAIL, SAME_AS, SITE_NAME, SITE_URL } from "../lib/site";
+import { jsonLd } from "../lib/structured-data";
+import { registerWebMcpTools } from "../lib/webmcp";
 
 function NotFoundComponent() {
   return (
@@ -96,13 +99,30 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children:
           "(function(){try{var t=localStorage.getItem('ab-theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}if(t==='dark'){document.documentElement.classList.add('dark')}document.documentElement.style.colorScheme=t}catch(e){}})();",
       },
+      jsonLd({
+        "@type": "WebSite",
+        name: SITE_NAME,
+        url: `${SITE_URL}/`,
+        publisher: { "@id": BUSINESS_ID },
+      }),
       {
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
-          "@id": "/#business",
-          name: "AB Digital Consultancy",
+          "@id": BUSINESS_ID,
+          name: SITE_NAME,
+          url: `${SITE_URL}/`,
+          image: `${SITE_URL}/favicon.png`,
+          logo: `${SITE_URL}/favicon.png`,
+          email: EMAIL,
+          ...(SAME_AS.length > 0 ? { sameAs: SAME_AS } : {}),
+          openingHoursSpecification: {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            opens: "10:00",
+            closes: "19:00",
+          },
           description:
             "Website design, hosting, SEO, maintenance and print marketing for small and medium businesses in Bengaluru and across India.",
           telephone: "+91 90521 42231",
@@ -167,6 +187,8 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+
+  useEffect(() => registerWebMcpTools(), []);
 
   return (
     <QueryClientProvider client={queryClient}>

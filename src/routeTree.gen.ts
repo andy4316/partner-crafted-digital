@@ -15,6 +15,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as IsoConsultancyRouteImport } from './routes/iso-consultancy'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as WorkRouteImport } from './routes/work'
 import { Route as ApiPublicEnquiryNotifyRouteImport } from './routes/api/public/enquiry-notify'
 
@@ -48,6 +49,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WorkRoute = WorkRouteImport.update({
   id: '/work',
   path: '/work',
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/iso-consultancy': typeof IsoConsultancyRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/work': typeof WorkRoute
   '/api/public/enquiry-notify': typeof ApiPublicEnquiryNotifyRoute
 }
@@ -76,6 +83,7 @@ export interface FileRoutesByTo {
   '/iso-consultancy': typeof IsoConsultancyRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/work': typeof WorkRoute
   '/api/public/enquiry-notify': typeof ApiPublicEnquiryNotifyRoute
 }
@@ -87,6 +95,7 @@ export interface FileRoutesById {
   '/iso-consultancy': typeof IsoConsultancyRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/work': typeof WorkRoute
   '/api/public/enquiry-notify': typeof ApiPublicEnquiryNotifyRoute
 }
@@ -99,6 +108,7 @@ export interface FileRouteTypes {
     | '/iso-consultancy'
     | '/services'
     | '/sitemap.xml'
+    | '/terms'
     | '/work'
     | '/api/public/enquiry-notify'
   fileRoutesByTo: FileRoutesByTo
@@ -109,6 +119,7 @@ export interface FileRouteTypes {
     | '/iso-consultancy'
     | '/services'
     | '/sitemap.xml'
+    | '/terms'
     | '/work'
     | '/api/public/enquiry-notify'
   id:
@@ -119,6 +130,7 @@ export interface FileRouteTypes {
     | '/iso-consultancy'
     | '/services'
     | '/sitemap.xml'
+    | '/terms'
     | '/work'
     | '/api/public/enquiry-notify'
   fileRoutesById: FileRoutesById
@@ -130,6 +142,7 @@ export interface RootRouteChildren {
   IsoConsultancyRoute: typeof IsoConsultancyRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TermsRoute: typeof TermsRoute
   WorkRoute: typeof WorkRoute
   ApiPublicEnquiryNotifyRoute: typeof ApiPublicEnquiryNotifyRoute
 }
@@ -178,6 +191,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/work': {
       id: '/work'
       path: '/work'
@@ -202,6 +222,7 @@ const rootRouteChildren: RootRouteChildren = {
   IsoConsultancyRoute: IsoConsultancyRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TermsRoute: TermsRoute,
   WorkRoute: WorkRoute,
   ApiPublicEnquiryNotifyRoute: ApiPublicEnquiryNotifyRoute,
 }

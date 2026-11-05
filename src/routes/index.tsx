@@ -17,9 +17,13 @@ import { MarkDivider, PageHero } from "@/components/hero";
 import { Reveal } from "@/components/reveal";
 import { DarkCta, Eyebrow, Section, SiteLayout } from "@/components/site-layout";
 import { serviceSlug, servicesQuery, type Service } from "@/lib/content";
+import { servicesSchema } from "@/lib/structured-data";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
+  loader: async ({ context }) => ({
+    services: await context.queryClient.ensureQueryData(servicesQuery),
+  }),
+  head: ({ loaderData }) => ({
     meta: [
       { title: "Website Design for Small Business in India | AB Digital Consultancy" },
       {
@@ -41,10 +45,8 @@ export const Route = createFileRoute("/")({
       },
     ],
     links: [{ rel: "canonical", href: "https://abdigitalconsultancy.in/" }],
+    scripts: loaderData ? [servicesSchema(loaderData.services)] : [],
   }),
-  loader: async ({ context }) => {
-    await context.queryClient.ensureQueryData(servicesQuery);
-  },
   component: Home,
 });
 

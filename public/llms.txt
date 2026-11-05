@@ -1,0 +1,25 @@
+# AB Digital Consultancy
+
+> A Bengaluru web partner for small and medium businesses across India: website design and development, hosting and domains, content updates, SEO, maintenance, digital marketing support, print materials, and ISO certification consulting.
+
+- Location: Bengaluru, Karnataka, working with businesses anywhere in India
+- Hours: Monday to Saturday, 10am to 7pm
+- Phone and WhatsApp: +91 90521 42231
+- Email: hello@abdigitalconsultancy.in
+- Website packages start at ₹12,000 to build and ₹5,000 a year to keep running
+- Clients own their domain, content and code, with no lock-in and no exit fee
+
+Each page below is also available as Markdown: request it with an `Accept: text/markdown` header, or open the `.md` link directly.
+
+## Key pages
+
+- [Home](https://abdigitalconsultancy.in/index.md): what we do and why we work this way
+- [Services and pricing](https://abdigitalconsultancy.in/services.md): the seven services, three pricing plans, and common questions
+- [ISO consultancy](https://abdigitalconsultancy.in/iso-consultancy.md): ISO standards covered, service routes, and common questions
+- [About](https://abdigitalconsultancy.in/about.md): how we work and what we refuse to do
+- [Contact](https://abdigitalconsultancy.in/contact.md): how to start a conversation or request a free sample
+
+## Optional
+
+- [Work](https://abdigitalconsultancy.in/work.md): case studies, as they are published
+- [Terms](https://abdigitalconsultancy.in/terms.md): terms of service
